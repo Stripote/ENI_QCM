@@ -8,15 +8,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 public class AccesBase {
 	public static Connection getConnection() throws SQLException{
 		
 		Connection connexion = null;
 		try {
 			InitialContext ic = new InitialContext();
-			DataSource ds= (DataSource)ic.lookup("java:comp/env/jdbc/bdd");
+			MysqlDataSource ds= (MysqlDataSource)ic.lookup("java:comp/env/jdbc/bdd");
 			connexion =  ds.getConnection();
-		} catch (NamingException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
