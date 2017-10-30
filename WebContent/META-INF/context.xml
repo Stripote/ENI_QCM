@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<WatchedResource>WEB-INF/web.xml</WatchedResource>
+<Resource
+name= "jdbc/bdd"
+type="javax.sql.DataSource"
+driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+url="jdbc:sqlserver://localhost:1433;databasename=TPJavaEE_GestionFormations"
+username="sa"
+password="Pa$$w0rd"
+
+maxActive="5"
+maxIdle="3"
+initialSize = "1"
+/>
+</Context>
