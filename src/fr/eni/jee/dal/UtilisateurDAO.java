@@ -13,6 +13,39 @@ import fr.eni.qcm.util.AccesBase;
 
 public class UtilisateurDAO {
 	
+	public static Utilisateur rechercher(String login, String password) throws SQLException{
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null;
+		Utilisateur utilisateur = null;
+		try{
+			cnx = AccesBase.getConnection();
+			rqt = cnx.prepareStatement("select id, nom, prenom, login, password from utilisateur where login=? and password=?");
+			rqt.setString(1, login);
+			rqt.setString(2, password);
+			rs=rqt.executeQuery();
+			
+			if (rs.next()){
+				utilisateur = new Utilisateur();
+				utilisateur.setId(rs.getInt("id"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setLogin(rs.getString("login"));
+				utilisateur.setPassword(rs.getString("password"));
+			}
+		
+			else {
+				utilisateur = null;
+			}
+			
+		}finally{
+			if (rs!=null) rs.close();
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		return utilisateur;
+	}
+	
 	public static Utilisateur rechercher(int id) throws SQLException{
 		Connection cnx = null;
 		PreparedStatement rqt = null;
