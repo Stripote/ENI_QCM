@@ -120,7 +120,7 @@ public class UtilisateurDAO {
 		PreparedStatement rqt=null;
 		try{
 			cnx=AccesBase.getConnection();
-			rqt=cnx.prepareStatement("update stagiaires set nom = ?, prenom = ?, login = ?, password=? where id = ?");
+			rqt=cnx.prepareStatement("update utilisateur set nom = ?, prenom = ?, login = ?, password= ? where id = ?");
 			rqt.setString(1, utilisateur.getNom());
 			rqt.setString(2, utilisateur.getPrenom());
 			rqt.setString(3, utilisateur.getLogin());
