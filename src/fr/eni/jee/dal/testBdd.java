@@ -18,7 +18,7 @@ public class testBdd {
 		
 		try{
 			try {
-				cnx = AccesBase.getConnection();
+				cnx = AccesBasePoolConnection.getConnection();
 				rqt = cnx.prepareStatement("select * from utilisateurs");
 				rs=rqt.executeQuery();		
 			}finally{

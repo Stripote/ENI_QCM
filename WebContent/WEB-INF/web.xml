@@ -3,7 +3,7 @@
   <display-name>ENI QCM</display-name>
   <resource-ref>
     <res-ref-name>jdbc/bdd</res-ref-name>
-    <res-type>javax.sql.MysqlDataSource</res-type>
+    <res-type>javax.sql.DataSource</res-type>
   </resource-ref>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

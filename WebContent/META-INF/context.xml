@@ -3,10 +3,11 @@
 <WatchedResource>WEB-INF/web.xml</WatchedResource>
 <Resource
 name= "jdbc/bdd"
-type="javax.sql.MysqlDataSource"
-driverClassName="com.mysql.jdbc.Driver"
-url="jdbc:mysql://http://10.12.129.4:8080;databasename=qcm"
-username="root"
-password="root"
+type="javax.sql.DataSource"
+driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+url="jdbc:sqlserver://localhost:1434;databasename=qcm"
+username="sa"
+password="Pa$$w0rd"
+
 />
 </Context>

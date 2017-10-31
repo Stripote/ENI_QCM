@@ -13,9 +13,14 @@ public class AccesBase {
 		String uri = Parametre.lire("dbUrl");
 		String user = Parametre.lire("dbUser");
 		String password = Parametre.lire("dbPassword");
+		//System.out.println(uri);
+		//System.out.println(user);
+		//System.out.println(password);
+		
+		
 		Connection connexion = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			//DriverManager.registerDriver((Driver)Class.forName("com.mysql.jdbc.Driver").newInstance());
 			connexion =  DriverManager.getConnection(uri, user, password);
 		} catch (ClassNotFoundException e) {

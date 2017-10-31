@@ -16,7 +16,7 @@ public class AccesBasePoolConnection {
 		Connection connexion = null;
 		try {
 			InitialContext ic = new InitialContext();
-			MysqlDataSource ds= (MysqlDataSource)ic.lookup("java:comp/env/jdbc/bdd");
+			DataSource ds= (DataSource)ic.lookup("java:comp/env/jdbc/bdd");
 			connexion =  ds.getConnection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
