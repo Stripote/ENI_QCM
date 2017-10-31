@@ -1,0 +1,6 @@
+<footer>
+<h3>Menu</h3>
+<a href="<%=request.getContextPath() %>/">Accueil</a><br />
+<a href="<%=request.getContextPath() %>/login/validerAcces">Accès Utilisateur</a><br />
+<a href="<%=request.getContextPath() %>/deconnecter">Deconnexion</a><br />
+</footer>
