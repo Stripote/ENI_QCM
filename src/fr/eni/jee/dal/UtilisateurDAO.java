@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.eni.jee.bo.Utilisateur;
 import fr.eni.qcm.util.AccesBase;
+import fr.eni.qcm.util.AccesBasePoolConnection;
 
 public class UtilisateurDAO {
 	
