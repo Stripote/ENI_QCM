@@ -31,9 +31,9 @@
 			</div>
 			</div>
 			</div>
-		   <br>
-	        <center><a id="lien" href="<%=request.getContextPath() %>/"><h3>Retour Accueil</h3></a><center>
-		   <br/>
+		   <br>		   
+
+<%@ include file="/structure/menu.jspf" %>
 
 </body>
 </html>

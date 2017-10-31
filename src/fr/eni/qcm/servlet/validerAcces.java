@@ -71,7 +71,7 @@ public class validerAcces extends HttpServlet {
 		// si tous les champs ne sont pas renseignés, revenir sur la page du formulaire
 		if ((identifiant == null) || (identifiant.length() == 0) 
 			|| (motdepasse == null) || (motdepasse.length() == 0)) {
-			dispatcher = getServletContext().getRequestDispatcher("/ENI_QCM/login/accesUtilisateur");
+			dispatcher = getServletContext().getRequestDispatcher("/login/accesUtilisateur.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
@@ -79,17 +79,18 @@ public class validerAcces extends HttpServlet {
 
 		try {
 			// Valider l'identification par rapport aux informations de la base
-			//utilisateurConnecte = UtilisateurDAO.rechercher(identifiant, motdepasse);
-			Utilisateur utilisateur=new Utilisateur();
+			utilisateurConnecte = UtilisateurDAO.rechercher(identifiant, motdepasse);
+			/*Utilisateur utilisateur=new Utilisateur();
 			utilisateur.setNom("villeret");
 			utilisateur.setPrenom("adrien");
 			utilisateur.setId(1);
 			utilisateur.setLogin("a");
 			utilisateur.setPassword("v");
-			
-			if (utilisateur.getLogin()==identifiant&&utilisateur.getPassword()==motdepasse) {
+			String login =utilisateur.getLogin();
+			String password=utilisateur.getPassword();
+			if (login.equals(identifiant) && password.equals(motdepasse)) {
 				utilisateurConnecte=utilisateur;
-			}
+			}*/
 			
 			// Si l'authentification est réussie...
 			if (utilisateurConnecte != null) {
@@ -102,25 +103,23 @@ public class validerAcces extends HttpServlet {
 			else {
 				System.out.println("Pas Connecté !");
 				// Retourner à l'écran d'identification			
-				dispatcher = getServletContext().getRequestDispatcher("/ENI_QCM/login/accesUtilisateur");
+				dispatcher = getServletContext().getRequestDispatcher("/login/accesUtilisateur.jsp");
 				dispatcher.forward(request, response);
 			}
-		} finally {
-			
-		} /*catch (SQLException sqle) {
+		} catch (SQLException sqle) {
 			// Placer l'objet représentant l'exception dans le contexte de requete
 			//request.setAttribute("erreur", sqle);
 			// Passer la main à la page de présentation des erreurs
 			//dispatcher = getServletContext().getRequestDispatcher("/erreurPage");
 			//dispatcher.forward(request, response);
 			return;
-		}	*/	
+		}	
 	}
 	
 	protected void redirectionMenuCandidat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Redirection !");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/candidat/menuCandidat");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/candidat/menuCandidat.jsp");
 		dispatcher.forward(request, response);
 		
 	}

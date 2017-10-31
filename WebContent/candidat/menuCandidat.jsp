@@ -8,5 +8,10 @@
 </head>
 <body>
 
+<h1>Menu Candidat</h1>
+
+
+<%@ include file="/structure/menu.jspf" %>
+
 </body>
 </html>
