@@ -51,15 +51,15 @@ public class validerAcces extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Utilisateur utilisateurConnecte = null;
 		
-		testBdd.test();
+		//testBdd.test();
 		
-		/*
-		// Si l'animateur est déjà  connecté, on redirige vers le menu animateur
+		
+		// Si l'utilisateur est déjà  connecté, on redirige vers le menu animateur
 		utilisateurConnecte = (Utilisateur)request.getSession().getAttribute("utilisateurConnecte");
 		System.out.println("utilisateurConnecte !" + utilisateurConnecte);
 		if (utilisateurConnecte!=null) {
 			System.out.println("Connecté !");
-			redirectionMenuUtilisateur(request, response);
+			redirectionMenuCandidat(request, response);
 			return;
 		}		
 		
@@ -71,7 +71,7 @@ public class validerAcces extends HttpServlet {
 		// si tous les champs ne sont pas renseignés, revenir sur la page du formulaire
 		if ((identifiant == null) || (identifiant.length() == 0) 
 			|| (motdepasse == null) || (motdepasse.length() == 0)) {
-			dispatcher = getServletContext().getRequestDispatcher("/login/accesUtilisateur");
+			dispatcher = getServletContext().getRequestDispatcher("/ENI_QCM/login/accesUtilisateur");
 			dispatcher.forward(request, response);
 			return;
 		}
@@ -79,41 +79,48 @@ public class validerAcces extends HttpServlet {
 
 		try {
 			// Valider l'identification par rapport aux informations de la base
-			utilisateurConnecte = UtilisateurDAO.rechercher(identifiant, motdepasse);
+			//utilisateurConnecte = UtilisateurDAO.rechercher(identifiant, motdepasse);
+			Utilisateur utilisateur=new Utilisateur();
+			utilisateur.setNom("villeret");
+			utilisateur.setPrenom("adrien");
+			utilisateur.setId(1);
+			utilisateur.setLogin("a");
+			utilisateur.setPassword("v");
+			
+			if (utilisateur.getLogin()==identifiant&&utilisateur.getPassword()==motdepasse) {
+				utilisateurConnecte=utilisateur;
+			}
+			
 			// Si l'authentification est réussie...
 			if (utilisateurConnecte != null) {
 				System.out.println("authentification réussie !");
 
-				//request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
+				request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
 
-				//redirectionMenuUtilisateur(request, response);
+				redirectionMenuCandidat(request, response);
 			}
-			// ...sinon
 			else {
 				System.out.println("Pas Connecté !");
 				// Retourner à l'écran d'identification			
-				dispatcher = getServletContext().getRequestDispatcher("/login/accesUtilisateur");
+				dispatcher = getServletContext().getRequestDispatcher("/ENI_QCM/login/accesUtilisateur");
 				dispatcher.forward(request, response);
 			}
-		} catch (SQLException sqle) {
+		} finally {
+			
+		} /*catch (SQLException sqle) {
 			// Placer l'objet représentant l'exception dans le contexte de requete
 			//request.setAttribute("erreur", sqle);
 			// Passer la main à la page de présentation des erreurs
 			//dispatcher = getServletContext().getRequestDispatcher("/erreurPage");
 			//dispatcher.forward(request, response);
 			return;
-		}		*/
+		}	*/	
 	}
 	
-	protected void redirectionMenuUtilisateur(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void redirectionMenuCandidat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// En fonction de la méthode de redirection utilisée (forward ou sendRedirect()),
-		// l'utilisateur pourra voir ou non l'URL de la ressource : 
-		
-		// L'utilisation d'un forward masque la nouvelle ressource demandée (car tout 
-		// se passe au sein du serveur d'application) 
 		System.out.println("Redirection !");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/animateur/menuAnimateurPage");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/candidat/menuCandidat");
 		dispatcher.forward(request, response);
 		
 	}
