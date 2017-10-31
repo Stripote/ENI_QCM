@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.jee.bo.Utilisateur;
-import fr.eni.qcm.util.AccesBasePoolConnection;
+import fr.eni.qcm.util.AccesBase;
 
 public class UtilisateurDAO {
 	
@@ -19,7 +19,7 @@ public class UtilisateurDAO {
 		ResultSet rs = null;
 		Utilisateur utilisateur = null;
 		try{
-			cnx = AccesBasePoolConnection.getConnection();
+			cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement("select id, nom, prenom, login, password from utilisateur where login=? and password=?");
 			rqt.setString(1, login);
 			rqt.setString(2, password);
@@ -52,7 +52,7 @@ public class UtilisateurDAO {
 		ResultSet rs = null;
 		Utilisateur utilisateur = null;
 		try{
-			cnx = AccesBasePoolConnection.getConnection();
+			cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement("select id, nom, prenom, login, password from utilisateur where id=?");
 			rqt.setInt(1, id);
 			rs=rqt.executeQuery();
@@ -82,7 +82,7 @@ public class UtilisateurDAO {
 		Connection cnx=null;
 		PreparedStatement rqt=null;
 		try{
-			cnx=AccesBasePoolConnection.getConnection(); 
+			cnx=AccesBase.getConnection(); 
 			
 			String insert = "insert into utilisateur (nom, prenom, login, password) values (?,?,?,?)";
 			rqt = cnx.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
@@ -119,8 +119,8 @@ public class UtilisateurDAO {
 		Connection cnx=null;
 		PreparedStatement rqt=null;
 		try{
-			cnx=AccesBasePoolConnection.getConnection();
-			rqt=cnx.prepareStatement("update stagiaires set nom = ?, prenom = ?, login = ?, password=? where id = ?");
+			cnx=AccesBase.getConnection();
+			rqt=cnx.prepareStatement("update utilisateur set nom = ?, prenom = ?, login = ?, password= ? where id = ?");
 			rqt.setString(1, utilisateur.getNom());
 			rqt.setString(2, utilisateur.getPrenom());
 			rqt.setString(3, utilisateur.getLogin());
@@ -137,7 +137,7 @@ public class UtilisateurDAO {
 		Connection cnx=null;
 		PreparedStatement rqt=null;
 		try{
-			cnx=AccesBasePoolConnection.getConnection();
+			cnx=AccesBase.getConnection();
 			rqt=cnx.prepareStatement("delete from utilisateur where id = ?");
 			rqt.setInt(1, utilisateur.getId());
 			rqt.executeUpdate();
@@ -155,7 +155,7 @@ public class UtilisateurDAO {
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		try{
-			cnx = AccesBasePoolConnection.getConnection();
+			cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement("select id, nom, prenom, login, password from utilisateur");
 			rs=rqt.executeQuery();
 			
