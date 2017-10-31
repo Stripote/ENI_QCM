@@ -8,9 +8,5 @@ driverClassName="com.mysql.jdbc.Driver"
 url="jdbc:mysql://http://10.12.129.4:8080;databasename=qcm"
 username="root"
 password="root"
-
-maxActive="5"
-maxIdle="3"
-initialSize = "1"
 />
 </Context>

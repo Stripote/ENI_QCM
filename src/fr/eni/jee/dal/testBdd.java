@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.eni.qcm.util.AccesBase;
+import fr.eni.qcm.util.AccesBasePoolConnection;
 
 
 
