@@ -2,17 +2,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
+  <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
+
 <title>Acces Utilisateur</title>
 </head>
-<body>
-
-	<div>
-		<h1>Acces Utilisateur</h1>
-	</div>
-	  
+<body>	
+<h1><font color="#6495ED">Acces Utilisateur</font></h1> 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-xs-9">
 				<form action=# method="post">
 				  	<div class="form-group">
 				    	<label for="identifiant">Identifiant :</label>
@@ -25,12 +27,10 @@
 				  	<button type="submit" class="btn btn-default">se connecter</button>
 				</form>
 			</div>
-		    <div class="col-sm-3">
-		    	<h3>Menu</h3>
-		   		<a href="/ENI_QCM/Accueil"></a><br />
-		  	</div>
-		</div>
-	</div>
-
+			</div>
+			</div>
+		   <br>
+	        <center><a id="lien" href="/ENI_QCM/Accueil"><h3>Retour Accueil</h3></a><center>
+		   <br/>
 </body>
 </html>
