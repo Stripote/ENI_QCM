@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
   <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
 
-<title>Acces Utilisateur</title>
+<title>ENI Ecole - Acces Utilisateur</title>
 </head>
 <body>
 

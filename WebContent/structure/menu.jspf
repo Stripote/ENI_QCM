@@ -1,6 +1,10 @@
 <footer>
 <h3>Menu</h3>
-<a href="<%=request.getContextPath() %>/">Accueil</a><br />
-<a href="<%=request.getContextPath() %>/login/validerAcces">Accès Utilisateur</a><br />
-<a href="<%=request.getContextPath() %>/deconnecter">Deconnexion</a><br />
+<ul>
+<li><a href="<%=request.getContextPath() %>/">Accueil</a></li>
+<li><a href="<%=request.getContextPath() %>/login/validerAcces">Accès Utilisateur</a></li>
+<%if(request.getSession().getAttribute("utilisateurConnecte")!= null){ %>
+<li><a href="<%=request.getContextPath() %>/deconnecter">Deconnexion</a></li>
+<%} %>
+</ul>
 </footer>

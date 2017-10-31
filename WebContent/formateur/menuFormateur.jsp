@@ -7,11 +7,17 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
   <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
-<title>ENI Ecole - Menu Candidat</title>
+  <title>ENI Ecole - Menu Formateur</title>
 </head>
 <body>
 
-<h1>Menu Candidat</h1>
+<h1>Menu Formateur</h1>
+
+<ul>
+<li><a href=#>Tests</a></li>
+<li><a href=#>Themes</a></li>
+<li><a href=#>Questions</a></li>
+</ul>
 
 
 <%@ include file="/structure/menu.jspf" %>
