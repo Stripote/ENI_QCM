@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
 import fr.eni.qcm.util.AccesBase;
