@@ -53,4 +53,14 @@
     <servlet-name>listerQcm</servlet-name>
     <url-pattern>/listerQcm</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>creationTest</display-name>
+    <servlet-name>creationTest</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.creationTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>creationTest</servlet-name>
+    <url-pattern>/creationTest</url-pattern>
+  </servlet-mapping>
 </web-app>
