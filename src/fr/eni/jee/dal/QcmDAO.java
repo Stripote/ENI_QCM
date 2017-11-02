@@ -13,9 +13,9 @@ import fr.eni.qcm.util.AccesBase;
 public class QcmDAO {
 
 	
-	public static List<Qcm> rechercher() throws SQLException {
+	public static ArrayList<Qcm> rechercher() throws SQLException {
 		
-		List<Qcm> listeqcm = new ArrayList<Qcm>();
+		ArrayList<Qcm> listeqcm = new ArrayList<Qcm>();
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
