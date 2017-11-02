@@ -64,7 +64,6 @@ public class Qcm {
 		
 	}
 	
-	
 	public Qcm(int id, String nom, boolean valide, Date creation, Date debut, Date fin) {
 		super();
 		this.id = id;

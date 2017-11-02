@@ -89,8 +89,9 @@ public class QcmDAO {
 				Theme theme=new Theme();
 				theme.setId(rs.getInt("theme.id"));
 				theme.setNom(rs.getString("theme.libelle"));
-				
+				section.setLesQuestions(ThemeDAO.rechercher(theme.getId()).getQuestions());
 				section.setTheme(theme);
+				section.ajusterNombre(section.getLesQuestions().size());
 				sections.add(section);
 				i++;
 			} 
@@ -104,4 +105,6 @@ public class QcmDAO {
 		return qcm;
 		
 	}
+	
+	
 }
