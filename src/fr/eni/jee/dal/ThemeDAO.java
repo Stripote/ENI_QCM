@@ -17,53 +17,40 @@ public class ThemeDAO {
 	
 	public static Theme rechercher(int id) throws SQLException{
 		Theme theme= null;
-		/*Connection cnx = null;
+		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 
 		try{
 			cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement(
-					"SELECT questions.id, questions.enonce, questions.image, reponses.libelle, reponses.reponses "
-					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
-					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
-					+ "JOIN theme ON qt.idTheme=theme.id"
-					+"where questions.id=?");
+					"SELECT theme.nom, questions.id" 
+							+"FROM questions" 
+							+"JOIN questions_theme qt ON qt.idQuestion=questions.id"
+							+"JOIN theme ON qt.idTheme=theme.id"
+							+"WHERE theme.id=?");
 			rqt.setInt(1, id);
 			rs=rqt.executeQuery();
+			List<Question> questions = new ArrayList<Question>();
+			theme = new Theme();
+			int i=0;
 			
-			if (rs.next()){
-				List<Reponse> reponses = new ArrayList<Reponse>();
-				
-				String libelle= rs.getString("reponses.libelle");
-				String index=rs.getString("reponses.reponse");
-				
-				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
-				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
-				
-				for (String unLibelle : libelles) {
-					Reponse reponse=new Reponse();
-					reponse.setLibelle(unLibelle);
-					if (indexs.contains(libelles.indexOf(unLibelle))) {
-						reponse.setBonneReponse(true);
-					} else {
-						reponse.setBonneReponse(false);
-					}
-					reponses.add(reponse);
+			if (rs.next()) {
+				if (i==0) {
+					theme.setId(id);
+					theme.setNom(rs.getString("theme.nom"));
 				}
-				
-				question.setId(rs.getInt("questions.id"));
-				question.setEnonce(rs.getString("questions.enonce"));
-				if (rs.getString("questions.image")!=null) {
-					question.setImage(rs.getString("questions.image"));
-				}		
-				question.setReponses(reponses);
-			}		
+				Question question= new Question();
+				question=QuestionDAO.rechercher(Integer.parseInt(rs.getString("questions.id")));
+				questions.add(question);
+				i++;
+			}
+			theme.setQuestions(questions);
 		}finally{
 			if (rs!=null) rs.close();
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();
-		}*/
+		}
 		return theme;
 	}
 	
