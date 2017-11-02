@@ -19,7 +19,7 @@ ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
 	 	for(Qcm Q : listeQcms) {
 	%>
 			<div class="qcm">
-				<p><%=Q.getNom() %>Creer le<%= df.format(Q.getCreation())%> <p>
+				<p><%=Q.getId() %><%=Q.getNom()%>Creer le<%= df.format(Q.getDateCreation())%><p>
 			</div>
 			<br />
 	<% } %>

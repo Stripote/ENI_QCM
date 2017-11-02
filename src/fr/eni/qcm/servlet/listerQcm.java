@@ -1,7 +1,7 @@
 package fr.eni.qcm.servlet;
 
-
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -18,45 +18,50 @@ import fr.eni.jee.dal.QcmDAO;
  */
 public class listerQcm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public listerQcm() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public listerQcm() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		try{
-			
-			
-			ArrayList<Qcm> qcms = QcmDAO.rechercher();
-		
-			request.setAttribute("listeQcm", qcms);
-			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/menuCandidat");
-			dispatcher.forward(request,response);
-							
-			
-		}catch (Exception e){
-		
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		ArrayList<Qcm> qcms;
+		try {
+			qcms = QcmDAO.rechercher();
+
+			request.setAttribute("listeQcms", qcms);
+
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/candidat/menuCandidat.jsp");
+			dispatcher.forward(request, response);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+
 	}
 }
+

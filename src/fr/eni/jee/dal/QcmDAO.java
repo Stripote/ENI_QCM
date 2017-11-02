@@ -20,26 +20,27 @@ public class QcmDAO {
 	 * @return
 	 * @throws SQLException
 	 */
+	
 	public static ArrayList<Qcm> rechercher() throws SQLException {
 		
-		ArrayList<Qcm> listeqcm = new ArrayList<Qcm>();
+		ArrayList<Qcm> listeQcms = new ArrayList<Qcm>();
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		try{
 			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement("select id, nom, creation from qcm");
+			rqt = cnx.prepareStatement("select id, nom, dateCreation from qcm");
 			rs=rqt.executeQuery();
 			
 			while (rs.next()){
-
 				Qcm qcm = new Qcm();
 				qcm.setId(rs.getInt("id"));
 				qcm.setNom(rs.getString("nom"));
-				qcm.setCreation(rs.getDate("creation"));
+				qcm.setDateCreation(rs.getDate("dateCreation"));
 				
-				listeqcm.add(qcm);
+				
+				listeQcms.add(qcm);
 			}
 
 			
@@ -48,7 +49,7 @@ public class QcmDAO {
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();
 		}
-		return listeqcm;
+		return listeQcms;
 		
 	}
 	
