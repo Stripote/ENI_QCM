@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import ="fr.eni.jee.bo.*, java.util.*, java.text.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +13,16 @@
 <body>
 
 <h1>Menu Candidat</h1>
-
+<%
+DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
+	 	for(Qcm Q : listeQcms) {
+	%>
+			<div class="qcm">
+				<p><%=Q.getNom() %>Creer le<%= df.format(Q.getCreation())%> <p>
+			</div>
+			<br />
+	<% } %>
 
 <%@ include file="/structure/menu.jspf" %>
 
