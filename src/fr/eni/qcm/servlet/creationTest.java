@@ -6,17 +6,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Servlet implementation class gestionTest
+ * Servlet implementation class creationTest
  */
-public class gestionTest extends HttpServlet {
+public class creationTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public gestionTest() {
+    public creationTest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,22 +24,16 @@ public class gestionTest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		gestionnaireTest(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		gestionnaireTest(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
-	protected void gestionnaireTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//rescuperation du qcm choisi dans le menu Candidat
-		//Qcm test = (Qcm)request.getAttribute("test");
-		
-		
-		
-	}
-	
 }
