@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.bo.Qcm;
+import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Section;
 import fr.eni.jee.dal.QcmDAO;
 
@@ -49,7 +50,9 @@ public class creationTest extends HttpServlet {
 		try {
 			//Création du QCM
 			Qcm qcm = QcmDAO.rechercher(Integer.parseInt(request.getAttribute("idQcm").toString()));
+			Question premiereQuestion = qcm.getSections().get(0).getLesQuestions().get(0);
 			request.setAttribute("qcm", qcm);
+			request.setAttribute("question", premiereQuestion);
 			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 			dispatcher.forward(request, response);
 
