@@ -16,7 +16,12 @@ import fr.eni.qcm.util.AccesBase;
 public class QuestionDAO {
 
 	
-	
+	/***
+	 * renvoie la question demandée et les reponses liées
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Question rechercher(int id) throws SQLException{
 		Question question= null;
 		Connection cnx = null;
@@ -138,6 +143,11 @@ public class QuestionDAO {
 		}*/
 	}
 	
+	/***
+	 * renvoie l'ensemble des questions en bdd
+	 * @return
+	 * @throws SQLException
+	 */
 	public static List<Question> rechercher() throws SQLException {
 		
 		List<Question> listQuestion = new ArrayList<Question>();

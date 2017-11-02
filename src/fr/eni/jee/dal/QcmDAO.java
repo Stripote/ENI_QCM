@@ -15,7 +15,11 @@ import fr.eni.qcm.util.AccesBase;
 
 public class QcmDAO {
 
-	
+	/***
+	 * renvoie la liste de qcm avec les id, le nom et la date de creation 
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<Qcm> rechercher() throws SQLException {
 		
 		ArrayList<Qcm> listeqcm = new ArrayList<Qcm>();
@@ -48,6 +52,12 @@ public class QcmDAO {
 		
 	}
 	
+	/***
+	 * renvoie un qcm avec les sections correspondantes, les themes et les id de questions liées
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Qcm rechercher(int id) throws SQLException {
 		
 		List<Section> sections = new ArrayList<Section>();
