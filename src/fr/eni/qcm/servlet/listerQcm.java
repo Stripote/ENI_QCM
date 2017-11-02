@@ -1,6 +1,5 @@
 package fr.eni.qcm.servlet;
 
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,7 +46,7 @@ public class listerQcm extends HttpServlet {
 			
 			
 			ArrayList<Qcm> qcms = QcmDAO.rechercher();
-			
+		
 			request.setAttribute("listeQcm", qcms);
 			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/menuCandidat");
@@ -55,7 +54,7 @@ public class listerQcm extends HttpServlet {
 							
 			
 		}catch (Exception e){
-			
+		
 		}
 		
 	}
