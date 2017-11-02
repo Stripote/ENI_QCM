@@ -1,6 +1,7 @@
 package fr.eni.jee.bo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Qcm {
 
@@ -10,6 +11,14 @@ public class Qcm {
 	Date Creation;
 	Date Debut;
 	Date Fin;
+	List<Section> sections;
+	
+	public List<Section> getSections() {
+		return sections;
+	}
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
 	public int getId() {
 		return id;
 	}
