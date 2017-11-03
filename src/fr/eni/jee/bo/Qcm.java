@@ -8,7 +8,7 @@ public class Qcm {
 	int id;
 	String Nom;
 	boolean valide;
-	Date Creation;
+	Date dateCreation;
 	Date Debut;
 	Date Fin;
 	List<Section> sections;
@@ -37,11 +37,12 @@ public class Qcm {
 	public void setValide(boolean valide) {
 		this.valide = valide;
 	}
-	public Date getCreation() {
-		return Creation;
+
+	public Date getDateCreation() {
+		return dateCreation;
 	}
-	public void setCreation(Date creation) {
-		Creation = creation;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 	public Date getDebut() {
 		return Debut;
@@ -63,16 +64,17 @@ public class Qcm {
 		
 		
 	}
-	
-	public Qcm(int id, String nom, boolean valide, Date creation, Date debut, Date fin) {
+	public Qcm(int id, String nom, boolean valide, Date dateCreation, Date debut, Date fin) {
 		super();
 		this.id = id;
 		Nom = nom;
 		this.valide = valide;
-		Creation = creation;
+		this.dateCreation = dateCreation;
 		Debut = debut;
 		Fin = fin;
 	}
+	
+	
 	
 	
 	
