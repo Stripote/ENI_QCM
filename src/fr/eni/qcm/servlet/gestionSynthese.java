@@ -43,7 +43,7 @@ public class gestionSynthese extends HttpServlet {
 	
 	protected void gestionnaireSynthese(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
-		Qcm qcm =(Qcm)request.getAttribute("qcm");
+		Qcm qcm =(Qcm)request.getSession().getAttribute("qcm");
 		List<Question> liste  =new ArrayList<Question>();
 		
 		//recuperation de la liste des questions du test
@@ -54,8 +54,10 @@ public class gestionSynthese extends HttpServlet {
 			}
 		}
 		
+		
+		//renvoie vers la jsp syntheseTest
 		request.setAttribute("listeQuestion", liste);
-		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
+		dispatcher = getServletContext().getRequestDispatcher("/candidat/syntheseTest.jsp");
 		dispatcher.forward(request, response);
 		
 	}
