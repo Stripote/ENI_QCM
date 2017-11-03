@@ -3,6 +3,7 @@ package fr.eni.qcm.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
+import fr.eni.jee.bo.Reponse;
 import fr.eni.jee.bo.Section;
 import fr.eni.jee.dal.QcmDAO;
 
@@ -47,6 +49,7 @@ public class creationTest extends HttpServlet {
 	protected void doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		ArrayList<Section> lesSections = null;
+		List<Reponse> reponses=new ArrayList<Reponse>();
 		try {
 			//Création du QCM
 			int test = Integer.parseInt(request.getParameter("idQcm").toString());
@@ -55,6 +58,7 @@ public class creationTest extends HttpServlet {
 			Question premiereQuestion = qcm.getSections().get(0).getLesQuestions().get(0);
 			request.setAttribute("qcm", qcm);
 			request.setAttribute("question", premiereQuestion);
+			request.setAttribute("reponsesCandidat", reponses);
 			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 			dispatcher.forward(request, response);
 

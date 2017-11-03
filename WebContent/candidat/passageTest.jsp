@@ -16,7 +16,7 @@
 			
 <form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
 	<%for(Reponse reponse :question.getReponses()){ %>
-    <input type="checkbox" class="reponse" name="reponse" value="<%=reponse%>">
+    <input type="checkbox" class="reponse" name="reponse" value="<%=reponse.getLibelle()%>">
     <label for="reponse"><%=reponse.getLibelle() %></label>
 	<%} %>
     <button type="submit">Question suivante</button>
