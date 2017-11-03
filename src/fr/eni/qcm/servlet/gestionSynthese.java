@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
+import fr.eni.jee.bo.Section;
 
 /**
  * Servlet implementation class gestionSynthese
@@ -47,13 +48,11 @@ public class gestionSynthese extends HttpServlet {
 		List<Question> liste  =new ArrayList<Question>();
 		
 		//recuperation de la liste des questions du test
-		for (int indexSection = 0; indexSection < (qcm.getSections().size()-1); indexSection++) {
-			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getNbQuestions()-1); indexQues++) {
-				Question question= qcm.getSections().get(indexSection).getLesQuestions().get(indexQues);
+		for (Section section : qcm.getSections()) {
+			for (Question question : section.getLesQuestions()) {
 				liste.add(question);
 			}
 		}
-		
 		
 		//renvoie vers la jsp syntheseTest
 		request.setAttribute("listeQuestion", liste);
