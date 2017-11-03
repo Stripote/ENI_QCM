@@ -75,7 +75,7 @@ public class gestionTest extends HttpServlet {
 		//recuperation de la question suivant
 		Question question= new Question();
 		for (int indexSection = 0; indexSection < (qcm.getSections().size()-1); indexSection++) {
-			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getNbQuestions()-1); indexQues++) {
+			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getLesQuestions().size()-1); indexQues++) {
 				if (derniereQuestion.equals(qcm.getSections().get(indexSection).getLesQuestions().get(indexQues))) {
 					if (indexQues==(qcm.getSections().get(indexSection).getNbQuestions()-1)) {
 						question=qcm.getSections().get(indexSection+1).getLesQuestions().get(indexQues);
