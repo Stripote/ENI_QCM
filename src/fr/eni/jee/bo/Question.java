@@ -33,6 +33,10 @@ public class Question {
 		this.reponses = reponses;
 	}
 	
+	@Override
+	public String toString(){
+		return this.enonce;
+	}
 	
 	
 	

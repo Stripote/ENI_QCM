@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
+import fr.eni.jee.bo.Section;
 
 
 /**
@@ -48,6 +49,9 @@ public class gestionTest extends HttpServlet {
 		
 		//recuperation de l'état du QCM
 		Qcm qcm =(Qcm)request.getSession().getAttribute("qcm");
+		
+		ArrayList<Question> lesQuestionsPosees = new ArrayList<Question>();
+		
 		Question derniereQuestion = (Question)request.getSession().getAttribute("question");
 		List<Reponse> reponses= (List<Reponse>)request.getSession().getAttribute("reponsesCandidat");
 		
@@ -74,14 +78,44 @@ public class gestionTest extends HttpServlet {
 		
 		//recuperation de la question suivant
 		Question question= new Question();
+		
+		/*
 		for (int indexSection = 0; indexSection < (qcm.getSections().size()-1); indexSection++) {
 			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getNbQuestions()-1); indexQues++) {
 				if (derniereQuestion.equals(qcm.getSections().get(indexSection).getLesQuestions().get(indexQues))) {
 					if (indexQues==(qcm.getSections().get(indexSection).getNbQuestions()-1)) {
 						question=qcm.getSections().get(indexSection+1).getLesQuestions().get(indexQues);
+						break;
 					}else {
 						question=qcm.getSections().get(indexSection).getLesQuestions().get(indexQues+1);
-					}					
+						break;
+					}	
+				}
+			}
+		}*/
+		//On parcour la liste des sections 
+		Boolean questionChoisi = false;
+		Boolean newSection = false;
+		for (Section S : qcm.getSections()) {
+			if(questionChoisi)
+				break;
+			if(newSection){
+				question = S.getLesQuestions().get(1);
+				break;
+			}
+			if(S.getLesQuestions().contains(derniereQuestion)){
+				int index = 1;
+				for(Question Q : S.getLesQuestions()){
+					if(Q.equals(derniereQuestion) && index == S.getLesQuestions().size()){
+						newSection = true;
+						break;	
+					}
+					else if(Q.equals(derniereQuestion)){
+						question = S.getLesQuestions().get(index);
+						questionChoisi = true;
+						break;
+					}
+					index++;
 				}
 			}
 		}
