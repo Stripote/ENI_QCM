@@ -12,19 +12,19 @@
 </head>
 <body>
 
-<h1>Menu Candidat</h1>
+<center><font color="#6495ED"><h1>Menu Candidat</h1></font></center>
 <%
-DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
 ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
 	 	for(Qcm Q : listeQcms) {
 	%>
 	  <% int idQcm = Q.getId();
 	     //lien servlet axel
 	  %>
-		<div class="qcm">
-			<form action="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>" method="POST" >
-			<a href ="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>"> <p><%=idQcm %><%=Q.getNom()%>Creer le<%= df.format(Q.getDateCreation())%></p></a>
-			</form>
+		<div class="container">
+			<center></center><form action="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>" method="POST" >
+			<a href ="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>"> <p><%=Q.getNom()%></p></a>
+			</form></center>
 			</div>
 			<br />
 	<% } %>
