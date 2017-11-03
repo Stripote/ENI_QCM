@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<% Question question = (Question)request.getAttribute("question");%>
+<% Question question = (Question)request.getSession().getAttribute("question");%>
 
 <p><%=question.getEnonce().toString()%></p>	
 			
