@@ -49,11 +49,13 @@ public class gestionTest extends HttpServlet {
 		//recuperation de l'état du QCM
 		Qcm qcm =(Qcm)request.getAttribute("qcm");
 		Question derniereQuestion = (Question)request.getAttribute("question");
-		List<Reponse> reponses=new ArrayList<Reponse>();
+		List<Reponse> reponses= (List<Reponse>)request.getAttribute("reponsesCandidat");
 		
 		
 		//enregistrement des reponses
-		
+		Reponse reponse = (Reponse) request.getAttribute("reponse");
+		reponses.add(reponse);
+		request.getSession().setAttribute("reponses", reponses);
 		
 		//recuperation de la question suivant
 		Question question= new Question();

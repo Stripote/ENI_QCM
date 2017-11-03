@@ -50,7 +50,7 @@ public class listerQcm extends HttpServlet {
 		
 			request.setAttribute("listeQcm", qcms);
 			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/candidat/menuCandidat");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/candidat/menuCandidat.jsp");
 			dispatcher.forward(request,response);
 							
 			
