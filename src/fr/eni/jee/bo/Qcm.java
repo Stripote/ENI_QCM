@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 public class Qcm {
-//getset
+
 	int id;
 	String Nom;
 	boolean valide;
