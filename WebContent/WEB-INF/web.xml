@@ -63,4 +63,24 @@
     <servlet-name>creationTest</servlet-name>
     <url-pattern>/test/creationTest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>gestionSynthese</display-name>
+    <servlet-name>gestionSynthese</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.gestionSynthese</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gestionSynthese</servlet-name>
+    <url-pattern>/test/gestionSynthese</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>calculScore</display-name>
+    <servlet-name>calculScore</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.calculScore</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>calculScore</servlet-name>
+    <url-pattern>/test/calculScore</url-pattern>
+  </servlet-mapping>
 </web-app>
