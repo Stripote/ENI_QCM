@@ -65,7 +65,7 @@ public class gestionTest extends HttpServlet {
 		}	
 		request.getSession().setAttribute("reponses", reponses);
 		
-		//envoie vers le servlet de synthese si derniere question du test
+		//envoie vers le servlet de synthese si derniere question du test	
 		if (derniereQuestion.equals(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().get(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().size()-1))) {
 			dispatcher = getServletContext().getRequestDispatcher("/test/gestionSynthese");
 			dispatcher.forward(request, response);
