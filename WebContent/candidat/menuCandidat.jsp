@@ -21,9 +21,9 @@ ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
 	  <% int idQcm = Q.getId();
 	     //lien servlet axel
 	  %>
-			<div class="qcm">
+		<div class="qcm">
 			<form action="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>" method="POST" >
-				<input hidden type="text" name="idQcm" value="<%= idQcm %>" /><input type="submit" value="<%= Q.getNom() %> - [<%=Q.getDateCreation() %>]" />
+			<a href ="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>"> <p><%=idQcm %><%=Q.getNom()%>Creer le<%= df.format(Q.getDateCreation())%></p></a>
 			</form>
 			</div>
 			<br />
