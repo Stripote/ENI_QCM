@@ -11,10 +11,10 @@
 <body>
 
 <% Question question = (Question)request.getAttribute("question");%>
+
+<p><%=question.getEnonce().toString()%></p>	
 			
-<form action=#>
-	<p><%=question.getEnonce().toString()%></p>
-	
+<form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
 	<%for(Reponse reponse :question.getReponses()){ %>
     <input type="checkbox" class="reponse" name="reponse" value="<%=reponse%>">
     <label for="reponse"><%=reponse.getLibelle() %></label>
