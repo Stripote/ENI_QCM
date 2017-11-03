@@ -53,8 +53,12 @@ public class Section {
 		}
 		//On parcours chacune des questions de la sections
 		for(int j = 0; j<lesQuestions.size();j++){
-			if(!lesIndexDesQuestionsAGarder.contains(j))//Si l'index de la question n'est pas dans la liste des index a garder
+			if(!lesIndexDesQuestionsAGarder.contains(j)){//Si l'index de la question n'est pas dans la liste des index a garder
+				System.out.println(j + " retirée");
 				lesQuestions.remove(j);//On retire la question
+				ArrayList<Question> lesQuestionsOrdonnees = new ArrayList<Question>(lesQuestions);
+				lesQuestions = lesQuestionsOrdonnees;
+			}
 		}
 	}
 	
