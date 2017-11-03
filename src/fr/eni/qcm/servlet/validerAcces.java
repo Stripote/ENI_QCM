@@ -120,7 +120,7 @@ public class validerAcces extends HttpServlet {
 	protected void redirectionMenuCandidat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Redirection !");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/candidat/menuCandidat.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/listerQcm");
 		dispatcher.forward(request, response);
 		
 	}
