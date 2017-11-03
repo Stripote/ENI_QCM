@@ -65,9 +65,8 @@ public class gestionTest extends HttpServlet {
 		}	
 		request.getSession().setAttribute("reponses", reponses);
 		
-		//envoie vers le servlet de synthese si derniere question du test
-		if (derniereQuestion.equals(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().get(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().size()-1))) 
-		{		
+		//envoie vers le servlet de synthese si derniere question du test	
+		if (derniereQuestion.equals(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().get(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().size()-1))) {
 			dispatcher = getServletContext().getRequestDispatcher("/test/gestionSynthese");
 			dispatcher.forward(request, response);
 			return;
@@ -88,7 +87,7 @@ public class gestionTest extends HttpServlet {
 		}
 		
 		//envoie vers la servlet
-		request.setAttribute("question", question);
+		request.getSession().setAttribute("question", question);
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 		dispatcher.forward(request, response);
 
