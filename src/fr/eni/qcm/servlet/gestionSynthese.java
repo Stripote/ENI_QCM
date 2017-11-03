@@ -53,8 +53,17 @@ public class gestionSynthese extends HttpServlet {
 				liste.add(question);
 			}
 		}
+
+		//renvoie dans la jsp passageTest
+		if (request.getParameter("retour")!=null) {
+			Question question = liste.get(Integer.parseInt(request.getParameter("retour")));
+			request.getSession().setAttribute("question", question);
+			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 		
-		//renvoie vers la jsp syntheseTest
+		//renvoie vers la jsp syntheseTest autrement
 		request.setAttribute("listeQuestion", liste);
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/syntheseTest.jsp");
 		dispatcher.forward(request, response);

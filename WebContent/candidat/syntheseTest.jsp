@@ -17,8 +17,8 @@
 		
 		<% int i =1;
 	for(Question question :list){ %>	
-<form action="<%=request.getContextPath() %>/test/gestionTest?question=<%= list.indexOf(question) %>" method="post">	
-	<a href ="/test/gestionTest?question=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
+<form action="<%=request.getContextPath() %>/test/gestionSynthese?retour=<%= list.indexOf(question) %>" method="post">	
+	<a href ="/test/gestionSynthese?retour=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
 </form>	
 <% } %>	
 
