@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +42,11 @@ public class gestionSynthese extends HttpServlet {
 	}
 	
 	protected void gestionnaireSynthese(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher;
 		Qcm qcm =(Qcm)request.getAttribute("qcm");
 		List<Question> liste  =new ArrayList<Question>();
 		
-		
+		//recuperation de la liste des questions du test
 		for (int indexSection = 0; indexSection < (qcm.getSections().size()-1); indexSection++) {
 			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getLesQuestions().size()-1); indexQues++) {
 				Question question= qcm.getSections().get(indexSection).getLesQuestions().get(indexQues);
@@ -52,6 +54,9 @@ public class gestionSynthese extends HttpServlet {
 			}
 		}
 		
+		request.setAttribute("listeQuestion", liste);
+		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 
