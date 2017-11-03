@@ -18,16 +18,73 @@ public class QuestionDAO {
 	
 	/***
 	 * renvoie la question demandée et les reponses liées
+	 * @param idQuestion
+	 * @param Connexion
+	 * @return Question
+	 * @throws SQLException
+	 */
+	public static Question rechercher(int id, Connection cnx) throws SQLException{
+		Question question= null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null;
+
+		try{
+			cnx = AccesBase.getConnection();
+			rqt = cnx.prepareStatement(
+					"SELECT questions.id idQUESTIONS, questions.enonce, questions.image, reponses.libelle, reponses.reponses "
+					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
+					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
+					+ "JOIN theme ON qt.idTheme=theme.id"
+					+"where questions.id=?");
+			rqt.setInt(1, id);
+			rs=rqt.executeQuery();
+			
+			if (rs.next()){
+				List<Reponse> reponses = new ArrayList<Reponse>();
+				
+				String libelle= rs.getString("reponses.libelle");
+				String index=rs.getString("reponses.reponse");
+				
+				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
+				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
+				
+				for (String unLibelle : libelles) {
+					Reponse reponse=new Reponse();
+					reponse.setLibelle(unLibelle);
+					if (indexs.contains(libelles.indexOf(unLibelle))) {
+						reponse.setBonneReponse(true);
+					} else {
+						reponse.setBonneReponse(false);
+					}
+					reponses.add(reponse);
+				}
+				
+				question.setId(rs.getInt("questions.id"));
+				question.setEnonce(rs.getString("questions.enonce"));
+				if (rs.getString("questions.image")!=null) {
+					question.setImage(rs.getString("questions.image"));
+				}		
+				question.setReponses(reponses);
+			}		
+		}finally{
+			if (rs!=null) rs.close();
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		return question;
+	}
+	
+	/***
+	 * renvoie la question demandée et les reponses liées
 	 * @param id
-	 * @return
+	 * @return Question
 	 * @throws SQLException
 	 */
 	public static Question rechercher(int id) throws SQLException{
 		Question question= null;
-		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
-
+		Connection cnx = null;
 		try{
 			cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement(

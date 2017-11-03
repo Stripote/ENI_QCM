@@ -15,6 +15,13 @@ import fr.eni.qcm.util.AccesBase;
 
 public class ThemeDAO {
 	
+	/***
+	 * Permet de rechercher un thème en base de données, par son ID
+	 * @param id
+	 * @param cnx
+	 * @return Theme
+	 * @throws SQLException
+	 */
 	public static Theme rechercher(int id, Connection cnx) throws SQLException{
 		Theme theme= null;
 		PreparedStatement rqt = null;
@@ -24,10 +31,10 @@ public class ThemeDAO {
 			if(cnx==null)
 				cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement(
-					"SELECT theme.nom, questions.id" 
-							+"FROM questions" 
-							+"JOIN questions_theme qt ON qt.idQuestion=questions.id"
-							+"JOIN theme ON qt.idTheme=theme.id"
+					"SELECT theme.libelle nomTHEME, questions.id idQUESTIONS " 
+							+"FROM questions " 
+							+"JOIN questions_theme qt ON qt.idQuestion=questions.id "
+							+"JOIN theme ON qt.idTheme=theme.id "
 							+"WHERE theme.id=?");
 			rqt.setInt(1, id);
 			rs=rqt.executeQuery();
@@ -38,10 +45,55 @@ public class ThemeDAO {
 			if (rs.next()) {
 				if (i==0) {
 					theme.setId(id);
-					theme.setNom(rs.getString("theme.nom"));
+					theme.setNom(rs.getString("nomTHEME"));
 				}
 				Question question= new Question();
-				question=QuestionDAO.rechercher(Integer.parseInt(rs.getString("questions.id")));
+				question=QuestionDAO.rechercher(Integer.parseInt(rs.getString("idQUESTIONS")), cnx);
+				questions.add(question);
+				i++;
+			}
+			theme.setQuestions(questions);
+		}finally{
+			if (rs!=null) rs.close();
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		return theme;
+	}
+	
+	/***
+	 * Permet de rechercher un thème en base de données, par son ID
+	 * @param id
+	 * @return Theme
+	 * @throws SQLException
+	 */
+	public static Theme rechercher(int id) throws SQLException{
+		Theme theme= null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null;
+		Connection cnx = null;
+		try{
+			
+			cnx = AccesBase.getConnection();
+			rqt = cnx.prepareStatement(
+					"SELECT theme.libelle nomTHEME, questions.id idQUESTIONS " 
+							+"FROM questions " 
+							+"JOIN questions_theme qt ON qt.idQuestion=questions.id "
+							+"JOIN theme ON qt.idTheme=theme.id "
+							+"WHERE theme.id=?");
+			rqt.setInt(1, id);
+			rs=rqt.executeQuery();
+			List<Question> questions = new ArrayList<Question>();
+			theme = new Theme();
+			int i=0;
+			
+			if (rs.next()) {
+				if (i==0) {
+					theme.setId(id);
+					theme.setNom(rs.getString("nomTHEME"));
+				}
+				Question question= new Question();
+				question=QuestionDAO.rechercher(Integer.parseInt(rs.getString("idQUESTIONS")), cnx);
 				questions.add(question);
 				i++;
 			}
