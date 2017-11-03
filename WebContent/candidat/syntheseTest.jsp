@@ -20,7 +20,13 @@
 <form action="<%=request.getContextPath() %>/test/gestionTest?question=<%= list.indexOf(question) %>" method="post">	
 	<a href ="/test/gestionTest?question=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
 </form>	
-<% } %>		
+<% } %>	
+
+<form action="<%=request.getContextPath() %>/test/calculScore" method="post">	
+    <button type="submit">Fin du test</button>
+</form>	
+		
+		
 		
 	<%@ include file="/structure/menu.jspf"%>		
 
