@@ -47,13 +47,17 @@ public class gestionTest extends HttpServlet {
 		RequestDispatcher dispatcher;
 		
 		//recuperation de l'état du QCM
-		Qcm qcm =(Qcm)request.getAttribute("qcm");
-		Question derniereQuestion = (Question)request.getAttribute("question");
-		List<Reponse> reponses= (List<Reponse>)request.getAttribute("reponsesCandidat");
+		Qcm qcm =(Qcm)request.getSession().getAttribute("qcm");
+		Question derniereQuestion = (Question)request.getSession().getAttribute("question");
+		List<Reponse> reponses= (List<Reponse>)request.getSession().getAttribute("reponsesCandidat");
 		
-		
+		String libelleReponse = null;
 		//enregistrement des reponses
-		String libelleReponse = request.getParameter("reponse");
+		if( !(request.getParameter("reponse") == null))
+			libelleReponse = request.getParameter("reponse");
+		else
+			libelleReponse = "NO ANSWER";
+		
 		for (Reponse reponse : derniereQuestion.getReponses()) {
 			if (reponse.getLibelle().equals(libelleReponse)) {
 				reponses.add(reponse);
