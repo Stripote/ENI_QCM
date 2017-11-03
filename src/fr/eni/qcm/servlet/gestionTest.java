@@ -87,7 +87,7 @@ public class gestionTest extends HttpServlet {
 		}
 		
 		//envoie vers la servlet
-		request.setAttribute("question", question);
+		request.getSession().setAttribute("question", question);
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 		dispatcher.forward(request, response);
 
