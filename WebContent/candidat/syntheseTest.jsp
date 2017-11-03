@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
+  <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
 <title>ENI Ecole - Synthèse Test</title>
 </head>
 <body>

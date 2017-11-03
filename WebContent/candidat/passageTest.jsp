@@ -10,7 +10,10 @@
 </head>
 <body>
 
+<% Qcm test = (Qcm)request.getSession().getAttribute("qcm");%>
 <% Question question = (Question)request.getSession().getAttribute("question");%>
+
+<h1></h1>
 
 <p><%=question.getEnonce().toString()%></p>	
 			

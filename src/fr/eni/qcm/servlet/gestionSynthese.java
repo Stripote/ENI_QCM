@@ -48,7 +48,7 @@ public class gestionSynthese extends HttpServlet {
 		
 		//recuperation de la liste des questions du test
 		for (int indexSection = 0; indexSection < (qcm.getSections().size()-1); indexSection++) {
-			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getLesQuestions().size()-1); indexQues++) {
+			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getNbQuestions()-1); indexQues++) {
 				Question question= qcm.getSections().get(indexSection).getLesQuestions().get(indexQues);
 				liste.add(question);
 			}
