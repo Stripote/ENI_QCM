@@ -53,8 +53,13 @@ public class gestionTest extends HttpServlet {
 		
 		
 		//enregistrement des reponses
-		Reponse reponse = (Reponse) request.getAttribute("reponse");
-		reponses.add(reponse);
+		String libelleReponse = request.getParameter("reponse");
+
+		for (Reponse reponse : derniereQuestion.getReponses()) {
+			if (reponse.getLibelle().equals(libelleReponse)) {
+				reponses.add(reponse);
+			}
+		}	
 		request.getSession().setAttribute("reponses", reponses);
 		
 		//recuperation de la question suivant
