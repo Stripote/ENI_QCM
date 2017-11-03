@@ -63,15 +63,15 @@ public class gestionTest extends HttpServlet {
 		
 		//envoie vers le servlet de synthese si derniere question du test
 		if (derniereQuestion.equals(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().get(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().size()))) {
-			dispatcher = getServletContext().getRequestDispatcher("/candidat/syntheseTest.jsp");
+			dispatcher = getServletContext().getRequestDispatcher("/test/gestionSynthese");
 			dispatcher.forward(request, response);
 			return;
 		}
 		
 		//recuperation de la question suivant
 		Question question= new Question();
-		for (int indexSection = 0; indexSection < qcm.getSections().size(); indexSection++) {
-			for (int indexQues = 0; indexQues < qcm.getSections().get(indexSection).getLesQuestions().size(); indexQues++) {
+		for (int indexSection = 0; indexSection < (qcm.getSections().size()-1); indexSection++) {
+			for (int indexQues = 0; indexQues < (qcm.getSections().get(indexSection).getLesQuestions().size()-1); indexQues++) {
 				if (derniereQuestion.equals(qcm.getSections().get(indexSection).getLesQuestions().get(indexQues))) {
 					if (indexQues==(qcm.getSections().get(indexSection).getNbQuestions()-1)) {
 						question=qcm.getSections().get(indexSection+1).getLesQuestions().get(indexQues);
