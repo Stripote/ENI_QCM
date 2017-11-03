@@ -19,7 +19,7 @@ ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
 	 	for(Qcm Q : listeQcms) {
 	%>
 	  <% int idQcm = Q.getId();
-	     
+	     //lien servlet axel
 	  %>
 			<div class="qcm">
 			<form action="/ENI_QCM/test/creationTest?param1= <%= idQcm %>" method="POST" >
