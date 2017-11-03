@@ -68,7 +68,7 @@ public class QcmDAO {
 		ResultSet rs = null;
 		try{
 			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement("SELECT qcm.id idQCM, qcm.nom nomQCM, theme.id idTHEME, theme.libelle libelleTHEME, sections.id idSECTIONS, sections.nbQuestions "
+			rqt = cnx.prepareStatement("SELECT qcm.id idQCM, qcm.nom nomQCM, theme.id idTHEME, theme.libelle libelleTHEME, sections.id idSECTIONS, sections.nbQuestions nbQUESTIONS "
 					+"FROM qcm "
 					+"JOIN sections ON qcm.id=sections.qcm "
 					+"JOIN theme ON theme.id=sections.theme "
@@ -86,12 +86,13 @@ public class QcmDAO {
 								
 				Section section= new Section();
 				section.setId(rs.getInt("idSECTIONS"));
+				section.setNbQuestions(rs.getInt("nbQUESTIONS"));
 				Theme theme=new Theme();
 				theme.setId(rs.getInt("idTHEME"));
 				theme.setNom(rs.getString("libelleTHEME"));
 				section.setLesQuestions(ThemeDAO.rechercher(theme.getId(), cnx).getQuestions());
 				section.setTheme(theme);
-				//section.ajusterNombre(section.getLesQuestions().size());
+				section.ajusterNombre(section.getLesQuestions().size());
 				sections.add(section);
 				i++;
 			} 

@@ -42,13 +42,14 @@ public class ThemeDAO {
 			theme = new Theme();
 			int i=0;
 			
-			if (rs.next()) {
+			while(rs.next()) {
 				if (i==0) {
 					theme.setId(id);
 					theme.setNom(rs.getString("nomTHEME"));
 				}
 				Question question= new Question();
-				question=QuestionDAO.rechercher(Integer.parseInt(rs.getString("idQUESTIONS")), cnx);
+				int idQuestion = Integer.parseInt(rs.getString("idQUESTIONS"));
+				question=QuestionDAO.rechercher(idQuestion, cnx);
 				questions.add(question);
 				i++;
 			}

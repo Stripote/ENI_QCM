@@ -54,7 +54,6 @@ public class gestionTest extends HttpServlet {
 		
 		//enregistrement des reponses
 		String libelleReponse = request.getParameter("reponse");
-
 		for (Reponse reponse : derniereQuestion.getReponses()) {
 			if (reponse.getLibelle().equals(libelleReponse)) {
 				reponses.add(reponse);
