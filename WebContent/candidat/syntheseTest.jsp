@@ -14,19 +14,15 @@
 <body>
 
 <% List<Question> list = (List<Question>)request.getSession().getAttribute("listeQuestion");%>
-			
-<form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
-	<% int i =1;
-	for(Question question :list){ %>
-    <input type="checkbox" class="reponse" name="reponse" value="<%=question.getId()%>">
-    <label for="reponse">question <%=i %></label>
-	<%i++;} %>
-    <button type="submit">Question suivante</button>
-
-
-</form>			
-			
-<%@ include file="/structure/menu.jspf" %>
+		
+		<% int i =1;
+	for(Question question :list){ %>	
+<form action="<%=request.getContextPath() %>/test/gestionTest?question=<%= list.indexOf(question) %>" method="post">	
+	<a href ="/test/gestionTest?question=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
+</form>	
+<% } %>		
+		
+	<%@ include file="/structure/menu.jspf"%>		
 
 </body>
 </html>
