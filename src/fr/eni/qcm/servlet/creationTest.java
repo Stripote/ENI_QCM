@@ -56,9 +56,9 @@ public class creationTest extends HttpServlet {
 			System.out.println("ID DU QCM :" + test);
 			Qcm qcm = QcmDAO.rechercher(test);
 			Question premiereQuestion = qcm.getSections().get(0).getLesQuestions().get(0);
-			request.setAttribute("qcm", qcm);
-			request.setAttribute("question", premiereQuestion);
-			request.setAttribute("reponsesCandidat", reponses);
+			request.getSession().setAttribute("qcm", qcm);
+			request.getSession().setAttribute("question", premiereQuestion);
+			request.getSession().setAttribute("reponsesCandidat", reponses);
 			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 			dispatcher.forward(request, response);
 
