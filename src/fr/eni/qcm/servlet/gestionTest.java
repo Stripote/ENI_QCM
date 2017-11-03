@@ -62,6 +62,13 @@ public class gestionTest extends HttpServlet {
 		}	
 		request.getSession().setAttribute("reponses", reponses);
 		
+		//envoie vers le servlet de synthese si derniere question du test
+		if (derniereQuestion.equals(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().get(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().size()))) {
+			dispatcher = getServletContext().getRequestDispatcher("/candidat/syntheseTest.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 		//recuperation de la question suivant
 		Question question= new Question();
 		for (int indexSection = 0; indexSection < qcm.getSections().size(); indexSection++) {

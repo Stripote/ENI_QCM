@@ -24,30 +24,37 @@ public class QuestionDAO {
 	 * @throws SQLException
 	 */
 	public static Question rechercher(int id, Connection cnx) throws SQLException{
-		Question question= null;
+		Question question = new Question();
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 
 		try{
-			cnx = AccesBase.getConnection();
+			if(cnx==null)
+				cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement(
-					"SELECT questions.id idQUESTIONS, questions.enonce, questions.image, reponses.libelle, reponses.reponses "
+					"SELECT questions.id idQUESTIONS, questions.enonce enonceQUESTIONS, questions.image imageQUESTIONS, reponses.libelle libelleREPONSES, reponses.reponses reponsesREPONSES "
 					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
 					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
-					+ "JOIN theme ON qt.idTheme=theme.id"
+					+ "JOIN theme ON qt.idTheme=theme.id "
 					+"where questions.id=?");
 			rqt.setInt(1, id);
 			rs=rqt.executeQuery();
 			
-			if (rs.next()){
+			if(rs.next()){
 				List<Reponse> reponses = new ArrayList<Reponse>();
 				
-				String libelle= rs.getString("reponses.libelle");
-				String index=rs.getString("reponses.reponse");
+				String libelle= rs.getString("libelleREPONSES");
+				String index=rs.getString("reponsesREPONSES");
+				String enonce = rs.getString("enonceQUESTIONS");
+				int idQuestion = rs.getInt("idQUESTIONS");
 				
+				question.setEnonce(enonce);
+				question.setId(idQuestion);
+				if(rs.getString("imageQUESTIONS")!=null) {
+					question.setImage(rs.getString("imageQUESTIONS"));
+				}	
 				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
 				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
-				
 				for (String unLibelle : libelles) {
 					Reponse reponse=new Reponse();
 					reponse.setLibelle(unLibelle);
@@ -59,17 +66,15 @@ public class QuestionDAO {
 					reponses.add(reponse);
 				}
 				
-				question.setId(rs.getInt("questions.id"));
-				question.setEnonce(rs.getString("questions.enonce"));
-				if (rs.getString("questions.image")!=null) {
-					question.setImage(rs.getString("questions.image"));
-				}		
 				question.setReponses(reponses);
 			}		
 		}finally{
-			if (rs!=null) rs.close();
-			if (rqt!=null) rqt.close();
-			if (cnx!=null) cnx.close();
+			/*if (!rs.isClosed()) 
+				rs.close();
+			if (!rqt.isClosed()) 
+				rqt.close();
+			if (!cnx.isClosed()) 
+				cnx.close(); */
 		}
 		return question;
 	}
@@ -88,10 +93,10 @@ public class QuestionDAO {
 		try{
 			cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement(
-					"SELECT questions.id, questions.enonce, questions.image, reponses.libelle, reponses.reponses "
+					"SELECT questions.id idQUESTIONS, questions.enonce enonceQUESTIONS, questions.image imageQUESTIONS, reponses.libelle libelleREPONSES, reponses.reponses reponsesREPONSES "
 					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
 					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
-					+ "JOIN theme ON qt.idTheme=theme.id"
+					+ "JOIN theme ON qt.idTheme=theme.id "
 					+"where questions.id=?");
 			rqt.setInt(1, id);
 			rs=rqt.executeQuery();
@@ -99,8 +104,8 @@ public class QuestionDAO {
 			if (rs.next()){
 				List<Reponse> reponses = new ArrayList<Reponse>();
 				
-				String libelle= rs.getString("reponses.libelle");
-				String index=rs.getString("reponses.reponse");
+				String libelle= rs.getString("libelleREPONSES");
+				String index=rs.getString("reponsesREPONSES");
 				
 				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
 				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
@@ -116,10 +121,10 @@ public class QuestionDAO {
 					reponses.add(reponse);
 				}
 				
-				question.setId(rs.getInt("questions.id"));
-				question.setEnonce(rs.getString("questions.enonce"));
-				if (rs.getString("questions.image")!=null) {
-					question.setImage(rs.getString("questions.image"));
+				question.setId(rs.getInt("idQUESTIONS"));
+				question.setEnonce(rs.getString("enonceQUESTIONS"));
+				if (rs.getString("imageQUESTIONS")!=null) {
+					question.setImage(rs.getString("imageQUESTIONS"));
 				}		
 				question.setReponses(reponses);
 			}		

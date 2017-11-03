@@ -54,9 +54,12 @@ public class ThemeDAO {
 			}
 			theme.setQuestions(questions);
 		}finally{
-			if (rs!=null) rs.close();
-			if (rqt!=null) rqt.close();
-			if (cnx!=null) cnx.close();
+			/*if (!rs.isClosed()) 
+				rs.close();
+			if (!rqt.isClosed()) 
+				rqt.close();
+			if (!cnx.isClosed()) 
+				cnx.close();*/
 		}
 		return theme;
 	}

@@ -79,7 +79,6 @@ public class QcmDAO {
 			int i = 0;
 			qcm = new Qcm();
 			while (rs.next()){
-
 				if (i==0) {
 					qcm.setId(rs.getInt("idQCM"));
 					qcm.setNom(rs.getString("nomQCM"));
@@ -92,16 +91,19 @@ public class QcmDAO {
 				theme.setNom(rs.getString("libelleTHEME"));
 				section.setLesQuestions(ThemeDAO.rechercher(theme.getId(), cnx).getQuestions());
 				section.setTheme(theme);
-				section.ajusterNombre(section.getLesQuestions().size());
+				//section.ajusterNombre(section.getLesQuestions().size());
 				sections.add(section);
 				i++;
 			} 
 			qcm.setSections(sections);
 			
 		}finally{
-			if (rs!=null) rs.close();
-			if (rqt!=null) rqt.close();
-			if (cnx!=null) cnx.close();
+			/*if(!rs.isClosed())
+				rs.close();
+			if(!rqt.isClosed())
+				rqt.close();
+			if(!cnx.isClosed())
+				cnx.close();*/
 		}
 		return qcm;
 		
