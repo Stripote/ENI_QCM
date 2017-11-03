@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-9">
-				<form action="<%=request.getContextPath() %>/login/validerAcces" method="post">
+				<form action="<%=request.getContextPath() %>/test/gestionTest" method="post">
 				  	<div class="form-group">
 				    	<label for="identifiant">Identifiant :</label>
 				    	<input type="text" class="form-control" id="identifiant" name="identifiant">

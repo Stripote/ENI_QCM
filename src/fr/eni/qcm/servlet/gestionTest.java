@@ -1,10 +1,18 @@
 package fr.eni.qcm.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.jee.bo.Qcm;
+import fr.eni.jee.bo.Question;
+import fr.eni.jee.bo.Reponse;
 
 
 /**
@@ -36,8 +44,40 @@ public class gestionTest extends HttpServlet {
 	}
 
 	protected void gestionnaireTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//rescuperation du qcm choisi dans le menu Candidat
-		//Qcm test = (Qcm)request.getAttribute("test");
+		RequestDispatcher dispatcher;
+		
+		//recuperation de l'état du QCM
+		Qcm qcm =(Qcm)request.getAttribute("qcm");
+		Question derniereQuestion = (Question)request.getAttribute("question");
+		List<Reponse> reponses=new ArrayList<Reponse>();
+		
+		
+		//enregistrement des reponses
+		
+		
+		//recuperation de la question suivant
+		Question question= new Question();
+		for (int indexSection = 0; indexSection < qcm.getSections().size(); indexSection++) {
+			for (int indexQues = 0; indexQues < qcm.getSections().get(indexSection).getLesQuestions().size(); indexQues++) {
+				if (derniereQuestion.equals(qcm.getSections().get(indexSection).getLesQuestions().get(indexQues))) {
+					if (indexQues==(qcm.getSections().get(indexSection).getNbQuestions()-1)) {
+						question=qcm.getSections().get(indexSection+1).getLesQuestions().get(indexQues);
+					}else {
+						question=qcm.getSections().get(indexSection).getLesQuestions().get(indexQues+1);
+					}					
+				}
+			}
+		}
+		
+		//envoie vers la servlet
+		request.setAttribute("question", question);
+		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
+		dispatcher.forward(request, response);
+
+		
+		
+		
+		
 		
 		
 		
