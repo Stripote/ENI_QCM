@@ -41,7 +41,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>gestionTest</servlet-name>
-    <url-pattern>/gestionTest</url-pattern>
+    <url-pattern>/test/gestionTest</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -61,6 +61,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>creationTest</servlet-name>
-    <url-pattern>/creationTest</url-pattern>
+    <url-pattern>/test/creationTest</url-pattern>
   </servlet-mapping>
 </web-app>

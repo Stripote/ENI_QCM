@@ -18,8 +18,13 @@ DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
 	 	for(Qcm Q : listeQcms) {
 	%>
+	  <% int idQcm = Q.getId();
+	     
+	  %>
 			<div class="qcm">
-				<a href ="fr.eni.qcm.servlet/creationTest.java"=<%= Q.getId() %>"> <p><%=Q.getId() %><%=Q.getNom()%>Creer le<%= df.format(Q.getDateCreation())%></p></a>
+			<form action="/ENI_QCM/test/creationTest?param1= <%= idQcm %>" method="POST" >
+			<a href="/ENI_QCM/test/creationTest?param1= <%= idQcm %>"> <p><%=idQcm %><%=Q.getNom()%>Creer le<%= df.format(Q.getDateCreation())%></p></a>
+			</form>
 			</div>
 			<br />
 	<% } %>
