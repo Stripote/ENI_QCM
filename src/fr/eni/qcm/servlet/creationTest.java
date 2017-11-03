@@ -49,7 +49,9 @@ public class creationTest extends HttpServlet {
 		ArrayList<Section> lesSections = null;
 		try {
 			//Création du QCM
-			Qcm qcm = QcmDAO.rechercher(Integer.parseInt(request.getAttribute("idQcm").toString()));
+			int test = Integer.parseInt(request.getParameter("idQcm").toString());
+			System.out.println("ID DU QCM :" + test);
+			Qcm qcm = QcmDAO.rechercher(test);
 			Question premiereQuestion = qcm.getSections().get(0).getLesQuestions().get(0);
 			request.setAttribute("qcm", qcm);
 			request.setAttribute("question", premiereQuestion);

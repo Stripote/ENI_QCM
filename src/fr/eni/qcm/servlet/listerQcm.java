@@ -48,9 +48,9 @@ public class listerQcm extends HttpServlet {
 			
 			ArrayList<Qcm> qcms = QcmDAO.rechercher();
 		
-			request.setAttribute("listeQcm", qcms);
+			request.setAttribute("listeQcms", qcms);
 			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/candidat/menuCandidat");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/candidat/menuCandidat.jsp");
 			dispatcher.forward(request,response);
 							
 			

@@ -15,14 +15,14 @@ import fr.eni.qcm.util.AccesBase;
 
 public class ThemeDAO {
 	
-	public static Theme rechercher(int id) throws SQLException{
+	public static Theme rechercher(int id, Connection cnx) throws SQLException{
 		Theme theme= null;
-		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 
 		try{
-			cnx = AccesBase.getConnection();
+			if(cnx==null)
+				cnx = AccesBase.getConnection();
 			rqt = cnx.prepareStatement(
 					"SELECT theme.nom, questions.id" 
 							+"FROM questions" 

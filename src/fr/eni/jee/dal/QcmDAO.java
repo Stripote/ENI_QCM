@@ -68,10 +68,10 @@ public class QcmDAO {
 		ResultSet rs = null;
 		try{
 			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement("SELECT qcm.id, qcm.nom, theme.id, theme.libelle, sections.id, sections.nbQuestions"
-					+"FROM qcm"
-					+"JOIN sections ON qcm.id=sections.qcm"
-					+"JOIN theme ON theme.id=sections.theme"
+			rqt = cnx.prepareStatement("SELECT qcm.id idQCM, qcm.nom nomQCM, theme.id idTHEME, theme.libelle libelleTHEME, sections.id idSECTIONS, sections.nbQuestions "
+					+"FROM qcm "
+					+"JOIN sections ON qcm.id=sections.qcm "
+					+"JOIN theme ON theme.id=sections.theme "
 					+"WHERE qcm.id = ?");
 			rqt.setInt(1, id);
 			rs=rqt.executeQuery();
@@ -81,16 +81,16 @@ public class QcmDAO {
 			while (rs.next()){
 
 				if (i==0) {
-					qcm.setId(rs.getInt("qcm.id"));
-					qcm.setNom(rs.getString("qcm.nom"));
+					qcm.setId(rs.getInt("idQCM"));
+					qcm.setNom(rs.getString("nomQCM"));
 				}
 								
 				Section section= new Section();
-				section.setId(rs.getInt("sections.id"));
+				section.setId(rs.getInt("idSECTIONS"));
 				Theme theme=new Theme();
-				theme.setId(rs.getInt("theme.id"));
-				theme.setNom(rs.getString("theme.libelle"));
-				section.setLesQuestions(ThemeDAO.rechercher(theme.getId()).getQuestions());
+				theme.setId(rs.getInt("idTHEME"));
+				theme.setNom(rs.getString("libelleTHEME"));
+				section.setLesQuestions(ThemeDAO.rechercher(theme.getId(), cnx).getQuestions());
 				section.setTheme(theme);
 				section.ajusterNombre(section.getLesQuestions().size());
 				sections.add(section);
