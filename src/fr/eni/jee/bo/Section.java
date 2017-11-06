@@ -3,6 +3,7 @@ package fr.eni.jee.bo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.SortedMap;
 
 public class Section {
 	int id;
@@ -40,26 +41,31 @@ public class Section {
 	 * le formateur, en retirant les questions en trop
 	 * @param nbQuestionMax
 	 */
-	public void ajusterNombre(int nbQuestionMax){
+	public void ajusterNombre(){
 		Random rand = new Random();
-		List<Integer> lesIndexDesQuestionsAGarder = new ArrayList<Integer>();
+		int nbQuestionMax = lesQuestions.size();
+		ArrayList<Integer> lesIndexDesQuestionsAGarder = new ArrayList<Integer>();
 		//Création d'une liste d'index de la taille de nbQuestionMax
-		for(int i=0; i<nbQuestions; i++){
+		int i=0;
+		while(i<nbQuestions){
 			int aleat = rand.nextInt(nbQuestionMax);
-			if(!lesIndexDesQuestionsAGarder.contains(aleat)) //Si le nombre aleatoire n'est pas dans la liste
+			if(!lesIndexDesQuestionsAGarder.contains(aleat)){ //Si le nombre aleatoire n'est pas dans la liste
 				lesIndexDesQuestionsAGarder.add(aleat); //On l'y ajoute
-			else if(i>0)
-				i--;//Sinon on descend l'index d'1, car ce tour de FOR n'a servit a rien, il a ramené un aleat déjà dans la liste
-		}
-		//On parcours chacune des questions de la sections
-		for(int j = 0; j<lesQuestions.size();j++){
-			if(!lesIndexDesQuestionsAGarder.contains(j)){//Si l'index de la question n'est pas dans la liste des index a garder
-				System.out.println(j + " retirée");
-				lesQuestions.remove(j);//On retire la question
-				ArrayList<Question> lesQuestionsOrdonnees = new ArrayList<Question>(lesQuestions);
-				lesQuestions = lesQuestionsOrdonnees;
+				System.out.println("a garder :"+lesQuestions.get(aleat));
+				i++;
 			}
 		}
+		//On parcours chacune des questions de la sections
+		int tailleAvantRetrait = lesQuestions.size();
+		for(int j = 0; j<tailleAvantRetrait;j++){
+			if(!lesIndexDesQuestionsAGarder.contains(j)){//Si l'index de la question n'est pas dans la liste des index a garder
+				Question toRemove = lesQuestions.get(j);
+				System.out.println(toRemove+" retirée");
+				lesQuestions.remove(toRemove);//On retire la question
+			}
+		}
+		ArrayList<Question> lesQuestionsOrdonnees = new ArrayList<Question>(lesQuestions);
+		lesQuestions = lesQuestionsOrdonnees;
 	}
 	
 }

@@ -2,6 +2,7 @@ package fr.eni.qcm.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -55,19 +56,44 @@ public class gestionTest extends HttpServlet {
 		Question derniereQuestion = (Question)request.getSession().getAttribute("question");
 		List<Reponse> reponses= (List<Reponse>)request.getSession().getAttribute("reponsesCandidat");
 		
-		String libelleReponse = null;
-		//enregistrement des reponses
-		if( !(request.getParameter("reponse") == null))
-			libelleReponse = request.getParameter("reponse");
-		else
-			libelleReponse = "NO ANSWER";
+		List<String> libelleReponse = null;
+		//enregistrement des reponses du candidat
+		if(request.getParameter("reponse") != null)   
+			libelleReponse = new ArrayList<String>(Arrays.asList(request.getParameterValues("reponse")));
 		
 		for (Reponse reponse : derniereQuestion.getReponses()) {
+			//System.out.println("____\nreponse saisie : "+libelleReponse+"\nreponse attendue : "+reponse);
 			if (reponse.getLibelle().equals(libelleReponse)) {
 				reponses.add(reponse);
 			}
-		}	
+		}
 		request.getSession().setAttribute("reponsesCandidat", reponses);
+		
+		
+		List<Reponse> bonnesReponses = derniereQuestion.getReponses();
+		Boolean reponseCorrecte = false;
+		
+		//Si chaque élément de la liste des bonnes réponses est retrouvé dans les réponses utilisateur
+		int nbBonnesReponses = 0;
+		for(Reponse R : bonnesReponses){
+			if(R.getBonneReponse() == true){
+				nbBonnesReponses++;
+				if(libelleReponse.contains(R.getLibelle())){
+						reponseCorrecte = true;
+				}
+			}
+		}
+		//Et si le nombre de réponses soumises correspond au nombre de réponses attendues
+		if(nbBonnesReponses != libelleReponse.size())
+			reponseCorrecte = false;
+		
+		//Alors la réponse est juste
+		if(reponseCorrecte)
+			System.out.println("Bonne réponse !");
+		else
+			System.err.println("Mauvaise réponse...");
+		
+		
 		
 		//envoie vers le servlet de synthese si derniere question du test	
 		if (derniereQuestion.equals(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().get(qcm.getSections().get(qcm.getSections().size()-1).getLesQuestions().size()-1))) {
@@ -123,15 +149,7 @@ public class gestionTest extends HttpServlet {
 		//envoie vers la servlet
 		request.getSession().setAttribute("question", question);
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
-		dispatcher.forward(request, response);
-
-		
-		
-		
-		
-		
-		
-		
+		dispatcher.forward(request, response);	
 	}
 	
 }

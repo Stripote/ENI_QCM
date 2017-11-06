@@ -18,6 +18,13 @@ public class Reponse {
 		this.bonneReponse = bonneReponse;
 	}
 	
+	public String toString(){
+		if(this.getBonneReponse())
+			return this.libelle+"\nBONNE REPONSE";
+		else
+			return this.libelle+"\nMAUVAISE REPONSE";
+	}
+	
 	
 	
 	

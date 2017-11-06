@@ -58,7 +58,8 @@ public class QuestionDAO {
 				for (String unLibelle : libelles) {
 					Reponse reponse=new Reponse();
 					reponse.setLibelle(unLibelle);
-					if (indexs.contains(libelles.indexOf(unLibelle))) {
+					int i = libelles.indexOf(unLibelle);
+					if (indexs.contains( String.valueOf(i+1) )) {
 						reponse.setBonneReponse(true);
 					} else {
 						reponse.setBonneReponse(false);
