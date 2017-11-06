@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.jee.bo.Qcm;
+import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
 
 /**
@@ -40,7 +42,21 @@ public class calculScore extends HttpServlet {
 	
 	protected void EnregistrementResultat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Reponse> reponses= (List<Reponse>)request.getSession().getAttribute("reponsesCandidat");
+		List<Question> list = (List<Question>)request.getSession().getAttribute("listeQuestion");
+		//Qcm qcm =(Qcm)request.getSession().getAttribute("qcm");
 		
+		
+		/*for (Question question : list) {
+			Boolean bonneReponse= true;
+			for (Reponse reponse : question.getReponses()) {
+				if (reponses.contains(reponse)&&(reponse.getBonneReponse()==false)) {
+					bonneReponse=false;
+				}
+				if ((!reponses.contains(reponse))&&(reponse.getBonneReponse()==true)) {
+					bonneReponse=false;
+				}
+			}
+		}*/
 		
 	}
 

@@ -1,13 +1,18 @@
 package fr.eni.jee.bo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Session {
 
-	int id;
-	int score;
-	Date inscription;
-	Date datelimite;
+	private int id;
+	private Date datePassage;
+	private Qcm qcm;
+	private Utilisateur utilisateur;
+	private int scoreMax;
+	private int scoreUtilisateur;
+	private List<Reponse> reponses;
+
 	
 	public int getId() {
 		return id;
@@ -15,40 +20,45 @@ public class Session {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getScore() {
-		return score;
+	public Date getDatePassage() {
+		return datePassage;
 	}
-	public void setScore(int score) {
-		this.score = score;
+	public void setDatePassage(Date datePassage) {
+		this.datePassage = datePassage;
 	}
-	public Date getInscription() {
-		return inscription;
+	public Qcm getQcm() {
+		return qcm;
 	}
-	public void setInscription(Date inscription) {
-		this.inscription = inscription;
+	public void setQcm(Qcm qcm) {
+		this.qcm = qcm;
 	}
-	public Date getDatelimite() {
-		return datelimite;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
-	public void setDatelimite(Date datelimite) {
-		this.datelimite = datelimite;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	public int getScoreMax() {
+		return scoreMax;
+	}
+	public void setScoreMax(int scoreMax) {
+		this.scoreMax = scoreMax;
+	}
+	public int getScoreUtilisateur() {
+		return scoreUtilisateur;
+	}
+	public void setScoreUtilisateur(int scoreUtilisateur) {
+		this.scoreUtilisateur = scoreUtilisateur;
+	}
+	public List<Reponse> getReponses() {
+		return reponses;
+	}
+	public void setReponses(List<Reponse> reponses) {
+		this.reponses = reponses;
 	}
 	
-	public Session(){
-		
-		
-	}
 	
-	
-	
-	public Session(int id, int score, Date inscription, Date datelimite) {
-		super();
-		this.id = id;
-		this.score = score;
-		this.inscription = inscription;
-		this.datelimite = datelimite;
-	}
-	
+
 	
 	
 }
