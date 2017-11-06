@@ -65,7 +65,7 @@ public class gestionSynthese extends HttpServlet {
 		}
 		
 		//renvoie vers la jsp syntheseTest autrement
-		request.setAttribute("listeQuestion", liste);
+		request.getSession().setAttribute("listeQuestion", liste);
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/syntheseTest.jsp");
 		dispatcher.forward(request, response);
 		

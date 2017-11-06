@@ -15,7 +15,7 @@
 <center><font color="#6495ED"><h1>Menu Candidat</h1></font></center>
 <%
 
-ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getAttribute("listeQcms");
+ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getSession().getAttribute("listeQcms");
 	 	for(Qcm Q : listeQcms) {
 	%>
 	  <% int idQcm = Q.getId();

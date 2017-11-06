@@ -13,19 +13,21 @@
 </head>
 <body>
 
+
 <% List<Question> list = (List<Question>)request.getSession().getAttribute("listeQuestion");%>
-		
+	
 		<% int i =1;
 	for(Question question :list){ %>	
 <form action="<%=request.getContextPath() %>/test/gestionSynthese?retour=<%= list.indexOf(question) %>" method="post">	
-	<a href ="/test/gestionSynthese?retour=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
-</form>	
-<% } %>	
+	<a href ="<%=request.getContextPath() %>/test/gestionSynthese?retour=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
+</form>
+<%i++;} %>	
+
 
 <form action="<%=request.getContextPath() %>/candidat/menuCandidat.jsp" method="post">	
     <button type="submit">Fin du test</button>
 </form>	
-		
+	
 		
 		
 	<%@ include file="/structure/menu.jspf"%>		
