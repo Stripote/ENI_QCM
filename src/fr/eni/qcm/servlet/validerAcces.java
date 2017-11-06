@@ -52,15 +52,22 @@ public class validerAcces extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Utilisateur utilisateurConnecte = null;
 		
-		//testBdd.test();
-		
-		
 		// Si l'utilisateur est déjà  connecté, on redirige vers le menu animateur
 		utilisateurConnecte = (Utilisateur)request.getSession().getAttribute("utilisateurConnecte");
 		System.out.println("utilisateurConnecte !" + utilisateurConnecte);
 		if (utilisateurConnecte!=null) {
 			System.out.println("Connecté !");
-			redirectionMenuCandidat(request, response);
+
+			if ("Candidat".equals(utilisateurConnecte.getRole())) {
+				redirectionMenuCandidat(request, response);
+			}
+			if ("Administrateur".equals(utilisateurConnecte.getRole())) {
+				redirectionMenuAdministratif(request, response);
+			}
+			if ("Gestionnaire".equals(utilisateurConnecte.getRole())) {
+				redirectionMenuFormateur(request, response);
+			}
+			
 			return;
 		}		
 		
@@ -88,7 +95,17 @@ public class validerAcces extends HttpServlet {
 
 				request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
 
-				redirectionMenuCandidat(request, response);
+				if ("Candidat".equals(utilisateurConnecte.getRole())) {
+					redirectionMenuCandidat(request, response);
+				}
+				if ("Administrateur".equals(utilisateurConnecte.getRole())) {
+					redirectionMenuAdministratif(request, response);
+				}
+				if ("Gestionnaire".equals(utilisateurConnecte.getRole())) {
+					redirectionMenuFormateur(request, response);
+				}
+				return;
+						
 			}
 			else {
 				System.out.println("Pas Connecté !");
@@ -109,6 +126,20 @@ public class validerAcces extends HttpServlet {
 	protected void redirectionMenuCandidat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Redirection !");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listerQcm");
+		dispatcher.forward(request, response);
+		
+	}
+	
+	protected void redirectionMenuAdministratif(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Redirection !");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/administratif/menuAdministratif.jsp");
+		dispatcher.forward(request, response);
+		
+	}
+	
+	protected void redirectionMenuFormateur(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Redirection !");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/formateur/menuFormateur.jsp");
 		dispatcher.forward(request, response);
 		
 	}

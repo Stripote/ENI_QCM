@@ -9,7 +9,7 @@ public class Utilisateur {
 	String prenom;
 	String login;
 	String password;
-	List<Role> lesRoles;
+	String role;
 	public int getId() {
 		return id;
 	}
@@ -40,13 +40,12 @@ public class Utilisateur {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<Role> getLesRoles() {
-		return lesRoles;
+	public String getRole() {
+		return role;
 	}
-	public void setLesRoles(List<Role> lesRoles) {
-		this.lesRoles = lesRoles;
+	public void setRole(String role) {
+		this.role = role;
 	}
-	
 	
 	public Utilisateur(){
 		
@@ -55,15 +54,16 @@ public class Utilisateur {
 	}
 	
 	
-	public Utilisateur(int id, String nom, String prenom, String login, String password, List<Role> lesRoles) {
+	public Utilisateur(int id, String nom, String prenom, String login, String password, String role) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
 		this.password = password;
-		this.lesRoles = lesRoles;
+		this.role = role;
 	}
+	
 	
 	
 	

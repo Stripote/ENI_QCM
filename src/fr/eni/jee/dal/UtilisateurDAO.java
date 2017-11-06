@@ -21,7 +21,11 @@ public class UtilisateurDAO {
 		Utilisateur utilisateur = null;
 		try{
 			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement("select id, nom, prenom, login, password from utilisateurs where login=? and password=?");
+			rqt = cnx.prepareStatement("select A.id, A.nom, A.prenom, A.login, A.password, C.libelle "
+					+ "from utilisateurs A "
+					+ "join utilisateurs_role B on A.id=B.idUtilisateur "
+					+ "join rôle C on C.id=B.idRole "
+					+ "where A.login=? and A.password=?");
 			rqt.setString(1, login);
 			rqt.setString(2, password);
 			rs=rqt.executeQuery();
@@ -33,6 +37,7 @@ public class UtilisateurDAO {
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setLogin(rs.getString("login"));
 				utilisateur.setPassword(rs.getString("password"));
+				utilisateur.setRole(rs.getString("libelle"));
 			}
 		
 			else {
