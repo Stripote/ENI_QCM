@@ -19,7 +19,7 @@ import fr.eni.qcm.util.AccesBase;
 
 public class SessionDAO {
 
-	public static Session rechercher(int id) throws SQLException{
+	public static Session rechercherScore(int idSession) throws SQLException{
 		Session session= null;
 		/*PreparedStatement rqt = null;
 		ResultSet rs = null;
@@ -79,14 +79,21 @@ public class SessionDAO {
 			
 			//mise à jour table session
 			String insertSession = "insert into session (utilisateur, qcm, datePassage, scoreMax) values (?,?,?,?)";
-			rqt = cnx.prepareStatement(insertSession);
+			rqt = cnx.prepareStatement(insertSession, Statement.RETURN_GENERATED_KEYS);
 			rqt.setInt(1, session.getUtilisateur().getId());
 			rqt.setInt(2, session.getQcm().getId());
 			rqt.setDate(3, new java.sql.Date(new Date().getTime()));
 			rqt.setInt(4, session.getScoreMax());
 			rqt.executeUpdate();
 			
+			//recuperation de l'idSession
+			ResultSet key = rqt.getGeneratedKeys();
+			key.next();
+			session.setId(key.getInt(1));
+			
 			cnx.commit();
+			
+			
 			
 			//mise à jour table reponse(des candidats)
 			String insertReponse = "insert into session_reponses (session, question) values (?,?)";
@@ -154,63 +161,6 @@ public class SessionDAO {
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();
 		}
-	}
-	
-	public static List<Session> rechercher() throws SQLException {
-		
-		List<Session> listSession = new ArrayList<Session>();
-		/*
-		Connection cnx = null;
-		PreparedStatement rqt = null;
-		ResultSet rs = null;
-		try{
-			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement(
-					"SELECT questions.id, questions.enonce, questions.image, reponses.libelle, reponses.reponses "
-					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
-					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
-					+ "JOIN theme ON qt.idTheme=theme.id");
-			rs=rqt.executeQuery();
-			
-			while (rs.next()){
-				List<Reponse> reponses = new ArrayList<Reponse>();
-							
-				String libelle= rs.getString("reponses.libelle");
-				String index=rs.getString("reponses.reponse");
-				
-				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
-				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
-				
-				for (String unLibelle : libelles) {
-					Reponse reponse=new Reponse();
-					reponse.setLibelle(unLibelle);
-					if (indexs.contains(libelles.indexOf(unLibelle))) {
-						reponse.setBonneReponse(true);
-					} else {
-						reponse.setBonneReponse(false);
-					}
-					reponses.add(reponse);
-				}
-				
-				
-				Question question = new Question();
-				question.setId(rs.getInt("questions.id"));
-				question.setEnonce(rs.getString("questions.enonce"));
-				if (rs.getString("questions.image")!=null) {
-					question.setImage(rs.getString("questions.image"));
-				}		
-				question.setReponses(reponses);
-				
-				listQuestion.add(question);
-			}
-			
-		}finally{
-			if (rs!=null) rs.close();
-			if (rqt!=null) rqt.close();
-			if (cnx!=null) cnx.close();
-		}*/
-		return listSession;
-		
 	}
 	
 }
