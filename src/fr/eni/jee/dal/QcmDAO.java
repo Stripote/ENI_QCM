@@ -92,8 +92,7 @@ public class QcmDAO {
 				theme.setNom(rs.getString("libelleTHEME"));
 				section.setLesQuestions(ThemeDAO.rechercher(theme.getId(), cnx).getQuestions());
 				section.setTheme(theme);
-				//section.ajusterNombre(section.getLesQuestions().size());
-				//section.ajusterNombre();
+				section.ajusterNombre();
 				sections.add(section);
 				i++;
 			} 

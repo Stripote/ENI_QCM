@@ -1,9 +1,12 @@
 package fr.eni.jee.bo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
-import java.util.SortedMap;
 
 public class Section {
 	int id;
@@ -45,6 +48,9 @@ public class Section {
 		Random rand = new Random();
 		int nbQuestionMax = lesQuestions.size();
 		ArrayList<Integer> lesIndexDesQuestionsAGarder = new ArrayList<Integer>();
+		ArrayList<Question> lesQuestionsOrdonnees = new ArrayList();
+		HashMap temp = new HashMap();
+		
 		//Création d'une liste d'index de la taille de nbQuestionMax
 		int i=0;
 		while(i<nbQuestions){
@@ -55,16 +61,29 @@ public class Section {
 				i++;
 			}
 		}
-		//On parcours chacune des questions de la sections
+		
+		//Conversion de la liste des questions en HashMap pour conserver les indexs
+		int tmpIndex = 0;
+		for(Question Q : lesQuestions){
+			temp.put(tmpIndex, Q);
+			tmpIndex++;
+		}
+		
+		//On parcours chacune des questions de la sections, pour les retirer via leurs indexs
 		int tailleAvantRetrait = lesQuestions.size();
 		for(int j = 0; j<tailleAvantRetrait;j++){
 			if(!lesIndexDesQuestionsAGarder.contains(j)){//Si l'index de la question n'est pas dans la liste des index a garder
-				Question toRemove = lesQuestions.get(j);
-				System.out.println(toRemove+" retirée");
-				lesQuestions.remove(toRemove);//On retire la question
+				temp.remove(j);
 			}
 		}
-		ArrayList<Question> lesQuestionsOrdonnees = new ArrayList<Question>(lesQuestions);
+		
+		//Conversion inverse d'un HashMap en liste de Questions
+		Iterator it = temp.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry me = (Map.Entry)it.next();
+			lesQuestionsOrdonnees.add( (Question) me.getValue());
+		}
+		//Attribution nouvelle liste de questions à l'objet Section courant
 		lesQuestions = lesQuestionsOrdonnees;
 	}
 	
