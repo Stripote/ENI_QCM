@@ -8,6 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
+  <script src="<%=request.getContextPath() %>/theme/js/jquery-3.2.1.min.js"></script>
+  <script src="<%=request.getContextPath() %>/theme/js/style.js"></script>
   <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
 <title>ENI Ecole - Test</title>
 </head>
@@ -22,24 +24,25 @@
 %>
 <center><font color="#6495ED"><h1>Question N°<%=index%></h1></font></center>
 <div class="container">
-<center><font color="#6495ED"><h3><%=question.getEnonce().toString()%></h3></font></center>	
-			
-<center><form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
-	<table>
-	<%for(Reponse reponse :question.getReponses()){ %>
-    <tr><td>
-    <input type="checkbox" class="reponse" id="reponse" name="reponse" value="<%=reponse.getLibelle()%>">
-    <label for="reponse"><%=reponse.getLibelle() %></label><br>
-	</td></tr>
-	<%} %>
-	</table>
-     <button type="submit" class="btn btn-primary">Validé</button>
-     
-     </center>
-</div>
-
-</form>			
-			
+<center><font color="#6495ED"><h3><%=question.getEnonce().toString()%></h3></font></center>		
+	<center>
+		<form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
+			<table class="tableQuestion">
+				<%
+				int k = 0;
+				for(Reponse reponse :question.getReponses()){ 
+					k++; 
+				%>
+			    <tr><td>
+			    <input hidden type="checkbox" class="reponse" id="reponse<%=k%>" name="reponse" value="<%=reponse.getLibelle()%>">
+			    <label for="reponse<%=k %>"><%=reponse.getLibelle() %></label><br>
+				</td></tr>
+				<%} %>
+			</table>
+	    	<button type="submit" class="btn btn-primary">Valider</button>
+		</form>
+	</center>	
+</div>		
 <%@ include file="/structure/menu.jspf" %>
 </body>
 </html>

@@ -28,4 +28,18 @@ margin-bottom: 50px;
 
 
 }
+form[action="/ENI_QCM/test/gestionTest"] td {
+	border:1px solid transparent;
+	margin-bottom:2px;
+	color:black;
+	cursor:pointer;
+}
+
+.tableQuestion{
+	border-collapse:separate;
+	border-spacing:2px;	
+}
+.tableQuestion tr{
+	margin-bottom:2px;
+}
 
