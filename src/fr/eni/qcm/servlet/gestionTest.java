@@ -15,6 +15,8 @@ import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
 import fr.eni.jee.bo.Section;
+import fr.eni.jee.bo.Session;
+import fr.eni.jee.dal.SessionDAO;
 
 
 /**
@@ -88,13 +90,23 @@ public class gestionTest extends HttpServlet {
 			reponseCorrecte = false;
 		
 		//Alors la réponse est juste
+		Session sessionTest = (Session) request.getSession().getAttribute("session");
+		int score = sessionTest.getScoreUtilisateur();
+		try{
 		if(reponseCorrecte){
 			System.out.println("Bonne réponse !");
-			//SessionDAO.ajouterReponse(libelleReponse, derniereQuestion.getId(), true);
+			score++;
+			sessionTest.setScoreUtilisateur(score);
+			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), true, score);
 		}
 		else{
 			System.err.println("Mauvaise réponse...");
-			//SessionDAO.ajouterReponse(libelleReponse, derniereQuestion.getId(), false);
+			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), false, score);
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			request.getSession().setAttribute("session", sessionTest);
 		}
 		
 		
