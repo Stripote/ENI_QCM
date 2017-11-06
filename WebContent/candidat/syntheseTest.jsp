@@ -22,7 +22,7 @@
 </form>	
 <% } %>	
 
-<form action="<%=request.getContextPath() %>/test/calculScore" method="post">	
+<form action="<%=request.getContextPath() %>/candidat/menuCandidat.jsp" method="post">	
     <button type="submit">Fin du test</button>
 </form>	
 		
