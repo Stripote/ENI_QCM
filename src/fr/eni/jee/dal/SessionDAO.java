@@ -91,7 +91,7 @@ public class SessionDAO {
 			key.next();
 			session.setId(key.getInt(1));
 			
-			cnx.commit();
+			//cnx.commit();
 			
 			
 			
@@ -106,15 +106,15 @@ public class SessionDAO {
 
 					rqt.executeUpdate();
 						
-					cnx.commit();					
+					//cnx.commit();					
 				}
 			}
 			
 		} catch (SQLException sqle){
 					
-			if (cnx != null) {
+			/*if (cnx != null) {
 				cnx.rollback();
-			}
+			}*/
 			throw sqle;
 		} finally {
 			if (rqt!=null) rqt.close();
@@ -147,7 +147,7 @@ public class SessionDAO {
 			rqt.setBoolean(2, bonneReponse);
 			rqt.setInt(3, idQuestion);
 			rqt.executeUpdate();
-			cnx.commit();
+			//cnx.commit();
 			
 			//mise à jour du score Utilisateur dans session
 			if (bonneReponse==true) {
@@ -155,7 +155,7 @@ public class SessionDAO {
 				rqt.setInt(1, score);
 				rqt.setInt(2, idSession);
 				rqt.executeUpdate();
-				cnx.commit();
+				//cnx.commit();
 			}			
 		}finally{
 			if (rqt!=null) rqt.close();
