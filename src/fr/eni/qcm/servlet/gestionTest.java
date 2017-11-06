@@ -94,13 +94,11 @@ public class gestionTest extends HttpServlet {
 		int score = sessionTest.getScoreUtilisateur();
 		try{
 		if(reponseCorrecte){
-			System.out.println("Bonne réponse !");
 			score++;
 			sessionTest.setScoreUtilisateur(score);
 			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), true, score);
 		}
 		else{
-			System.err.println("Mauvaise réponse...");
 			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), false, score);
 		}
 		}catch(Exception e){

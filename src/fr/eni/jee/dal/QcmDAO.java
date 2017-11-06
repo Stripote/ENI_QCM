@@ -100,12 +100,12 @@ public class QcmDAO {
 			qcm.setSections(sections);
 			
 		}finally{
-			/*if(!rs.isClosed())
+			if(!rs.isClosed())
 				rs.close();
 			if(!rqt.isClosed())
 				rqt.close();
 			if(!cnx.isClosed())
-				cnx.close();*/
+				cnx.close();
 		}
 		return qcm;
 		

@@ -101,8 +101,8 @@ public class SessionDAO {
 			for (Section section : session.getQcm().getSections()) {
 				for (Question question : section.getLesQuestions()) {						
 					rqt = cnx.prepareStatement(insertReponse);
-					rqt.setInt(2, session.getId());
-					rqt.setInt(3, question.getId());
+					rqt.setInt(1, session.getId());
+					rqt.setInt(2, question.getId());
 
 					rqt.executeUpdate();
 						
@@ -128,10 +128,10 @@ public class SessionDAO {
 	public static void ajouterReponse(int idSession, List<String> reponses, int idQuestion, boolean bonneReponse, int score) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
-		String reponseBdd =null;
+		String reponseBdd = "";
 		
 		for (String S : reponses) {
-			if (reponses.indexOf(S)==reponses.size()) {
+			if (reponses.indexOf(S)==reponses.size()-1) {
 				reponseBdd+=S;
 			}else {
 				reponseBdd+=S+"#";
@@ -140,7 +140,6 @@ public class SessionDAO {
 		
 		try{
 			cnx=AccesBase.getConnection();
-			
 			//mise à jour de session_reponses
 			rqt=cnx.prepareStatement("update session_reponses set reponse = ?, vraiFaux = ? where question = ?");
 			rqt.setString(1, reponseBdd);
