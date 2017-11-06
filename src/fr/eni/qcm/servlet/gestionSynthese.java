@@ -57,6 +57,7 @@ public class gestionSynthese extends HttpServlet {
 		//renvoie dans la jsp passageTest
 		if (request.getParameter("retour")!=null) {
 			Question question = liste.get(Integer.parseInt(request.getParameter("retour")));
+			request.removeAttribute("retour");
 			request.getSession().setAttribute("question", question);
 			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 			dispatcher.forward(request, response);
