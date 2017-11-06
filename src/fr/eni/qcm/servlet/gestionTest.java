@@ -88,10 +88,15 @@ public class gestionTest extends HttpServlet {
 			reponseCorrecte = false;
 		
 		//Alors la réponse est juste
-		if(reponseCorrecte)
+		if(reponseCorrecte){
 			System.out.println("Bonne réponse !");
-		else
+			//SessionDAO.ajouterReponse(libelleReponse, derniereQuestion.getId(), true);
+		}
+		else{
 			System.err.println("Mauvaise réponse...");
+			//SessionDAO.ajouterReponse(libelleReponse, derniereQuestion.getId(), false);
+		}
+		
 		
 		
 		
