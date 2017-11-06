@@ -140,11 +140,12 @@ public class gestionTest extends HttpServlet {
 		//On parcour la liste des sections 
 		Boolean questionChoisi = false;
 		Boolean newSection = false;
+
 		for (Section S : qcm.getSections()) {
 			if(questionChoisi)
 				break;
 			if(newSection){
-				question = S.getLesQuestions().get(1);
+				question = S.getLesQuestions().get(0);
 				break;
 			}
 			if(S.getLesQuestions().contains(derniereQuestion)){
@@ -166,6 +167,14 @@ public class gestionTest extends HttpServlet {
 		
 		//envoie vers la servlet
 		request.getSession().setAttribute("question", question);
+		try{
+			int indexGlobal = (Integer) request.getSession().getAttribute("indexQuestion");
+			indexGlobal++;
+			request.getSession().setAttribute("indexQuestion", indexGlobal);
+		}catch(Exception e){
+			int indexGlobal = 1;
+			request.getSession().setAttribute("indexQuestion", indexGlobal);
+		}
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 		dispatcher.forward(request, response);	
 	}

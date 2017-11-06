@@ -15,17 +15,26 @@
 <%@ include file="/structure/logo.jspf" %>
 <% Qcm test = (Qcm)request.getSession().getAttribute("qcm");%>
 <% Question question = (Question)request.getSession().getAttribute("question");%>
-
-<center><font color="#6495ED"><h1>Question N°<%=question.getId()%></h1></font></center>
+<% 
+	int index = 1;
+	if(request.getSession().getAttribute("indexQuestion") != null)
+		index = (Integer)request.getSession().getAttribute("indexQuestion");
+%>
+<center><font color="#6495ED"><h1>Question N°<%=index%></h1></font></center>
 <div class="container">
 <center><font color="#6495ED"><h3><%=question.getEnonce().toString()%></h3></font></center>	
 			
 <center><form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
+	<table>
 	<%for(Reponse reponse :question.getReponses()){ %>
-    <input type="checkbox" class="reponse" name="reponse" value="<%=reponse.getLibelle()%>">
-    <label for="reponse"><%=reponse.getLibelle() %></label>
+    <tr><td>
+    <input type="checkbox" class="reponse" id="reponse" name="reponse" value="<%=reponse.getLibelle()%>">
+    <label for="reponse"><%=reponse.getLibelle() %></label><br>
+	</td></tr>
 	<%} %>
+	</table>
      <button type="submit" class="btn btn-primary">Validé</button>
+     
      </center>
 </div>
 

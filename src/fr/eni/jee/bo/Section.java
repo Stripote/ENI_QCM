@@ -57,7 +57,6 @@ public class Section {
 			int aleat = rand.nextInt(nbQuestionMax);
 			if(!lesIndexDesQuestionsAGarder.contains(aleat)){ //Si le nombre aleatoire n'est pas dans la liste
 				lesIndexDesQuestionsAGarder.add(aleat); //On l'y ajoute
-				System.out.println("a garder :"+lesQuestions.get(aleat));
 				i++;
 			}
 		}
