@@ -81,17 +81,6 @@ public class validerAcces extends HttpServlet {
 		try {
 			// Valider l'identification par rapport aux informations de la base
 			utilisateurConnecte = UtilisateurDAO.rechercher(identifiant, motdepasse);
-			/*Utilisateur utilisateur=new Utilisateur();
-			utilisateur.setNom("villeret");
-			utilisateur.setPrenom("adrien");
-			utilisateur.setId(1);
-			utilisateur.setLogin("a");
-			utilisateur.setPassword("v");
-			String login =utilisateur.getLogin();
-			String password=utilisateur.getPassword();
-			if (login.equals(identifiant) && password.equals(motdepasse)) {
-				utilisateurConnecte=utilisateur;
-			}*/
 			
 			// Si l'authentification est réussie...
 			if (utilisateurConnecte != null) {
