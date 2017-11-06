@@ -1,6 +1,7 @@
 package fr.eni.jee.bo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Session {
@@ -13,6 +14,13 @@ public class Session {
 	private int scoreUtilisateur;
 	private List<Reponse> reponses;
 
+	public Session(Qcm unQcm, Utilisateur unUtilisateur){
+		this.reponses = new ArrayList<Reponse>();
+		this.datePassage = new Date(System.currentTimeMillis());
+		this.qcm = unQcm;
+		this.utilisateur = unUtilisateur;
+		this.scoreMax = qcm.getScoreMax();
+	}
 	
 	public int getId() {
 		return id;

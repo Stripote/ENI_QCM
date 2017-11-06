@@ -74,6 +74,14 @@ public class Qcm {
 		Fin = fin;
 	}
 	
+	public int getScoreMax(){
+		int nb = 0;
+		for(Section St : this.getSections()){
+			 nb+=St.getNbQuestions();
+		}
+		return nb;
+	}
+	
 	
 	
 	

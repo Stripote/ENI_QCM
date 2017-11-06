@@ -15,6 +15,8 @@ import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
 import fr.eni.jee.bo.Section;
+import fr.eni.jee.bo.Session;
+import fr.eni.jee.bo.Utilisateur;
 import fr.eni.jee.dal.QcmDAO;
 
 /**
@@ -59,6 +61,7 @@ public class creationTest extends HttpServlet {
 			request.getSession().setAttribute("qcm", qcm);
 			request.getSession().setAttribute("question", premiereQuestion);
 			request.getSession().setAttribute("reponsesCandidat", reponses);
+			request.getSession().setAttribute("session", new Session(qcm, (Utilisateur)request.getSession().getAttribute("utilisateurConnecte")));
 			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 			dispatcher.forward(request, response);
 
