@@ -11,7 +11,7 @@
 <title>ENI Ecole - Acces Utilisateur</title>
 </head>
 <body>
-
+<%@ include file="/structure/logo.jspf" %>
 <h1><font color="#6495ED">Acces Utilisateur</font></h1> 
 	<div class="container">
 		<div class="row">

@@ -11,7 +11,7 @@
 <title>ENI Ecole - Menu Candidat</title>
 </head>
 <body>
-
+<%@ include file="/structure/logo.jspf" %>
 <center><font color="#6495ED"><h1>Menu Candidat</h1></font></center>
 <%
 

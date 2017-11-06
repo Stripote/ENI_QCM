@@ -12,7 +12,7 @@
 <title>ENI Ecole - Test</title>
 </head>
 <body>
-
+<%@ include file="/structure/logo.jspf" %>
 <% Qcm test = (Qcm)request.getSession().getAttribute("qcm");%>
 <% Question question = (Question)request.getSession().getAttribute("question");%>
 
