@@ -58,7 +58,7 @@ public class gestionSynthese extends HttpServlet {
 		if (request.getParameter("retour")!=null) {
 			Question question = liste.get(Integer.parseInt(request.getParameter("retour")));
 			
-			int indexGlobal = Integer.parseInt(request.getParameter("retour"));
+			int indexGlobal = Integer.parseInt(request.getParameter("retour"))+1;
 			request.getSession().setAttribute("indexQuestion", indexGlobal);
 			
 			request.removeAttribute("retour");
