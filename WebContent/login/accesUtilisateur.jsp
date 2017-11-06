@@ -25,7 +25,7 @@
 				    	<label for="motdepasse">Mot de passe :</label>
 				    	<input type="password" class="form-control" id="motdepasse" name="motdepasse">
 				  	</div>
-				  	<button type="submit" class="btn btn-default">se connecter</button>
+				  	<button type="submit" class="btn btn-primary">se connecter</button>
 				</form>
 			</div>
 			</div>

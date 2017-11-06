@@ -2,7 +2,7 @@
 <center><ul class="Menu">
 	<h3>Menu</h3>
 <a href="<%=request.getContextPath() %>/">Accueil</a><br>
-<a href="<%=request.getContextPath() %>/login/validerAcces">Accès Utilisateur</a>
+<a href="<%=request.getContextPath() %>/login/validerAcces">Accès Utilisateur</a><br>
 <%if(request.getSession().getAttribute("utilisateurConnecte")!= null){ %>
 <a href="<%=request.getContextPath() %>/deconnecter">Deconnexion</a>
 <%} %>
