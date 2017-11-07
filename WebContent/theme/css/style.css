@@ -24,16 +24,15 @@ padding-top: 50px;
  box-shadow: 10px 10px grey;
 padding-bottom: 50px;
 margin-bottom: 50px;
-
-
-
 }
+
 form[action="/ENI_QCM/test/gestionTest"] td {
 	border:1px solid transparent;
 	margin-bottom:2px;
 	color:black;
 	cursor:pointer;
 }
+
 form[action="/ENI_QCM/test/gestionTest"] label{
 	cursor:pointer;
 }
@@ -42,7 +41,16 @@ form[action="/ENI_QCM/test/gestionTest"] label{
 	border-collapse:separate;
 	border-spacing:2px;	
 }
+
 .tableQuestion tr{
 	margin-bottom:2px;
+}
+
+.Menu{
+	padding-left:0;
+}
+
+.fsSection{
+	margin-top:25px;
 }
 

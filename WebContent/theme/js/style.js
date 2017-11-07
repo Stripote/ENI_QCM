@@ -10,7 +10,10 @@ $(document).ready( function(){
 		}
 	});
 	
-	if( $("#reponseDonnee" ) ){
-		console.log("une réponse existe déja !");
+	if( $("#reponseDonnee" ).length > 0 ){
+		console.log("une réponse existe déja => "+$("#reponseDonnee" ).val() );
+		$(".reponse").each( function(){
+			
+		});
 	}
 });

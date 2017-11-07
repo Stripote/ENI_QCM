@@ -18,8 +18,10 @@
 <% Qcm test = (Qcm)request.getSession().getAttribute("qcm");%>
 <% Question question = (Question)request.getSession().getAttribute("question");%>
 
-<%if(request.getSession().getAttribute("reponseDonnee")!=null){String reponseDonnee= (String)request.getSession().getAttribute("reponseDonnee");%>
-<input hidden id="reponseDonnee" value="<%=reponseDonnee %>">
+<%if(request.getSession().getAttribute("reponseDonnee")!=null){
+	String reponseDonnee= (String)request.getSession().getAttribute("reponseDonnee");
+%>
+<input  id="reponseDonnee" value="<%=reponseDonnee %>">
 <%} %>
 
 <% 

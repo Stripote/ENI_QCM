@@ -12,6 +12,10 @@
 	href="<%=request.getContextPath()%>/theme/css/style.css">
 <script
 	src="<%=request.getContextPath()%>/theme/bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/theme/js/jquery-3.2.1.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/theme/js/qcmForm.js"></script>
 
 <title>ENI Ecole - Creation Qcm</title>
 </head>
@@ -20,64 +24,38 @@
 	<center>
 		<font color="#6495ED"><h1>Creation Qcm</h1></font>
 	</center>
-
-
 	<form action="Qcm" method="POST" >
 		<div class="container">
-
-			<h3>Choisir un Nom de Qcm</h3>
-
-
 			<div class="form-group">
-				<label for="nom">Nom</label><input type="nom" class="form-control"
-					id="nom">
-				
+				<label for="nom"><h3>Donnez un nom au QCM</h3></label><input type="nom" class="form-control" id="nom">	
 			</div>
-
-
-
-
-			<h3>Choisir un theme</h3>
-			<select class="form-control">
-
-				<%
+			<div id="sections">
+				<fieldset class="fsSection" id="firstSection"><legend>Section <span id="idSection">1</span></legend>
+					<h4>Choisir un theme</h4>
+					<select name="themes[]" class="form-control">
+					<%
 					ArrayList<Theme> listeThemes = (ArrayList<Theme>) request.getAttribute("listeThemes");
 					for (Theme T : listeThemes) {
-				%>
-				<%
-					int idTheme = T.getId();
-				%>
-				<option value="<%=idTheme%>"><a
-						href="/ENI_QCM/test/creationQcm?idTheme=<%=idTheme%>"><%=T.getNom()%></a></option>
-
-				<%
-					}
-				%>
-			</select> <br />
-
-			<h3>Choisir un nombre de questions</h3>
-			<select class="form-control">
-
-
-
-				<%
-					for (int i = 1; i <= 10; ++i) {
-				%>
-
-
-				<option value="<%=i%>"><%=i%></option>
-
-
-				<%
-					}
-				%>
-
-			</select>
-<br>
-			<button type="submit" class="btn btn-primary" value="Qcm">Envoyé</button>
-
+						int idTheme = T.getId();
+						%>
+						<option value="<%=idTheme%>">
+							<a href="/ENI_QCM/test/creationQcm?idTheme=<%=idTheme%>"><%=T.getNom()%></a>
+						</option>
+					<%}%>
+					</select> 
+					<br />
+					<h4>Choisir un nombre de questions</h4>
+					<select name="nbQuestions[]" class="form-control">
+					<%for (int i = 1; i <= 10; ++i) {%>
+						<option value="<%=i%>"><%=i%></option>
+					<%}%>
+					</select>
+				</fieldset>
+			</div>
+			<br><br>
+			<a class="btn btn-info" id="addSection">Ajouter une section</a>
+			<button type="submit" class="btn btn-primary" value="Qcm">Envoyer</button>
 		</div>
-
 	</form>
 
 	<br />
