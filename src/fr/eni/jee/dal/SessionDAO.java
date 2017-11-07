@@ -125,10 +125,13 @@ public class SessionDAO {
 
 	}
 
-	public static void ajouterReponse(int idSession, List<String> reponses, int idQuestion, boolean bonneReponse, int score) throws SQLException{
+	public static void ajouterReponse(int idSession, List<String> reponses, int idQuestion, boolean bonneReponse) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
 		String reponseBdd = "";
+		ResultSet rs = null;
+		List<Boolean> listReponse=new ArrayList<Boolean>();
+		int score=0;
 		
 		for (String S : reponses) {
 			if (reponses.indexOf(S)==reponses.size()-1) {
@@ -140,22 +143,33 @@ public class SessionDAO {
 		
 		try{
 			cnx=AccesBase.getConnection();
+						
 			//mise à jour de session_reponses
 			rqt=cnx.prepareStatement("update session_reponses set reponse = ?, vraiFaux = ? where question = ?");
 			rqt.setString(1, reponseBdd);
 			rqt.setBoolean(2, bonneReponse);
 			rqt.setInt(3, idQuestion);
 			rqt.executeUpdate();
-			//cnx.commit();
+				
+			//verification question déjà repondue
+			rqt=cnx.prepareStatement("select vraiFaux from session_reponses where session = ?");
+			rqt.setInt(1, idSession);			
+			rs=rqt.executeQuery();
+			
+			while (rs.next()) {
+				Boolean verifReponse= rs.getBoolean("vraiFaux");
+				if (verifReponse) {
+					listReponse.add(verifReponse);
+				}				
+			}			
+			score=listReponse.size();
 			
 			//mise à jour du score Utilisateur dans session
-			if (bonneReponse==true) {
-				rqt=cnx.prepareStatement("update session set scoreUtilisateur = ? where idSession = ?");
-				rqt.setInt(1, score);
-				rqt.setInt(2, idSession);
-				rqt.executeUpdate();
-				//cnx.commit();
-			}			
+			rqt=cnx.prepareStatement("update session set scoreUtilisateur = ? where idSession = ?");
+			rqt.setInt(1, score);
+			rqt.setInt(2, idSession);
+			rqt.executeUpdate();
+			
 		}finally{
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();

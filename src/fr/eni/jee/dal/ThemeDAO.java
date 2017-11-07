@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
 import fr.eni.jee.bo.Theme;
@@ -179,60 +180,37 @@ public class ThemeDAO {
 		}*/
 	}
 	
-	public static List<Theme> rechercher() throws SQLException {
+public static ArrayList<Theme> rechercher() throws SQLException {
 		
-		List<Theme> listTheme = new ArrayList<Theme>();
-		/*
+		ArrayList<Theme> listeThemes = new ArrayList<Theme>();
+		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		try{
 			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement(
-					"SELECT questions.id, questions.enonce, questions.image, reponses.libelle, reponses.reponses "
-					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
-					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
-					+ "JOIN theme ON qt.idTheme=theme.id");
+			rqt = cnx.prepareStatement("select id, libelle from theme");
 			rs=rqt.executeQuery();
 			
 			while (rs.next()){
-				List<Reponse> reponses = new ArrayList<Reponse>();
-							
-				String libelle= rs.getString("reponses.libelle");
-				String index=rs.getString("reponses.reponse");
-				
-				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
-				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
-				
-				for (String unLibelle : libelles) {
-					Reponse reponse=new Reponse();
-					reponse.setLibelle(unLibelle);
-					if (indexs.contains(libelles.indexOf(unLibelle))) {
-						reponse.setBonneReponse(true);
-					} else {
-						reponse.setBonneReponse(false);
-					}
-					reponses.add(reponse);
-				}
+				Theme theme = new Theme();
+				theme.setId(rs.getInt("id"));
+				theme.setNom(rs.getString("libelle"));
 				
 				
-				Question question = new Question();
-				question.setId(rs.getInt("questions.id"));
-				question.setEnonce(rs.getString("questions.enonce"));
-				if (rs.getString("questions.image")!=null) {
-					question.setImage(rs.getString("questions.image"));
-				}		
-				question.setReponses(reponses);
 				
-				listQuestion.add(question);
+				listeThemes.add(theme);
 			}
+
 			
 		}finally{
 			if (rs!=null) rs.close();
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();
-		}*/
-		return listTheme;
+		}
+		return listeThemes;
+		
+	
 		
 	}
 }
