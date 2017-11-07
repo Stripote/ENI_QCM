@@ -91,15 +91,13 @@ public class gestionTest extends HttpServlet {
 		
 		//Alors la réponse est juste
 		Session sessionTest = (Session) request.getSession().getAttribute("session");
-		int score = sessionTest.getScoreUtilisateur();
+
 		try{
 		if(reponseCorrecte){
-			score++;
-			sessionTest.setScoreUtilisateur(score);
-			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), true, score);
+			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), true);
 		}
 		else{
-			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), false, score);
+			SessionDAO.ajouterReponse(sessionTest.getId(), libelleReponse, derniereQuestion.getId(), false);
 		}
 		}catch(Exception e){
 			e.printStackTrace();
