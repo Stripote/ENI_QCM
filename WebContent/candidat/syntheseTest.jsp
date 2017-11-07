@@ -12,23 +12,24 @@
 <title>ENI Ecole - Synthèse Test</title>
 </head>
 <body>
-
-
+<%@ include file="/structure/logo.jspf" %>
+<center><font color="#6495ED"><h1>Synthèse Test</h1></font></center>
+<div class ="container">
 <% List<Question> list = (List<Question>)request.getSession().getAttribute("listeQuestion");%>
 	
 		<% int i =1;
 	for(Question question :list){ %>	
-<form action="<%=request.getContextPath() %>/test/gestionSynthese?retour=<%= list.indexOf(question) %>" method="post">	
+<center><font color="#6495ED"><form action="<%=request.getContextPath() %>/test/gestionSynthese?retour=<%= list.indexOf(question) %>" method="post">	
 	<a href ="<%=request.getContextPath() %>/test/gestionSynthese?retour=<%= list.indexOf(question) %>"><p>question <%=i %></p></a>	
-</form>
+</form></font></center>
 <%i++;} %>	
 
 
 <form action="<%=request.getContextPath() %>/candidat/menuCandidat.jsp" method="post">	
-    <button type="submit">Fin du test</button>
-</form>	
+    <center><font color="#6495ED"><button type="submit" class="btn btn-primary">Fin du test</button>
+</form></font></center>	
 	
-		
+</div>		
 		
 	<%@ include file="/structure/menu.jspf"%>		
 

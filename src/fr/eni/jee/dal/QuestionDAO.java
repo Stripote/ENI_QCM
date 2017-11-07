@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
+import fr.eni.jee.bo.Theme;
 import fr.eni.qcm.util.AccesBase;
 
 public class QuestionDAO {
@@ -211,9 +212,9 @@ public class QuestionDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static List<Question> rechercher() throws SQLException {
+	public static ArrayList<Question> rechercher() throws SQLException {
 		
-		List<Question> listQuestion = new ArrayList<Question>();
+		ArrayList<Question> listQuestion = new ArrayList<Question>();
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
@@ -267,5 +268,6 @@ public class QuestionDAO {
 		return listQuestion;
 		
 	}
+
 	
 }

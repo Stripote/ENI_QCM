@@ -55,6 +55,26 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>listerQuestion</display-name>
+    <servlet-name>listerQuestion</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.listerQuestion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listerQuestion</servlet-name>
+    <url-pattern>/listerQuestion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>listerTheme</display-name>
+    <servlet-name>listerTheme</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.listerTheme</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listerTheme</servlet-name>
+    <url-pattern>/listerTheme</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>creationTest</display-name>
     <servlet-name>creationTest</servlet-name>
     <servlet-class>fr.eni.qcm.servlet.creationTest</servlet-class>
