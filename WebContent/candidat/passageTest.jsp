@@ -17,6 +17,11 @@
 <%@ include file="/structure/logo.jspf" %>
 <% Qcm test = (Qcm)request.getSession().getAttribute("qcm");%>
 <% Question question = (Question)request.getSession().getAttribute("question");%>
+
+<%if(request.getSession().getAttribute("reponseDonnee")!=null){String reponseDonnee= (String)request.getSession().getAttribute("reponseDonnee");%>
+<input hidden id="reponseDonnee" value="<%=reponseDonnee %>">
+<%} %>
+
 <% 
 	int index = 1;
 	if(request.getSession().getAttribute("indexQuestion") != null)
@@ -26,7 +31,11 @@
 <div class="container">
 <center><font color="#6495ED"><h3><%=question.getEnonce().toString()%></h3></font></center>		
 	<center>
-		<form action="<%=request.getContextPath() %>/test/gestionTest" method="post">	
+		<%if(request.getSession().getAttribute("testTermine")==null){ %>
+		<form action="<%=request.getContextPath() %>/test/gestionTest" method="post">
+		<%}else{ %>	
+		<form action="<%=request.getContextPath() %>/test/gestionSynthese" method="post">
+		<%} %>
 			<table class="tableQuestion">
 				<%
 				int k = 0;
