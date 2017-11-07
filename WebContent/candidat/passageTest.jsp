@@ -1,7 +1,7 @@
 <%@ page import ="fr.eni.jee.bo.*, java.util.*, java.text.*" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,7 +22,7 @@
 	if(request.getSession().getAttribute("indexQuestion") != null)
 		index = (Integer)request.getSession().getAttribute("indexQuestion");
 %>
-<center><font color="#6495ED"><h1>Question N°<%=index%></h1></font></center>
+<center><font color="#6495ED"><h1>Question NÂ°<%=index%></h1></font></center>
 <div class="container">
 <center><font color="#6495ED"><h3><%=question.getEnonce().toString()%></h3></font></center>		
 	<center>
