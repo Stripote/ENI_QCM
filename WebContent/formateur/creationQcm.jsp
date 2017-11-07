@@ -15,6 +15,12 @@
 <center><font color="#6495ED"><h1>Creation Qcm</h1></font></center>
 
 <h3>Choisir un theme</h3>
+
+	<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Themes
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+
 <%
 
 ArrayList<Theme> listeThemes = (ArrayList<Theme>)request.getAttribute("listeThemes");
@@ -23,42 +29,14 @@ ArrayList<Theme> listeThemes = (ArrayList<Theme>)request.getAttribute("listeThem
 	  <% int idTheme = T.getId();
 	    
 	  %>
-		<div class="container">
-		<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-			<form action="/ENI_QCM/test/creationQcm?idTheme=<%= idTheme %>" method="POST" >
-			<li><a href ="/ENI_QCM/test/creationQcm?idQcm=<%= idTheme %>"> <p><%=T.getNom()%></p></a></li>
-			</form>
-			</ul>
-			</div>
-			</div>
-			<br />
+			<li><a href ="/ENI_QCM/test/creationQcm?idTheme=<%= idTheme %>"><%=T.getNom()%></a></li>
+					
 	<% } %>
-<h3>Choisir une ou des question(s)</h3>
-<%
+</ul>
+</div>
 
-ArrayList<Question> listeQuestions = (ArrayList<Question>)request.getAttribute("listeQuestions");
-	 	for(Question Q : listeQuestions) {
-	%>
-	  <% int idQuestion = Q.getId();
-	    
-	  %>
-		<div class="container">
-		<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-			<li><form action="/ENI_QCM/test/creationQcm?idQuestion=<%= idQuestion %>" method="POST" >
-			<a href ="/ENI_QCM/test/creationQcm?idQuestion=<%= idQuestion  %>"> <p><%=Q.getEnonce()%></p></a>
-			</form></li>
-			</ul>
-			</div>
-			</div>		
-			<br />
-	<% } %>
-	
+<br />
+
 <%@ include file="/structure/menu.jspf" %>
 
 </body>
