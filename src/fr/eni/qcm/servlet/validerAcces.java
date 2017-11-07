@@ -56,18 +56,19 @@ public class validerAcces extends HttpServlet {
 		utilisateurConnecte = (Utilisateur)request.getSession().getAttribute("utilisateurConnecte");
 		System.out.println("utilisateurConnecte !" + utilisateurConnecte);
 		if (utilisateurConnecte!=null) {
-			System.out.println("Connecté !");
-
 			if ("Candidat".equals(utilisateurConnecte.getRole())) {
 				redirectionMenuCandidat(request, response);
 			}
-			if ("Administrateur".equals(utilisateurConnecte.getRole())) {
+			else if ("Administrateur".equals(utilisateurConnecte.getRole())) {
 				redirectionMenuAdministratif(request, response);
 			}
-			if ("Gestionnaire".equals(utilisateurConnecte.getRole())) {
+			else if ("Formateur".equals(utilisateurConnecte.getRole())) {
 				redirectionMenuFormateur(request, response);
 			}
-			
+			else{
+				//Redirection par defaut
+				redirectionMenuCandidat(request, response);
+			}
 			return;
 		}		
 		
@@ -91,18 +92,17 @@ public class validerAcces extends HttpServlet {
 			
 			// Si l'authentification est réussie...
 			if (utilisateurConnecte != null) {
-				System.out.println("authentification réussie !");
-
 				request.getSession().setAttribute("utilisateurConnecte", utilisateurConnecte);
-
 				if ("Candidat".equals(utilisateurConnecte.getRole())) {
 					redirectionMenuCandidat(request, response);
 				}
-				if ("Administrateur".equals(utilisateurConnecte.getRole())) {
+				else if ("Administrateur".equals(utilisateurConnecte.getRole())) {
 					redirectionMenuAdministratif(request, response);
 				}
-				if ("Gestionnaire".equals(utilisateurConnecte.getRole())) {
+				else if ("Formateur".equals(utilisateurConnecte.getRole())) {
 					redirectionMenuFormateur(request, response);
+				}else{
+					redirectionMenuCandidat(request, response);
 				}
 				return;
 						
@@ -139,7 +139,7 @@ public class validerAcces extends HttpServlet {
 	
 	protected void redirectionMenuFormateur(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Redirection !");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/formateur/menuFormateur.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/listerQcm");
 		dispatcher.forward(request, response);
 		
 	}

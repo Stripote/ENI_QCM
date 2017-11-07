@@ -14,20 +14,22 @@
 <%@ include file="/structure/logo.jspf" %>
 <center><font color="#6495ED"><h1>Menu Candidat</h1></font></center>
 <%
-
-ArrayList<Qcm> listeQcms = (ArrayList<Qcm>)request.getSession().getAttribute("listeQcms");
-	 	for(Qcm Q : listeQcms) {
-	%>
-	  <% int idQcm = Q.getId();
+	ArrayList<Qcm> listeQcms = new ArrayList<Qcm>();
+	listeQcms = (ArrayList<Qcm>)request.getSession().getAttribute("listeQcms");
+	for(Qcm Q : listeQcms) 
+	{
+		int idQcm = Q.getId();
 	     //lien servlet axel
-	  %>
+%>
 		<div class="container">
-			<center><form action="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>" method="POST" >
-			<a href ="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>"> <p><%=Q.getNom()%></p></a>
-			</form></center>
-			</div>
-			<br />
-	<% } %>
+			<center>
+				<form action="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>" method="POST" >
+					<a href ="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>"> <p><%=Q.getNom()%></p></a>
+				</form>
+			</center>
+		</div>
+		<br />
+<% } %>
 
 <%@ include file="/structure/menu.jspf" %>
 

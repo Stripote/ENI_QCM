@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.bo.Qcm;
+import fr.eni.jee.bo.Utilisateur;
 import fr.eni.jee.dal.QcmDAO;
 
 /**
@@ -49,13 +50,21 @@ public class listerQcm extends HttpServlet {
 			ArrayList<Qcm> qcms = QcmDAO.rechercher();
 		
 			request.getSession().setAttribute("listeQcms", qcms);
-			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/candidat/menuCandidat.jsp");
+			Utilisateur user = null;
+			user = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
+			
+			if(user != null){
+				if("Formateur".equals(user.getRole()))
+					dispatcher = getServletContext().getRequestDispatcher("/formateur/menuFormateur.jsp");
+				else if("Administrateur".equals(user.getRole()))
+					dispatcher = getServletContext().getRequestDispatcher("/administratif/menuAdministratif.jsp");
+			}
 			dispatcher.forward(request,response);
 							
 			
 		}catch (Exception e){
-		
+			e.printStackTrace();
 		}
 		
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import ="fr.eni.jee.bo.*, java.util.*, java.text.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,13 +11,33 @@
   <title>ENI Ecole - Menu Formateur</title>
 </head>
 <body>
+<center><font color="#6495ED"><h1>Menu Formateur</h1></font></center>
 
-<h1>Menu Formateur</h1>
+
+<div class="container">
+<h3>Questionnaires existants</h3>
+	<center><table>
+<%
+	ArrayList<Qcm> listeQcms = new ArrayList<Qcm>();
+	listeQcms = (ArrayList<Qcm>)request.getSession().getAttribute("listeQcms");
+	for(Qcm Q : listeQcms) 
+	{
+%>
+		<tr>
+			<td><p class="listQcm_element" idQcm="<%= Q.getId() %>"><%=Q.getNom()%></p></td>
+			<td><a href=# title="Modifier" class="btn btn-info glyphicon glyphicon-edit"></a></td>
+			<td><a href=# title="Supprimer" class="btn btn-danger glyphicon glyphicon-erase"></a></td>
+		</tr>
+<% } %>
+	</table></center>
+</div>
+<br />
 
 <ul>
-<li><a href=#>Tests</a></li>
-<li><a href=#>Themes</a></li>
-<li><a href=#>Questions</a></li>
+<li><a href=#>Créer un QCM</a></li>
+<li><a href=#>Ajouter un thème</a></li>
+<li><a href=#>Créer des questions</a></li>
+<li><a href=#>Affecter des candidats à un QCM</a>
 </ul>
 
 

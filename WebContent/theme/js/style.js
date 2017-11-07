@@ -9,4 +9,8 @@ $(document).ready( function(){
 			$(this).parent().css("color", "black");
 		}
 	});
+	
+	if( $("#reponseDonnee" ) ){
+		console.log("une réponse existe déja !");
+	}
 });
