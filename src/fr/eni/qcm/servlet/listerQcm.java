@@ -47,6 +47,10 @@ public class listerQcm extends HttpServlet {
 		try{
 			
 			
+			
+			
+			
+			
 			ArrayList<Qcm> qcms = QcmDAO.rechercher();
 		
 			request.getSession().setAttribute("listeQcms", qcms);

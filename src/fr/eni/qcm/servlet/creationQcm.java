@@ -49,30 +49,24 @@ public class creationQcm extends HttpServlet {
 	}
 	
 	
+	
+	
 	protected void doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
-		ArrayList<Section> lesSections = null;
-		List<Reponse> reponses=new ArrayList<Reponse>();
+		
+		
+		
+		
 		try {
 			//Création du QCM
-			int test = Integer.parseInt(request.getParameter("idQcm").toString());
-			System.out.println("ID DU QCM :" + test);
-			Qcm qcm = QcmDAO.rechercher(test);
-			Question premiereQuestion = qcm.getSections().get(0).getLesQuestions().get(0);
-			request.getSession().setAttribute("qcm", qcm);
-			request.getSession().setAttribute("question", premiereQuestion);
-			request.getSession().setAttribute("reponsesCandidat", reponses);
+			String nom = (request.getParameter("nom"));
+			Qcm qcm = new Qcm (nom);
+			qcm = QcmDAO.ajouter(qcm);
 			
-			Session sessionTest = new Session(qcm, (Utilisateur)request.getSession().getAttribute("utilisateurConnecte"));;
-			sessionTest = SessionDAO.ajouter(sessionTest);
+			int idTheme = Integer.parseInt(request.getParameter("idTheme").toString());
 			
-			request.getSession().setAttribute("session", sessionTest);
-			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
-			dispatcher.forward(request, response);
+			
 
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

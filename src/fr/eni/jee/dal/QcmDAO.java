@@ -5,12 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Section;
 import fr.eni.jee.bo.Theme;
+import fr.eni.jee.bo.Utilisateur;
 import fr.eni.qcm.util.AccesBase;
 
 public class QcmDAO {
@@ -110,5 +112,41 @@ public class QcmDAO {
 		
 	}
 	
+	
+	public static Qcm ajouter(Qcm qcm) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		try{
+			cnx=AccesBase.getConnection(); 
+			
+			String insert = "insert into qcm (nom) values (?)";
+			rqt = cnx.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			rqt.setString(1, qcm.getNom());
+			
+			
+			rqt.executeUpdate();
+			ResultSet key = rqt.getGeneratedKeys();
+			key.next();
+			qcm.setId(key.getInt(1));
+			
+			
+			cnx.commit();
+			
+			key.close();
+			
+		} catch (SQLException sqle){
+					
+			if (cnx != null) {
+				cnx.rollback();
+			}
+			throw sqle;
+		} finally {
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+		return qcm;
+
+	}
 	
 }
