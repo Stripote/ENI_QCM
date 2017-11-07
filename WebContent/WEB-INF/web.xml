@@ -103,4 +103,14 @@
     <servlet-name>calculScore</servlet-name>
     <url-pattern>/test/calculScore</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>creerQcm</display-name>
+    <servlet-name>creerQcm</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.creationQcm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>creerQcm</servlet-name>
+    <url-pattern>/formateur/creerQcm</url-pattern>
+  </servlet-mapping>
 </web-app>

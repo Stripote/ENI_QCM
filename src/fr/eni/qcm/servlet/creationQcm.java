@@ -49,25 +49,25 @@ public class creationQcm extends HttpServlet {
 	}
 	
 	
-	
-	
 	protected void doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
-		
-		
-		
 		
 		try {
 			//Création du QCM
 			String nom = (request.getParameter("nom"));
 			Qcm qcm = new Qcm (nom);
-			qcm = QcmDAO.ajouter(qcm);
+			//qcm = QcmDAO.ajouter(qcm);
 			
-			int idTheme = Integer.parseInt(request.getParameter("idTheme").toString());
-			
-			
-
-		} catch (SQLException e) {
+			String[] idTheme =  request.getParameterValues("themes");
+			String[] nbQuestions = request.getParameterValues("nbQuestions");
+			int compteur = 0;
+			for(String S : idTheme){
+				String unTheme = S;
+				String unNombreDeQuestion = nbQuestions[compteur];
+				System.out.println("Theme : "+unTheme+" de "+unNombreDeQuestion+" questions");
+				compteur++;
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

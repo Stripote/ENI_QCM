@@ -24,7 +24,7 @@
 	<center>
 		<font color="#6495ED"><h1>Creation Qcm</h1></font>
 	</center>
-	<form action="Qcm" method="POST" >
+	<form action="<%=request.getContextPath()%>/formateur/creerQcm" method="POST" >
 		<div class="container">
 			<div class="form-group">
 				<label for="nom"><h3>Donnez un nom au QCM</h3></label><input type="nom" class="form-control" id="nom">	
@@ -32,7 +32,7 @@
 			<div id="sections">
 				<fieldset class="fsSection" id="firstSection"><legend>Section <span id="idSection">1</span></legend>
 					<h4>Choisir un theme</h4>
-					<select name="themes[]" class="form-control">
+					<select name="themes" class="form-control">
 					<%
 					ArrayList<Theme> listeThemes = (ArrayList<Theme>) request.getAttribute("listeThemes");
 					for (Theme T : listeThemes) {
@@ -45,7 +45,7 @@
 					</select> 
 					<br />
 					<h4>Choisir un nombre de questions</h4>
-					<select name="nbQuestions[]" class="form-control">
+					<select name="nbQuestions" class="form-control">
 					<%for (int i = 1; i <= 10; ++i) {%>
 						<option value="<%=i%>"><%=i%></option>
 					<%}%>
