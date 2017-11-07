@@ -84,6 +84,43 @@ public class UtilisateurDAO {
 		return utilisateur;
 	}
 	
+	public static Utilisateur rechercher(String role) throws SQLException{
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null;
+		Utilisateur utilisateur = null;
+		try{
+			cnx = AccesBase.getConnection();
+			rqt = cnx.prepareStatement("select A.id, A.nom, A.prenom, A.login, A.password, C.libelle "
+					+ "from utilisateurs A "
+					+ "join utilisateurs_role B on A.id=B.idUtilisateur "
+					+ "join rôle C on C.id=B.idRole "
+					+ "where C.libelle=?");
+			rqt.setString(1, role);
+			rs=rqt.executeQuery();
+			
+			if (rs.next()){
+				utilisateur = new Utilisateur();
+				utilisateur.setId(rs.getInt("id"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setLogin(rs.getString("login"));
+				utilisateur.setPassword(rs.getString("password"));
+				utilisateur.setRole(rs.getString("libelle"));
+			}
+		
+			else {
+				utilisateur = null;
+			}
+			
+		}finally{
+			if (rs!=null) rs.close();
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		return utilisateur;
+	}
+	
 	public static Utilisateur ajouter(Utilisateur utilisateur) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;

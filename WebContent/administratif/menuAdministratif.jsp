@@ -14,8 +14,9 @@
 <h1>Menu Administratif</h1>
 
 <ul>
-<li><a href=#>Candidats</a></li>
+<li><a href=#>Liste des Candidats</a></li>
 <li><a href=#>Inscription</a></li>
+<li><a href=#>Gestion des Utilisateurs</a></li>
 </ul>
 
 <%@ include file="/structure/menu.jspf" %>

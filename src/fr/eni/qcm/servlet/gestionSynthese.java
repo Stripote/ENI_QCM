@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
+import fr.eni.jee.bo.Reponse;
 import fr.eni.jee.bo.Section;
 
 /**
@@ -46,6 +47,8 @@ public class gestionSynthese extends HttpServlet {
 		RequestDispatcher dispatcher;
 		Qcm qcm =(Qcm)request.getSession().getAttribute("qcm");
 		List<Question> liste  =new ArrayList<Question>();
+		List<Reponse> listeReponse  =new ArrayList<Reponse>();
+		String reponseDonnee=null;
 		
 		//recuperation de la liste des questions du test
 		for (Section section : qcm.getSections()) {
@@ -62,14 +65,25 @@ public class gestionSynthese extends HttpServlet {
 			request.getSession().setAttribute("indexQuestion", indexGlobal);
 			
 			request.removeAttribute("retour");
-			request.getSession().setAttribute("question", question);
-						
+			request.getSession().setAttribute("question", question);			
+			
+			listeReponse = (ArrayList<Reponse>)request.getSession().getAttribute("reponsesCandidat");
+			for (Reponse reponse : listeReponse) {
+				if (question.getReponses().contains(reponse)) {
+					reponseDonnee+=reponse.getLibelle()+"#";
+				}
+			}
+			request.getSession().setAttribute("reponseDonnee", reponseDonnee);
+			
 			dispatcher = getServletContext().getRequestDispatcher("/candidat/passageTest.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
 		
 		//renvoie vers la jsp syntheseTest autrement
+		Boolean testTermine=true;
+		request.getSession().setAttribute("testTermine", testTermine);
+		
 		request.getSession().setAttribute("listeQuestion", liste);
 		dispatcher = getServletContext().getRequestDispatcher("/candidat/syntheseTest.jsp");
 		dispatcher.forward(request, response);
