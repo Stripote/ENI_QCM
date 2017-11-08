@@ -14,8 +14,7 @@
 <h1>Menu Administratif</h1>
 
 <ul>
-<li><a href=#>Liste des Candidats</a></li>
-<li><a href=#>Inscription</a></li>
+<li><a href="<%=request.getContextPath() %>/administratif/creationInscription"></a>Inscription</li>
 <li><a href=#>Gestion des Utilisateurs</a></li>
 </ul>
 

@@ -113,4 +113,34 @@
     <servlet-name>creerQcm</servlet-name>
     <url-pattern>/formateur/creerQcm</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>creationInscription</display-name>
+    <servlet-name>creationInscription</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.creationInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>creationInscription</servlet-name>
+    <url-pattern>/administratif/creationInscription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>accesCreationUtilisateur</display-name>
+    <servlet-name>accesCreationUtilisateur</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.accesCreationUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>accesCreationUtilisateur</servlet-name>
+    <url-pattern>/administratif/accesCreationUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>validerInscription</display-name>
+    <servlet-name>validerInscription</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.validerInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>validerInscription</servlet-name>
+    <url-pattern>/administratif/validerInscription</url-pattern>
+  </servlet-mapping>
 </web-app>
