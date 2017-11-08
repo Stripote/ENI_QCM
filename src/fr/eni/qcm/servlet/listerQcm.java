@@ -51,20 +51,10 @@ public class listerQcm extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	RequestDispatcher dispatcher;
     	
-		try{
-<<<<<<< Upstream, based on origin/master
-			
-			
-			
-			
-			
-			
-			ArrayList<Qcm> qcms = QcmDAO.rechercher();
+		try{		
 		
-=======
 			//recuperation de la liste de qcm
-			ArrayList<Qcm> qcms = QcmDAO.rechercher();		
->>>>>>> 794a358 mise à jour du systeme de retour au test après une deconnexion
+			ArrayList<Qcm> qcms= QcmDAO.rechercher();		
 			request.getSession().setAttribute("listeQcms", qcms);
 						
 			//verification des sessions de test en cours
@@ -73,14 +63,14 @@ public class listerQcm extends HttpServlet {
 			
 			Session testEnCours =SessionDAO.rechercherTestEnCours(user.getId());
 			if (testEnCours!=null) {
-				Qcm qcm =testEnCours.getQcm();
+				Qcm qcmEnCours =testEnCours.getQcm();
 				
 				List<Reponse> reponses=new ArrayList<Reponse>();
 				reponses=SessionDAO.rechercherReponsesCandidat(testEnCours.getId());
 				Question derniereQuestion= QuestionDAO.rechercher(SessionDAO.rechercherDerniereQuestion(testEnCours.getId()));
 				
 				request.getSession().setAttribute("session", testEnCours);
-				request.getSession().setAttribute("qcm", qcm);
+				request.getSession().setAttribute("qcm", qcmEnCours);
 				request.getSession().setAttribute("question", derniereQuestion);
 				request.getSession().setAttribute("reponsesCandidat", reponses);
 				
