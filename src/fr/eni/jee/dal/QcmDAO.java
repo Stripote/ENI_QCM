@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.jee.bo.Qcm;
+import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Section;
 import fr.eni.jee.bo.Theme;
 import fr.eni.jee.bo.Utilisateur;
@@ -112,26 +113,86 @@ public class QcmDAO {
 		
 	}
 	
+public static Qcm rechercher(int idQcm, int idSession, Connection cnx) throws SQLException {
+		
+		List<Section> sections = new ArrayList<Section>();
+		List<Integer> listQues = new ArrayList<Integer>();
+		Qcm qcm = null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null;
+		try{
+			rqt = cnx.prepareStatement("SELECT question "
+					+"FROM session_reponses "
+					+"WHERE session = ?");
+			rqt.setInt(1, idSession);
+			rs=rqt.executeQuery();
+			while (rs.next()) {listQues.add(rs.getInt("question"));}
+			
+			rqt = cnx.prepareStatement("SELECT qcm.id idQCM, qcm.nom nomQCM, theme.id idTHEME, theme.libelle libelleTHEME, sections.id idSECTIONS, sections.nbQuestions nbQUESTIONS "
+					+"FROM qcm "
+					+"JOIN sections ON qcm.id=sections.qcm "
+					+"JOIN theme ON theme.id=sections.theme "
+					+"WHERE qcm.id = ?");
+			rqt.setInt(1, idQcm);
+			rs=rqt.executeQuery();
+			
+			int i = 0;
+			qcm = new Qcm();
+			while (rs.next()){
+				if (i==0) {
+					qcm.setId(rs.getInt("idQCM"));
+					qcm.setNom(rs.getString("nomQCM"));
+				}
+								
+				Section section= new Section();
+				section.setId(rs.getInt("idSECTIONS"));
+				section.setNbQuestions(rs.getInt("nbQUESTIONS"));
+				Theme theme=new Theme();
+				theme.setId(rs.getInt("idTHEME"));
+				theme.setNom(rs.getString("libelleTHEME"));
+				section.setLesQuestions(ThemeDAO.rechercher(theme.getId(), cnx).getQuestions());
+				section.setTheme(theme);
+
+				List<Question> listeAVerifier= new ArrayList<Question>(section.getLesQuestions());
+				for (Question question : listeAVerifier) {
+					if (!listQues.contains(question.getId())) {
+						section.getLesQuestions().remove(question);
+					}
+				}
+				
+				sections.add(section);
+				i++;
+			} 
+			qcm.setSections(sections);
+			
+		}finally{
+			/*if(!rs.isClosed())
+				rs.close();
+			if(!rqt.isClosed())
+				rqt.close();
+			if(!cnx.isClosed())
+				cnx.close();*/
+		}
+		return qcm;
+		
+	}
 	
 	public static Qcm ajouter(Qcm qcm) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
 		try{
 			cnx=AccesBase.getConnection(); 
-			
-			String insert = "insert into qcm (nom) values (?)";
-			rqt = cnx.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			//Insertion du QCM
+			String insertQcm = "insert into qcm (nom) values (?)";
+			rqt = cnx.prepareStatement(insertQcm, Statement.RETURN_GENERATED_KEYS);
 			rqt.setString(1, qcm.getNom());
-			
-			
 			rqt.executeUpdate();
 			ResultSet key = rqt.getGeneratedKeys();
 			key.next();
 			qcm.setId(key.getInt(1));
 			
 			
-			cnx.commit();
-			
+			cnx.commit();	
 			key.close();
 			
 		} catch (SQLException sqle){

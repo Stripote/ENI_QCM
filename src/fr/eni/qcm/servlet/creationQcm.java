@@ -1,24 +1,17 @@
 package fr.eni.qcm.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.bo.Qcm;
-import fr.eni.jee.bo.Question;
-import fr.eni.jee.bo.Reponse;
 import fr.eni.jee.bo.Section;
-import fr.eni.jee.bo.Session;
-import fr.eni.jee.bo.Utilisateur;
+import fr.eni.jee.bo.Theme;
 import fr.eni.jee.dal.QcmDAO;
-import fr.eni.jee.dal.SessionDAO;
+import fr.eni.jee.dal.ThemeDAO;
 
 /**
  * Servlet implementation class creationTest
@@ -50,13 +43,11 @@ public class creationQcm extends HttpServlet {
 	
 	
 	protected void doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher;
-		
 		try {
 			//Création du QCM
 			String nom = (request.getParameter("nom"));
 			Qcm qcm = new Qcm (nom);
-			//qcm = QcmDAO.ajouter(qcm);
+			
 			
 			String[] idTheme =  request.getParameterValues("themes");
 			String[] nbQuestions = request.getParameterValues("nbQuestions");
@@ -65,8 +56,12 @@ public class creationQcm extends HttpServlet {
 				String unTheme = S;
 				String unNombreDeQuestion = nbQuestions[compteur];
 				System.out.println("Theme : "+unTheme+" de "+unNombreDeQuestion+" questions");
+				Theme leTheme = (Theme)ThemeDAO.rechercher(Integer.parseInt(unTheme));
+				Section laSection = new Section(leTheme, Integer.parseInt(unNombreDeQuestion));
+				qcm.getSections().add(laSection);
 				compteur++;
 			}
+			QcmDAO.ajouter(qcm);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

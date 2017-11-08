@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 public class Section {
@@ -14,6 +13,17 @@ public class Section {
 	int nbQuestions;
 	List<Question> lesQuestions;
 	
+	public Section(Theme unTheme, int nbQuestions){
+		this.theme = unTheme;
+		this.nbQuestions = nbQuestions;
+		this.id = 0;
+		this.lesQuestions = new ArrayList<Question>();
+	}
+	
+	public Section() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Question> getLesQuestions() {
 		return lesQuestions;
 	}
