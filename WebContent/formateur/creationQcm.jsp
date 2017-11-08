@@ -27,7 +27,7 @@
 	<form action="<%=request.getContextPath()%>/formateur/creerQcm" method="POST" >
 		<div class="container">
 			<div class="form-group">
-				<label for="nom"><h3>Donnez un nom au QCM</h3></label><input type="nom" class="form-control" id="nom">	
+				<label for="nom"><h3>Donnez un nom au QCM</h3></label><input name="nom" type="text" class="form-control" id="nom">	
 			</div>
 			<div id="sections">
 				<fieldset class="fsSection" id="firstSection"><legend>Section <span id="idSection">1</span></legend>
