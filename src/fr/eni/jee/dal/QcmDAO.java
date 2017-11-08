@@ -177,6 +177,12 @@ public static Qcm rechercher(int idQcm, int idSession, Connection cnx) throws SQ
 		
 	}
 	
+	/***
+	 * Permet d'ajouter un QCM en base de données.
+	 * @param qcm
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Qcm ajouter(Qcm qcm) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
@@ -186,21 +192,24 @@ public static Qcm rechercher(int idQcm, int idSession, Connection cnx) throws SQ
 			String insertQcm = "insert into qcm (nom) values (?)";
 			rqt = cnx.prepareStatement(insertQcm, Statement.RETURN_GENERATED_KEYS);
 			rqt.setString(1, qcm.getNom());
-			rqt.executeUpdate();
+			rqt.execute();
 			ResultSet key = rqt.getGeneratedKeys();
 			key.next();
 			qcm.setId(key.getInt(1));
-			
-			
+			//insertion des sections
+			for(Section S : qcm.getSections()){
+				String insertSection = "insert into sections(theme, nbQuestions, qcm) values(?, ?, ?)";
+				rqt = cnx.prepareStatement(insertSection);
+				rqt.setInt(1, S.getTheme().getId());
+				rqt.setInt(2, S.getNbQuestions());
+				rqt.setInt(3, qcm.getId());
+				rqt.execute();
+			}
 			cnx.commit();	
 			key.close();
 			
-		} catch (SQLException sqle){
-					
-			if (cnx != null) {
-				cnx.rollback();
-			}
-			throw sqle;
+		} catch (SQLException sqle){		
+			sqle.printStackTrace();
 		} finally {
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();

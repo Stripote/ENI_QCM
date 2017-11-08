@@ -50,9 +50,7 @@ public class listerQcm extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	RequestDispatcher dispatcher;
-    	
 		try{		
-		
 			//recuperation de la liste de qcm
 			ArrayList<Qcm> qcms= QcmDAO.rechercher();		
 			request.getSession().setAttribute("listeQcms", qcms);
@@ -62,7 +60,7 @@ public class listerQcm extends HttpServlet {
 			user = (Utilisateur) request.getSession().getAttribute("utilisateurConnecte");
 			
 			Session testEnCours =SessionDAO.rechercherTestEnCours(user.getId());
-			if (testEnCours!=null) {
+			if (testEnCours!=null && user.getRole().equals("Candidat")) {
 				Qcm qcmEnCours =testEnCours.getQcm();
 				
 				List<Reponse> reponses=new ArrayList<Reponse>();
