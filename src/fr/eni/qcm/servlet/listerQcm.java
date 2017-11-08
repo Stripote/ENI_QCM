@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.jee.bo.Qcm;
 import fr.eni.jee.bo.Question;
 import fr.eni.jee.bo.Reponse;
+import fr.eni.jee.bo.Section;
 import fr.eni.jee.bo.Session;
 import fr.eni.jee.bo.Utilisateur;
 import fr.eni.jee.dal.QcmDAO;
@@ -66,6 +67,20 @@ public class listerQcm extends HttpServlet {
 				List<Reponse> reponses=new ArrayList<Reponse>();
 				reponses=SessionDAO.rechercherReponsesCandidat(testEnCours.getId());
 				Question derniereQuestion= QuestionDAO.rechercher(SessionDAO.rechercherDerniereQuestion(testEnCours.getId()));
+				
+				
+				int indexQuestion =1;
+				int index = 1;
+				for (Section section : qcmEnCours.getSections()) {
+					for (Question question : section.getLesQuestions()) {
+						if (question.getId()==derniereQuestion.getId()) {
+							indexQuestion = index;
+							break;
+						}
+						index++;
+					}
+				}
+				request.getSession().setAttribute("indexQuestion", indexQuestion);
 				
 				request.getSession().setAttribute("session", testEnCours);
 				request.getSession().setAttribute("qcm", qcmEnCours);

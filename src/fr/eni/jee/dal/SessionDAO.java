@@ -267,10 +267,10 @@ public class SessionDAO {
 			
 			
 			while (rs.next()) {				
-				if (rs.getString("reponse")!=null&&rs.getString("reponse")!="") {
+				if (rs.getString("reponse")==null&&index==-1) {
 					index=rs.getInt("question");					
 				}			
-			}			
+			}
 						
 		}finally{
 			if (rqt!=null) rqt.close();
