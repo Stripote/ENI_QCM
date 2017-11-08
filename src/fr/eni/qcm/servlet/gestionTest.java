@@ -146,7 +146,28 @@ public class gestionTest extends HttpServlet {
 				question = S.getLesQuestions().get(0);
 				break;
 			}
-			if(S.getLesQuestions().contains(derniereQuestion)){
+			
+			List<Integer> listId = new ArrayList<Integer>();
+			for (Question uneQuestion : S.getLesQuestions()) {
+				listId.add(uneQuestion.getId());
+			}
+			if(listId.contains(derniereQuestion.getId())){
+				int index = 1;
+				for(Question Q : S.getLesQuestions()){
+					if(Q.getId()==derniereQuestion.getId() && index == S.getLesQuestions().size()){
+						newSection = true;
+						break;	
+					}
+					else if(Q.getId()==derniereQuestion.getId()){
+						question = S.getLesQuestions().get(index);
+						questionChoisi = true;
+						break;
+					}
+					index++;
+				}
+			}
+			
+			/*if(S.getLesQuestions().contains(derniereQuestion)){
 				int index = 1;
 				for(Question Q : S.getLesQuestions()){
 					if(Q.equals(derniereQuestion) && index == S.getLesQuestions().size()){
@@ -160,7 +181,7 @@ public class gestionTest extends HttpServlet {
 					}
 					index++;
 				}
-			}
+			}*/
 		}
 		
 		//envoie vers la servlet

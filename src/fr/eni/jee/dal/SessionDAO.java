@@ -176,4 +176,130 @@ public class SessionDAO {
 		}
 	}
 	
+	public static Session rechercherTestEnCours(int idUtilisateur) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		String reponseBdd = "";
+		ResultSet rs = null;
+		int testEnCours = 0;
+		Session sessionEnCours=null;
+		
+		try{
+			cnx=AccesBase.getConnection();
+				
+			//verification question déjà repondue
+			rqt=cnx.prepareStatement("select idSession, qcm from session where utilisateur = ? and testTermine=0");
+			rqt.setInt(1, idUtilisateur);			
+			rs=rqt.executeQuery();
+			
+			
+			while (rs.next()) {	
+				if (sessionEnCours==null) {
+					sessionEnCours=new Session();
+				}				
+				sessionEnCours.setId(rs.getInt("idSession"));
+				sessionEnCours.setQcm(QcmDAO.rechercher(rs.getInt("qcm"),sessionEnCours.getId(), cnx));	
+			}			
+						
+		}finally{
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+		return sessionEnCours;
+	}
+	
+	public static List<Reponse> rechercherReponsesCandidat(int idSession) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		String reponseBdd = "";
+		ResultSet rs = null;
+		List<Reponse> reponses = null;
+		
+		try{
+			cnx=AccesBase.getConnection();
+				
+			//verification question déjà repondue
+			rqt=cnx.prepareStatement("select reponse from session_reponses where session = ?");
+			rqt.setInt(1, idSession);			
+			rs=rqt.executeQuery();
+			
+			reponses = new ArrayList<Reponse>();
+			
+			while (rs.next()) {
+				
+				if (rs.getString("reponse")!=null&&rs.getString("reponse")!="") {
+					String libelle= rs.getString("reponse");
+					
+					ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
+
+					for (String unLibelle : libelles) {
+						Reponse reponse=new Reponse();
+						reponse.setLibelle(unLibelle);
+						reponses.add(reponse);
+					}
+				}
+				
+			
+			}			
+						
+		}finally{
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+		return reponses;
+	}
+	
+	public static int rechercherDerniereQuestion(int idSession) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		ResultSet rs = null;
+		int index = -1;
+		
+		try{
+			cnx=AccesBase.getConnection();
+				
+			//verification question déjà repondue
+			rqt=cnx.prepareStatement("select question, reponse from session_reponses where session = ?");
+			rqt.setInt(1, idSession);			
+			rs=rqt.executeQuery();
+			
+			
+			while (rs.next()) {				
+				if (rs.getString("reponse")!=null&&rs.getString("reponse")!="") {
+					index=rs.getInt("question");					
+				}			
+			}			
+						
+		}finally{
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+		return index;
+	}
+	
+	public static void testTermine(int idSession) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		
+		try{
+			cnx=AccesBase.getConnection(); 
+			
+			//mise à jour table session
+			rqt = cnx.prepareStatement("update session set testTermine = ? where idSession = ?");
+			rqt.setBoolean(1, true);
+			rqt.setInt(2, idSession);
+			rqt.executeUpdate();
+						
+		} catch (SQLException sqle){
+			throw sqle;
+		} finally {
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+
+	}
+	
 }
