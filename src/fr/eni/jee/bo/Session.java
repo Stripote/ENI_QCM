@@ -14,6 +14,12 @@ public class Session {
 	private int scoreUtilisateur;
 	private List<Reponse> reponses;
 
+	public Session(){
+		this.reponses = new ArrayList<Reponse>();
+		this.qcm = new Qcm();
+		this.utilisateur = new Utilisateur();
+	}
+	
 	public Session(Qcm unQcm, Utilisateur unUtilisateur){
 		this.reponses = new ArrayList<Reponse>();
 		this.datePassage = new Date(System.currentTimeMillis());

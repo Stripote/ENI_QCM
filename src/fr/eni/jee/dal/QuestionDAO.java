@@ -88,12 +88,23 @@ public class QuestionDAO {
 	 * @throws SQLException
 	 */
 	public static Question rechercher(int id) throws SQLException{
-		Question question= null;
+		Question question= new Question();
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		Connection cnx = null;
 		try{
 			cnx = AccesBase.getConnection();
+			/*
+			rqt = cnx.prepareStatement(
+					"SELECT questions.id idQUESTIONS, questions.enonce enonceQUESTIONS, questions.image imageQUESTIONS, reponses.libelle libelleREPONSES, reponses.reponses reponsesREPONSES "
+					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
+					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
+					+ "JOIN theme ON qt.idTheme=theme.id "
+					+"where questions.id=?");
+			rqt.setInt(1, id);
+			rs=rqt.executeQuery();
+			*/
+			
 			rqt = cnx.prepareStatement(
 					"SELECT questions.id idQUESTIONS, questions.enonce enonceQUESTIONS, questions.image imageQUESTIONS, reponses.libelle libelleREPONSES, reponses.reponses reponsesREPONSES "
 					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
@@ -105,6 +116,34 @@ public class QuestionDAO {
 			
 			if (rs.next()){
 				List<Reponse> reponses = new ArrayList<Reponse>();
+				
+				String libelle= rs.getString("libelleREPONSES");
+				String index=rs.getString("reponsesREPONSES");
+				String enonce = rs.getString("enonceQUESTIONS");
+				int idQuestion = rs.getInt("idQUESTIONS");
+				
+				question.setEnonce(enonce);
+				question.setId(idQuestion);
+				if(rs.getString("imageQUESTIONS")!=null) {
+					question.setImage(rs.getString("imageQUESTIONS"));
+				}	
+				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
+				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
+				for (String unLibelle : libelles) {
+					Reponse reponse=new Reponse();
+					reponse.setLibelle(unLibelle);
+					int i = libelles.indexOf(unLibelle);
+					if (indexs.contains( String.valueOf(i+1) )) {
+						reponse.setBonneReponse(true);
+					} else {
+						reponse.setBonneReponse(false);
+					}
+					reponses.add(reponse);
+				}
+				
+				question.setReponses(reponses);
+				
+				/*List<Reponse> reponses = new ArrayList<Reponse>();
 				
 				String libelle= rs.getString("libelleREPONSES");
 				String index=rs.getString("reponsesREPONSES");
@@ -128,7 +167,7 @@ public class QuestionDAO {
 				if (rs.getString("imageQUESTIONS")!=null) {
 					question.setImage(rs.getString("imageQUESTIONS"));
 				}		
-				question.setReponses(reponses);
+				question.setReponses(reponses);*/
 			}		
 		}finally{
 			if (rs!=null) rs.close();
