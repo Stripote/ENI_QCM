@@ -37,13 +37,8 @@
 					class="form-control" id="password">
 			</div>
 			
-			<div class="form-group">
-				<label for="password"><h3>Password</h3></label><input name="password" type="password"
-					class="form-control" id="password">
-			</div>
-			
 			<h3>Role Utilisateur</h3>
-					<select name="nbQuestions" class="form-control" name="role">
+					<select name="role" class="form-control" name="role">
 					<%for (int i = 1; i <= 3; ++i) {%>
 					<%if (i == 1){ %>
 						<option value="<%=i%>">Candidat</option>

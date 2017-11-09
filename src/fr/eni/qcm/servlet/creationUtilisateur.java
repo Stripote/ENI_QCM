@@ -63,7 +63,7 @@ public class creationUtilisateur extends HttpServlet {
 		
 		
 		
-			utilisateur = UtilisateurDAO.ajouter(utilisateur);
+			utilisateur = UtilisateurDAO.ajouterRole(utilisateur);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

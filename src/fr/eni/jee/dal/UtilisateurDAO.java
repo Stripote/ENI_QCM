@@ -158,26 +158,34 @@ public class UtilisateurDAO {
 
 	}
 
+	@SuppressWarnings("resource")
 	public static Utilisateur ajouterRole(Utilisateur utilisateur) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
 		try{
 			cnx=AccesBase.getConnection(); 
 			
-			String insert = "insert into utilisateurs (nom, prenom, login, password, role) values (?,?,?,?,?)"
-	                         +"INNERJOIN utilisateurs_role ur ON ur.idUtilisateur = utilisateur.id AND ur.idRole = utilisateur.role";
+			String insertUtilisateur = "insert into utilisateurs (nom, prenom, login, password) values (?,?,?,?)";
+	                         
 			
-			rqt = cnx.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			
+			rqt = cnx.prepareStatement(insertUtilisateur, Statement.RETURN_GENERATED_KEYS);
 			rqt.setString(1, utilisateur.getNom());
 			rqt.setString(2, utilisateur.getPrenom());
 			rqt.setString(3, utilisateur.getLogin());
 			rqt.setString(4, utilisateur.getPassword());
-			rqt.setString(5, utilisateur.getRole());
 			rqt.executeUpdate();
 			ResultSet key = rqt.getGeneratedKeys();
 			key.next();
 			utilisateur.setId(key.getInt(1));
 			
+		
+		    String insertRole = "insert into utilisateurs_role (idUtilisateur, idRole) values (?,?)";
+		    
+			rqt = cnx.prepareStatement(insertRole);
+			rqt.setInt(1, utilisateur.getId());           
+			rqt.setInt(2, Integer.parseInt(utilisateur.getRole()));
+			rqt.executeUpdate();
 			
 			cnx.commit();
 			
