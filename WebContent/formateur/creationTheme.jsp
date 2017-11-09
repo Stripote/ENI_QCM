@@ -67,7 +67,9 @@
 					type="enonce" class="form-control" id="enonce">
 			</div>
 			<br>
+			<div id="reponses">
 			<div id="firstreponse">
+			
 				<fieldset class="fsReponse" id="firstReponse">
 					<legend>
 						<h2>Reponse</h2>
@@ -85,6 +87,7 @@
 			</fieldset>
 			<a class="btn btn-info" id="addReponse">Ajouter une Reponse</a>
 			<button type="submit" class="btn btn-primary" value="Qcm">Envoyer</button>
+		</div>
 		</div>
 		<br>
 
