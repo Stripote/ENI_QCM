@@ -19,13 +19,13 @@ import fr.eni.jee.dal.UtilisateurDAO;
 /**
  * Servlet implementation class creationInscription
  */
-public class creationInscription extends HttpServlet {
+public class accesCreationInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public creationInscription() {
+    public accesCreationInscription() {
         super();
         // TODO Auto-generated constructor stub
     }

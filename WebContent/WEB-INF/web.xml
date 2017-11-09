@@ -115,13 +115,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>creationInscription</display-name>
-    <servlet-name>creationInscription</servlet-name>
-    <servlet-class>fr.eni.qcm.servlet.creationInscription</servlet-class>
+    <display-name>accesCreationInscription</display-name>
+    <servlet-name>accesCreationInscription</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.accesCreationInscription</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>creationInscription</servlet-name>
-    <url-pattern>/administratif/creationInscription</url-pattern>
+    <servlet-name>accesCreationInscription</servlet-name>
+    <url-pattern>/administratif/accesCreationInscription</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
