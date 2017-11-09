@@ -72,8 +72,7 @@
 			
 				<fieldset class="fsReponse" id="firstReponse">
 					<legend>
-						<h2>Reponse</h2>
-						<span id="idReponse"><h2>1</h2></span>
+						<h2>Reponse <span id="idReponse">1</span></h2>
 					</legend>
 					<div class="form-group">
 						<label for="reponse"><h3>Reponse</h3></label><input name="reponse"
@@ -85,9 +84,10 @@
 					<br>
 			</div>
 			</fieldset>
-			<a class="btn btn-info" id="addReponse">Ajouter une Reponse</a>
-			<button type="submit" class="btn btn-primary" value="Qcm">Envoyer</button>
+			
 		</div>
+		<a class="btn btn-info" id="addReponse">Ajouter une Reponse</a>
+			<button type="submit" class="btn btn-primary" value="Qcm">Envoyer</button>
 		</div>
 		<br>
 
