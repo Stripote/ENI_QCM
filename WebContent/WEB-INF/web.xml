@@ -115,7 +115,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-<<<<<<< HEAD
     <display-name>administrerQcm</display-name>
     <servlet-name>administrerQcm</servlet-name>
     <servlet-class>fr.eni.qcm.servlet.administrerQcm</servlet-class>
@@ -123,7 +122,8 @@
   <servlet-mapping>
     <servlet-name>administrerQcm</servlet-name>
     <url-pattern>/administrerQcm</url-pattern>
-=======
+  </servlet-mapping> 
+  <servlet>
     <display-name>creationUtilisateur</display-name>
     <servlet-name>creationUtilisateur</servlet-name>
     <servlet-class>fr.eni.qcm.servlet.creationUtilisateur</servlet-class>
@@ -171,6 +171,5 @@
   <servlet-mapping>
     <servlet-name>gestionResultat</servlet-name>
     <url-pattern>/candidat/gestionResultat</url-pattern>
->>>>>>> branch 'master' of https://github.com/Stripote/ENI_QCM
   </servlet-mapping>
 </web-app>
