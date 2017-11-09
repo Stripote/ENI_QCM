@@ -153,4 +153,14 @@
     <servlet-name>validerInscription</servlet-name>
     <url-pattern>/administratif/validerInscription</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>gestionResultat</display-name>
+    <servlet-name>gestionResultat</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.gestionResultat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gestionResultat</servlet-name>
+    <url-pattern>/candidat/gestionResultat</url-pattern>
+  </servlet-mapping>
 </web-app>
