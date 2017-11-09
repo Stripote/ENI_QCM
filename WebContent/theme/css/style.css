@@ -70,6 +70,7 @@ form[action="/ENI_QCM/test/gestionTest"] label{
     padding-right: 20%;
 	margin-top:1%;
 }
+<<<<<<< HEAD
 
 a{
 	cursor:default;
@@ -82,3 +83,10 @@ h1, h2, h3{
 	cursor:default;
 }
 
+=======
+#toto{
+	
+	padding-left: 0px;
+	
+}
+>>>>>>> branch 'master' of https://github.com/Stripote/ENI_QCM

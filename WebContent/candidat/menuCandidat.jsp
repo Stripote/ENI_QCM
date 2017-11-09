@@ -16,12 +16,15 @@
 	<div class="container">
 	<%
 		ArrayList<Qcm> listeQcms = new ArrayList<Qcm>();
-		listeQcms = (ArrayList<Qcm>)request.getSession().getAttribute("listeQcms");
+	if(request.getSession().getAttribute("listeQcms")!=null){	
+	listeQcms = (ArrayList<Qcm>)request.getSession().getAttribute("listeQcms");
 		for(Qcm Q : listeQcms) 
 		{
 			int idQcm = Q.getId();
 	%>
 		<center><a href ="/ENI_QCM/test/creationTest?idQcm=<%= idQcm %>"><%=Q.getNom()%></a></center><br />
+	<% }}else{%>
+	<center><p>Vous n'êtes inscrit à aucun test, veuillez contacter l'accueil</p></center>	
 	<% } %>
 	</div>
 	<%@ include file="/structure/menu.jspf" %>

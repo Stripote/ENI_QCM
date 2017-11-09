@@ -115,6 +115,7 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+<<<<<<< HEAD
     <display-name>administrerQcm</display-name>
     <servlet-name>administrerQcm</servlet-name>
     <servlet-class>fr.eni.qcm.servlet.administrerQcm</servlet-class>
@@ -122,5 +123,54 @@
   <servlet-mapping>
     <servlet-name>administrerQcm</servlet-name>
     <url-pattern>/administrerQcm</url-pattern>
+=======
+    <display-name>creationUtilisateur</display-name>
+    <servlet-name>creationUtilisateur</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.creationUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>creationUtilisateur</servlet-name>
+    <url-pattern>/creationUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>accesCreationInscription</display-name>
+    <servlet-name>accesCreationInscription</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.accesCreationInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>accesCreationInscription</servlet-name>
+    <url-pattern>/administratif/accesCreationInscription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>accesCreationUtilisateur</display-name>
+    <servlet-name>accesCreationUtilisateur</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.accesCreationUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>accesCreationUtilisateur</servlet-name>
+    <url-pattern>/administratif/accesCreationUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>validerInscription</display-name>
+    <servlet-name>validerInscription</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.validerInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>validerInscription</servlet-name>
+    <url-pattern>/administratif/validerInscription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>gestionResultat</display-name>
+    <servlet-name>gestionResultat</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.gestionResultat</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gestionResultat</servlet-name>
+    <url-pattern>/candidat/gestionResultat</url-pattern>
+>>>>>>> branch 'master' of https://github.com/Stripote/ENI_QCM
   </servlet-mapping>
 </web-app>

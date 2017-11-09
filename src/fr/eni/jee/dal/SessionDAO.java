@@ -20,54 +20,34 @@ import fr.eni.qcm.util.AccesBase;
 public class SessionDAO {
 
 	public static Session rechercherScore(int idSession) throws SQLException{
-		Session session= null;
-		/*PreparedStatement rqt = null;
+		Connection cnx=null;
+		PreparedStatement rqt=null;
 		ResultSet rs = null;
-		Connection cnx = null;
+		Session sessionEnCours=null;
+		
 		try{
-			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement(
-					"SELECT questions.id idQUESTIONS, questions.enonce enonceQUESTIONS, questions.image imageQUESTIONS, reponses.libelle libelleREPONSES, reponses.reponses reponsesREPONSES "
-					+ "FROM questions JOIN reponses ON reponses.question=questions.id "
-					+ "JOIN questions_theme qt ON qt.idQuestion=questions.id "
-					+ "JOIN theme ON qt.idTheme=theme.id "
-					+"where questions.id=?");
-			rqt.setInt(1, id);
+			cnx=AccesBase.getConnection();
+				
+			//verification question déjà repondue
+			rqt=cnx.prepareStatement("select scoreMax, scoreUtilisateur from session where idSession = ?");
+			rqt.setInt(1, idSession);			
 			rs=rqt.executeQuery();
 			
-			if (rs.next()){
-				List<Reponse> reponses = new ArrayList<Reponse>();
-				
-				String libelle= rs.getString("libelleREPONSES");
-				String index=rs.getString("reponsesREPONSES");
-				
-				ArrayList<String> libelles = new ArrayList<String>(Arrays.asList(libelle.split("#")));
-				List<String> indexs = new ArrayList<String>(Arrays.asList(index.split("#")));
-				
-				for (String unLibelle : libelles) {
-					Reponse reponse=new Reponse();
-					reponse.setLibelle(unLibelle);
-					if (indexs.contains(libelles.indexOf(unLibelle))) {
-						reponse.setBonneReponse(true);
-					} else {
-						reponse.setBonneReponse(false);
-					}
-					reponses.add(reponse);
-				}
-				
-				question.setId(rs.getInt("idQUESTIONS"));
-				question.setEnonce(rs.getString("enonceQUESTIONS"));
-				if (rs.getString("imageQUESTIONS")!=null) {
-					question.setImage(rs.getString("imageQUESTIONS"));
-				}		
-				question.setReponses(reponses);
-			}		
+			
+			while (rs.next()) {	
+				if (sessionEnCours==null) {
+					sessionEnCours=new Session();
+				}				
+				sessionEnCours.setScoreMax(rs.getInt("scoreMax"));
+				sessionEnCours.setScoreUtilisateur(rs.getInt("scoreUtilisateur"));
+			}			
+						
 		}finally{
-			if (rs!=null) rs.close();
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();
-		}*/
-		return session;
+		}
+		
+		return sessionEnCours;
 	}
 	
 	public static Session ajouter(Session session) throws SQLException{

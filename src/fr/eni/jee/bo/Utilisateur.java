@@ -1,7 +1,5 @@
 package fr.eni.jee.bo;
 
-import java.util.List;
-
 public class Utilisateur {
 
 	int id;
@@ -53,10 +51,29 @@ public class Utilisateur {
 		
 	}
 	
+	public Utilisateur(String nom, String prenom, String login, String password) {
+		super();
+		
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.password = password;
+		
+	}
 	
 	public Utilisateur(int id, String nom, String prenom, String login, String password, String role) {
 		super();
 		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.password = password;
+		this.role = role;
+	}
+	
+	public Utilisateur(String nom, String prenom, String login, String password, String role) {
+		super();
+		
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;

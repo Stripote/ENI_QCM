@@ -25,7 +25,7 @@
 <%i++;} %>	
 
 
-<form action="<%=request.getContextPath() %>/candidat/menuCandidat.jsp" method="post">	
+<form action="<%=request.getContextPath() %>/candidat/gestionResultat" method="post">	
     <center><font color="#6495ED"><button type="submit" class="btn btn-primary">Fin du test</button>
 </form></font></center>	
 	

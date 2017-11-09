@@ -158,6 +158,53 @@ public class UtilisateurDAO {
 
 	}
 
+	@SuppressWarnings("resource")
+	public static Utilisateur ajouterRole(Utilisateur utilisateur) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		try{
+			cnx=AccesBase.getConnection(); 
+			
+			String insertUtilisateur = "insert into utilisateurs (nom, prenom, login, password) values (?,?,?,?)";
+	                         
+			
+			
+			rqt = cnx.prepareStatement(insertUtilisateur, Statement.RETURN_GENERATED_KEYS);
+			rqt.setString(1, utilisateur.getNom());
+			rqt.setString(2, utilisateur.getPrenom());
+			rqt.setString(3, utilisateur.getLogin());
+			rqt.setString(4, utilisateur.getPassword());
+			rqt.executeUpdate();
+			ResultSet key = rqt.getGeneratedKeys();
+			key.next();
+			utilisateur.setId(key.getInt(1));
+			
+		
+		    String insertRole = "insert into utilisateurs_role (idUtilisateur, idRole) values (?,?)";
+		    
+			rqt = cnx.prepareStatement(insertRole);
+			rqt.setInt(1, utilisateur.getId());           
+			rqt.setInt(2, Integer.parseInt(utilisateur.getRole()));
+			rqt.executeUpdate();
+			
+			cnx.commit();
+			
+			key.close();
+			
+		} catch (SQLException sqle){
+					
+			if (cnx != null) {
+				cnx.rollback();
+			}
+			throw sqle;
+		} finally {
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+		return utilisateur;
+
+	}
 	public static void modifier(Utilisateur utilisateur) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
@@ -199,7 +246,10 @@ public class UtilisateurDAO {
 		ResultSet rs = null;
 		try{
 			cnx = AccesBase.getConnection();
-			rqt = cnx.prepareStatement("select id, nom, prenom, login, password from utilisateurs");
+			rqt = cnx.prepareStatement("select A.id, A.nom, A.prenom, A.login, A.password, C.libelle "
+					+ "from utilisateurs A "
+					+ "join utilisateurs_role B on A.id=B.idUtilisateur "
+					+ "join rôle C on C.id=B.idRole");
 			rs=rqt.executeQuery();
 			
 			while (rs.next()){
@@ -209,7 +259,7 @@ public class UtilisateurDAO {
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setLogin(rs.getString("login"));
 				utilisateur.setPassword(rs.getString("password"));
-				
+				utilisateur.setRole(rs.getString("libelle"));
 				listeutilisateur.add(utilisateur);
 			}
 
@@ -223,9 +273,58 @@ public class UtilisateurDAO {
 		
 	}
 	
+	public static void inscription(int idUtilisateur,int idQcm) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		try{
+			cnx=AccesBase.getConnection(); 
+			
+			String insertInscription = "insert into passageQcm (utilisateur, qcm) values (?,?)";
+			rqt = cnx.prepareStatement(insertInscription);
+			rqt.setInt(1, idUtilisateur);
+			rqt.setInt(2, idQcm);
+
+			rqt.executeUpdate();
+						
+			cnx.commit();
+			
+		} catch (SQLException sqle){
+					
+			if (cnx != null) {
+				cnx.rollback();
+			}
+			throw sqle;
+		} finally {
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+
+	}
 	
-	
-	
+	public static ArrayList<Integer> rechercherInscription(int idUtilisateur) throws SQLException{
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null;
+		ArrayList<Integer> listQcm = new ArrayList<Integer>();
+		
+		try{
+			cnx = AccesBase.getConnection();
+			rqt = cnx.prepareStatement("select qcm from passageQcm where utilisateur=?");
+			rqt.setInt(1, idUtilisateur);
+			rs=rqt.executeQuery();
+			
+			while (rs.next()){
+				listQcm.add(rs.getInt("qcm"));
+			}
+			
+		}finally{
+			if (rs!=null) rs.close();
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		return listQcm;
+	}
 	
 	
 	
