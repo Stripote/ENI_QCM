@@ -2,6 +2,7 @@ package fr.eni.qcm.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,10 +44,11 @@ public class creationQcm extends HttpServlet {
 	
 	
 	protected void doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher;
 		try {
 			//Création du QCM
-			String nom = (request.getParameter("nom"));
-			Qcm qcm = new Qcm (nom);
+			String nom = request.getParameter("nom");
+			Qcm qcm = new Qcm(nom);
 			
 			
 			String[] idTheme =  request.getParameterValues("themes");
@@ -62,6 +64,8 @@ public class creationQcm extends HttpServlet {
 				compteur++;
 			}
 			QcmDAO.ajouter(qcm);
+			dispatcher = getServletContext().getRequestDispatcher("/listerQcm");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -14,9 +14,8 @@
 <h1>Menu Administratif</h1>
 
 <ul>
-<li><a href=#>Liste des Candidats</a></li>
-<li><a href=#>Inscription</a></li>
-<li><a href=#>Gestion des Utilisateurs</a></li>
+<li><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription"></a>Inscription</li>
+<li><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></li>
 </ul>
 
 <%@ include file="/structure/menu.jspf" %>
