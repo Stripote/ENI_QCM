@@ -177,26 +177,46 @@ public class QuestionDAO {
 		return question;
 	}
 	
-	public static Question ajouter(Question question) throws SQLException{
-		/*Connection cnx=null;
+	public static Question ajouter(Question question, String idTheme) throws SQLException{
+		Connection cnx=null;
 		PreparedStatement rqt=null;
 		try{
 			cnx=AccesBase.getConnection(); 
 			
-			String insert = "insert into utilisateurs (nom, prenom, login, password) values (?,?,?,?)";
+			String insert = "INSERT INTO questions(enonce, forme, image, estRepondu) VALUES(?, 0, ?, 0)";
 			rqt = cnx.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-			rqt.setString(1, utilisateur.getNom());
-			rqt.setString(2, utilisateur.getPrenom());
-			rqt.setString(3, utilisateur.getLogin());
-			rqt.setString(4, utilisateur.getPassword());
-			rqt.executeUpdate();
+			rqt.setString(1, question.getEnonce());
+			rqt.setString(2, question.getImage());
+			rqt.execute();
+			
 			ResultSet key = rqt.getGeneratedKeys();
 			key.next();
-			utilisateur.setId(key.getInt(1));
+			question.setId(key.getInt(1));
 			
+			String libelleReponses = "";
+			String bonneReponse = "";
+		    Integer compteur = 1;
+			for(Reponse R : question.getReponses()){
+				libelleReponses += R.getLibelle();
+				if(R.getBonneReponse())
+					bonneReponse += compteur.toString();
+				compteur++;
+			}
+			
+			insert = "INSERT INTO reponses(libelle, question, reponses) VALUES(?, ?, ?)";
+			rqt = cnx.prepareStatement(insert);
+			rqt.setString(1, libelleReponses);
+			rqt.setInt(2, question.getId());
+			rqt.setString(3, bonneReponse);
+			rqt.execute();
+			
+			insert = "INSERT INTO questions_theme VALUES(?, ?)";
+			rqt = cnx.prepareStatement(insert);
+			rqt.setInt(1, question.getId());
+			rqt.setInt(2, Integer.parseInt(idTheme));
+			rqt.execute();
 			
 			cnx.commit();
-			
 			key.close();
 			
 		} catch (SQLException sqle){
@@ -208,7 +228,7 @@ public class QuestionDAO {
 		} finally {
 			if (rqt!=null) rqt.close();
 			if (cnx!=null) cnx.close();
-		}*/
+		}
 		
 		return question;
 

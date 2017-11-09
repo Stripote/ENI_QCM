@@ -1,5 +1,6 @@
 package fr.eni.jee.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -8,6 +9,15 @@ public class Question {
 	String image;
 	List<Reponse> reponses;
 	
+	public Question(String unEnonce){
+		this.enonce = unEnonce;
+		this.reponses  = new ArrayList<Reponse>();
+	}
+	
+	public Question() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}

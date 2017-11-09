@@ -5,6 +5,15 @@ public class Reponse {
 	Boolean bonneReponse;
 	
 	
+	public Reponse(String unLibelle, Boolean bonneReponse){
+		this.libelle = unLibelle;
+		this.bonneReponse = bonneReponse;
+	}
+	
+	public Reponse() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getLibelle() {
 		return libelle;
 	}

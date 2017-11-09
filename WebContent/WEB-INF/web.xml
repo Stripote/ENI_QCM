@@ -115,6 +115,15 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>administrerQcm</display-name>
+    <servlet-name>administrerQcm</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.administrerQcm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>administrerQcm</servlet-name>
+    <url-pattern>/administrerQcm</url-pattern>
+  </servlet-mapping> 
+  <servlet>
     <display-name>creationUtilisateur</display-name>
     <servlet-name>creationUtilisateur</servlet-name>
     <servlet-class>fr.eni.qcm.servlet.creationUtilisateur</servlet-class>
