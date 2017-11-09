@@ -35,9 +35,7 @@
 
 <ul>
 <li><a href="/ENI_QCM/listerTheme">Créer un QCM</a></li>
-<li><a href=#>Ajouter un thème</a></li>
-<li><a href=#>Créer des questions</a></li>
-<li><a href=#>Affecter des candidats à un QCM</a>
+<li><a href="<%=request.getContextPath() %>/administrerQcm">Ajouter un thème / Creer des questions</a></li>
 </ul>
 
 
