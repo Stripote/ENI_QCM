@@ -158,6 +158,45 @@ public class UtilisateurDAO {
 
 	}
 
+	public static Utilisateur ajouterRole(Utilisateur utilisateur) throws SQLException{
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+		try{
+			cnx=AccesBase.getConnection(); 
+			
+			String insert = "insert into utilisateurs (nom, prenom, login, password, role) values (?,?,?,?,?)"
+	                         +"INNERJOIN utilisateurs_role ur ON ur.idUtilisateur = utilisateur.id AND ur.idRole = utilisateur.role";
+			
+			rqt = cnx.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			rqt.setString(1, utilisateur.getNom());
+			rqt.setString(2, utilisateur.getPrenom());
+			rqt.setString(3, utilisateur.getLogin());
+			rqt.setString(4, utilisateur.getPassword());
+			rqt.setString(5, utilisateur.getRole());
+			rqt.executeUpdate();
+			ResultSet key = rqt.getGeneratedKeys();
+			key.next();
+			utilisateur.setId(key.getInt(1));
+			
+			
+			cnx.commit();
+			
+			key.close();
+			
+		} catch (SQLException sqle){
+					
+			if (cnx != null) {
+				cnx.rollback();
+			}
+			throw sqle;
+		} finally {
+			if (rqt!=null) rqt.close();
+			if (cnx!=null) cnx.close();
+		}
+		
+		return utilisateur;
+
+	}
 	public static void modifier(Utilisateur utilisateur) throws SQLException{
 		Connection cnx=null;
 		PreparedStatement rqt=null;
