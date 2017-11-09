@@ -10,8 +10,14 @@
 	href="<%=request.getContextPath()%>/theme/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/theme/css/style.css">
+	
 <script
 	src="<%=request.getContextPath()%>/theme/bootstrap/js/bootstrap.min.js"></script>
+
+<script
+	src="<%=request.getContextPath()%>/theme/js/jquery-3.2.1.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/theme/js/qcmForm.js"></script>
 <title>ENI Ecole - Creation Theme Questiont</title>
 </head>
 <body>
@@ -73,7 +79,7 @@
 					</div>
 
 					<h3>Vrai ou Faux</h3>
-					<br> <input type="checkbox" class="reponse"> <br>
+					<br> <input name="vraiFaux" type="checkbox" class="reponse"> <br>
 					<br>
 			</div>
 			</fieldset>
