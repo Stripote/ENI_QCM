@@ -210,7 +210,7 @@ public class QuestionDAO {
 			rqt.setString(3, bonneReponse);
 			rqt.execute();
 			
-			insert = "INSERT INTO question_theme VALUES(?, ?)";
+			insert = "INSERT INTO questions_theme VALUES(?, ?)";
 			rqt = cnx.prepareStatement(insert);
 			rqt.setInt(1, question.getId());
 			rqt.setInt(2, Integer.parseInt(idTheme));

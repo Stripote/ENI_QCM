@@ -49,20 +49,26 @@ public class administrerQcm extends HttpServlet {
 		RequestDispatcher dispatcher;
 		ArrayList<Theme> lesThemes = new ArrayList<Theme>();
 		try {
-			if(request.getParameter("nomTheme") != null){
-				Theme nouveauTheme = new Theme(request.getParameter("nomTheme"));
+			if(request.getParameter("libelle") != null){
+				System.out.println("ajout d'un theme en BDD");
+				Theme nouveauTheme = new Theme(request.getParameter("libelle"));
 				ThemeDAO.ajouter(nouveauTheme);
-			}else if(request.getParameter("libelleQuestion") != null 
-					&& request.getParameter("themeId") != null 
-					&& request.getParameter("reponses")!= null){
-						String libelleQuestion = request.getParameter("libelleQuestion");
-						String idTheme = request.getParameter("themeId");
-						String[] lesReponses = request.getParameterValues("reponses");
-						String[] lesBonnesReponses = request.getParameterValues("bonneReponse");
+			}else if(request.getParameter("enonce") != null 
+					&& request.getParameter("themes") != null 
+					&& request.getParameter("reponse")!= null){
+						String libelleQuestion = request.getParameter("enonce");
+						String idTheme = request.getParameter("themes");
+						String[] lesReponses = request.getParameterValues("reponse");
+						String[] lesBonnesReponses = request.getParameterValues("vraiFaux");
 						Question nouvelleQuestion = new Question(libelleQuestion);
 						int compteur = 0;
 						for(String S : lesReponses){
-							Reponse R = new Reponse(S, Boolean.valueOf(lesBonnesReponses[compteur]));
+							Boolean ok = false;
+							if(lesBonnesReponses != null){
+								String goodR = lesBonnesReponses[compteur];
+								ok = Boolean.valueOf(goodR);
+							}
+							Reponse R = new Reponse(S, ok);
 							nouvelleQuestion.getReponses().add(R);
 							compteur++;
 						}
@@ -75,7 +81,7 @@ public class administrerQcm extends HttpServlet {
 		
 		//redirection
 		request.setAttribute("listeThemes", lesThemes);
-		dispatcher = getServletContext().getRequestDispatcher("creationTheme.jsp");
+		dispatcher = getServletContext().getRequestDispatcher("/formateur/creationTheme.jsp");
 		dispatcher.forward(request, response);
 	}
 
