@@ -30,7 +30,6 @@ form[action="/ENI_QCM/test/gestionTest"] td {
 	border:1px solid transparent;
 	margin-bottom:2px;
 	color:black;
-	cursor:pointer;
 }
 
 form[action="/ENI_QCM/test/gestionTest"] label{
@@ -70,5 +69,16 @@ form[action="/ENI_QCM/test/gestionTest"] label{
     padding-left: 20%;
     padding-right: 20%;
 	margin-top:1%;
+}
+
+a{
+	cursor:default;
+}
+a[href]{
+	cursor:pointer;
+}
+
+h1, h2, h3{
+	cursor:default;
 }
 

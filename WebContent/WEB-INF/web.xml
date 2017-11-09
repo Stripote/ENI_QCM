@@ -113,4 +113,14 @@
     <servlet-name>creerQcm</servlet-name>
     <url-pattern>/formateur/creerQcm</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>administrerQcm</display-name>
+    <servlet-name>administrerQcm</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.administrerQcm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>administrerQcm</servlet-name>
+    <url-pattern>/administrerQcm</url-pattern>
+  </servlet-mapping>
 </web-app>
