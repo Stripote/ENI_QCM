@@ -10,13 +10,23 @@
 <title>ENI Ecole - Menu Administratif</title>
 </head>
 <body>
+<%@ include file="/structure/logo.jspf" %>
+<center><font color="#6495ED"><h1>Menu Administratif</h1></font></center>
 
+<<<<<<< HEAD
 <h1>Menu Administratif</h1>
 
 <ul>
 <li><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a></li>
 <li><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></li>
 </ul>
+=======
+<center><ul id="toto">
+<a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a>
+<br>
+<a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a>
+</ul></center>
+>>>>>>> branch 'master' of https://github.com/Stripote/ENI_QCM.git
 
 <%@ include file="/structure/menu.jspf" %>
 

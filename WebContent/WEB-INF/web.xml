@@ -115,6 +115,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>creationUtilisateur</display-name>
+    <servlet-name>creationUtilisateur</servlet-name>
+    <servlet-class>fr.eni.qcm.servlet.creationUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>creationUtilisateur</servlet-name>
+    <url-pattern>/creationUtilisateur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>accesCreationInscription</display-name>
     <servlet-name>accesCreationInscription</servlet-name>
     <servlet-class>fr.eni.qcm.servlet.accesCreationInscription</servlet-class>
