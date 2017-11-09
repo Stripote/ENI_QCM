@@ -17,20 +17,20 @@
 
 <a class="btn btn-info" id="addUser" href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Ajouter un utilisateur</a>
 
-<form action="">
+<form action="<%=request.getContextPath() %>/administratif/validerInscription" method="post">
 	<div class="container">
 			<div id="inscriptions">
-				<fieldset class="fsInscription" id="firstSection"><legend>Section <span id="idInscription">1</span></legend>
+				<fieldset class="fsInscription" id="firstSection"><legend>Inscription <span id="idInscription"></span></legend>
 					<h4>Choisir un candidat</h4>
 					<select name="candidats" class="form-control">
 					<%
 					ArrayList<Utilisateur> listeUtilisateurs = (ArrayList<Utilisateur>) request.getSession().getAttribute("listeUtilisateurs");
 					for (Utilisateur U : listeUtilisateurs) {
-						if(U.getRole()=="Candidat"){
+						if("Candidat".equals(U.getRole())){
 						int idUtilisateur = U.getId();
 						%>
 						<option value="<%=idUtilisateur%>">
-							<a href="<%=request.getContextPath() %>/administratif/validerInscription?idUtilisateur=<%=idUtilisateur%>"><%=U.getNom()%></a>
+							<a href="<%=request.getContextPath() %>/administratif/validerInscription?idUtilisateur=<%=idUtilisateur%>"><%=U.getPrenom()+" "+U.getNom()%></a>
 						</option>
 					<%}}%>
 					</select> 
@@ -47,11 +47,12 @@
 							<a href="<%=request.getContextPath() %>/administratif/validerInscription?idQcm=<%=idQcm%>"><%=Q.getNom()%></a>
 						</option>
 					<%}%>
-									
+					</select>
+						
 				</fieldset>
 			</div>
-			<br><br>
-			<button type="submit" class="btn btn-primary" value="Inscription">Envoyer</button>
+			<br>
+			<button type="submit" class="btn btn-primary" value="Inscription">Envoyer</button>	
 	</div>
 </form>
 
