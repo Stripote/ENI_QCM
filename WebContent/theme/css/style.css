@@ -114,3 +114,12 @@ table#reponses tbody tr td:last-child{
     margin-bottom: 10px;
 }
 
+.delRep{
+	margin-left:5px;
+	color:red;
+	cursor:pointer;
+}
+.delRep:hover{
+	font-weight:bold;
+}
+

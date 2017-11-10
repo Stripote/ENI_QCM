@@ -1,5 +1,4 @@
 $(document).ready( function(){
-	console.log("js loaded");
 	$(".reponse").on("click", function(){
 		if( $(this).prop("checked") ){
 			$(this).parent().css("background-color", "#1b90c6");
@@ -21,7 +20,6 @@ $(document).ready( function(){
 	//footer always on bottom
 	if( $("body").height() > 1000 ){
 		$(".bottom_menu").css("position", "relative");
-		console.log("footer reset to bottom");
 	}
 	$("body").bind("DOMSubtreeModified", function(){
 		if( $("body").height() > 1000 ){
