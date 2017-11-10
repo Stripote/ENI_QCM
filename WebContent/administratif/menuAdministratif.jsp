@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
   <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<%=request.getContextPath() %>/theme/js/style.js"></script>
+  <script src="<%=request.getContextPath()%>/theme/js/jquery-3.2.1.min.js"></script>
 <title>ENI Ecole - Menu Administratif</title>
 </head>
 <body>
@@ -19,9 +21,6 @@
 <li><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a></li>
 <li><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></li>
 </ul>
-
-
-<%@ include file="/structure/menu.jspf" %>
-
 </body>
+<%@ include file="/structure/menu.jspf" %>
 </html>

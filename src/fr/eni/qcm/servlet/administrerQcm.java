@@ -60,13 +60,17 @@ public class administrerQcm extends HttpServlet {
 						String idTheme = request.getParameter("themes");
 						String[] lesReponses = request.getParameterValues("reponse");
 						String[] lesBonnesReponses = request.getParameterValues("vraiFaux");
+						ArrayList<Integer> indexesBonnesReponses = new ArrayList<Integer>();
+						for(String S : lesBonnesReponses){
+							indexesBonnesReponses.add(Integer.parseInt(S));
+						}
 						Question nouvelleQuestion = new Question(libelleQuestion);
-						int compteur = 0;
+						Integer compteur = 1;
 						for(String S : lesReponses){
 							Boolean ok = false;
-							if(lesBonnesReponses != null){
-								String goodR = lesBonnesReponses[compteur];
-								ok = Boolean.valueOf(goodR);
+							if(indexesBonnesReponses.size() > 0){
+								if(indexesBonnesReponses.contains(compteur))
+									ok = true;
 							}
 							Reponse R = new Reponse(S, ok);
 							nouvelleQuestion.getReponses().add(R);

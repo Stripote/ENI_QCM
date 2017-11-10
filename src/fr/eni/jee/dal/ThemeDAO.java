@@ -117,10 +117,9 @@ public class ThemeDAO {
 		try{
 			cnx=AccesBase.getConnection(); 
 			
-			String insert = "insert into theme (id, libelle) values (?,?)";
+			String insert = "insert into theme (libelle) values (?)";
 			rqt = cnx.prepareStatement(insert);
-			rqt.setInt(1, theme.getId());
-			rqt.setString(2, theme.getNom());
+			rqt.setString(1, theme.getNom());
 
 			rqt.executeUpdate();			
 			
