@@ -15,8 +15,6 @@
 <%@ include file="/structure/logo.jspf" %>
 <center><font color="#6495ED"><h1>Menu Administratif</h1></font></center>
 
-<<<<<<< HEAD
-
 <div class="container">
 <center><table>
 
@@ -28,12 +26,6 @@
 
 <%@ include file="/structure/menu.jspf" %>
 
-=======
-<ul>
-<li><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a></li>
-<li><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></li>
-</ul>
->>>>>>> branch 'master' of https://github.com/Stripote/ENI_QCM.git
+
 </body>
-<%@ include file="/structure/menu.jspf" %>
 </html>
