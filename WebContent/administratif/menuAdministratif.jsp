@@ -15,8 +15,6 @@
 <%@ include file="/structure/logo.jspf" %>
 <center><font color="#6495ED"><h1>Menu Administratif</h1></font></center>
 
-<h1>Menu Administratif</h1>
-
 <ul>
 <li><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a></li>
 <li><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></li>
