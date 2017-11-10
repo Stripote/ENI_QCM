@@ -13,11 +13,15 @@
 <%@ include file="/structure/logo.jspf" %>
 <center><font color="#6495ED"><h1>Menu Administratif</h1></font></center>
 
-<ul>
-<li><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a></li>
-<li><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></li>
-</ul>
 
+<div class="container">
+<center><table>
+
+<tr><td><a href="<%=request.getContextPath() %>/administratif/accesCreationInscription">Inscription</a></td></tr>
+<tr><td><a href="<%=request.getContextPath() %>/administratif/accesCreationUtilisateur">Creation des Utilisateurs</a></td></tr>
+
+</table></center>
+</div>
 
 <%@ include file="/structure/menu.jspf" %>
 
