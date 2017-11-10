@@ -1,11 +1,11 @@
 <footer>
 	<center>
 		<ul class="bottom_menu">
-			<li><a class="glyphicon glyphicon-home" href="<%=request.getContextPath() %>/"></a></li>
+			<li><a class="glyphicon glyphicon-home" href="<%=request.getContextPath() %>/login/validerAcces""></a></li>
 			<%if(request.getSession().getAttribute("utilisateurConnecte")!= null){ %>
 				<li><a title="Se déconnecter" class="glyphicon glyphicon-log-out"href="<%=request.getContextPath() %>/deconnecter"></a></li>
 			<%}else{ %>
-				<li><a title="Se connecter" class="glyphicon glyphicon-log-in" href="<%=request.getContextPath() %>login/validerAcces"></a></li>
+				<li><a title="Se connecter" class="glyphicon glyphicon-log-in" href="<%=request.getContextPath() %>/login/validerAcces"></a></li>
 			<%} %>
 		</ul>
 	</center>
