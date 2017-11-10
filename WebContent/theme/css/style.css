@@ -70,7 +70,7 @@ form[action="/ENI_QCM/test/gestionTest"] label{
     padding-right: 20%;
 	margin-top:1%;
 }
-<<<<<<< HEAD
+
 
 a{
 	cursor:default;
@@ -82,11 +82,35 @@ a[href]{
 h1, h2, h3{
 	cursor:default;
 }
+h3{
+	display:inline-block;
+}
 
-=======
 #toto{
 	
 	padding-left: 0px;
 	
 }
->>>>>>> branch 'master' of https://github.com/Stripote/ENI_QCM
+#vraiFaux{
+	display:inline-block;
+}
+
+table#reponses{
+	width:100%;
+}
+table#reponses tbody{
+	width:100%;
+}
+table#reponses tbody tr td:first-child{
+	width:90%;
+}
+table#reponses tbody tr td:last-child{
+    text-align: center;
+    padding-top: 2.5%;
+}
+#bonneReponseLbl{
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+

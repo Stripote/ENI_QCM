@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
   <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<%=request.getContextPath() %>/theme/js/style.js"></script>
   <title>ENI Ecole - Menu Formateur</title>
 </head>
 <body>
@@ -37,9 +38,6 @@
 <li><a href="/ENI_QCM/listerTheme">Créer un QCM</a></li>
 <li><a href="<%=request.getContextPath() %>/administrerQcm">Ajouter un thème / Creer des questions</a></li>
 </ul>
-
-
-<%@ include file="/structure/menu.jspf" %>
-
 </body>
+<%@ include file="/structure/menu.jspf" %>
 </html>

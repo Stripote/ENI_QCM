@@ -9,5 +9,7 @@ $(document).ready( function(){
 		var index = $(".fsReponse").length;
 		$("#firstreponse").clone().appendTo("#reponses");
 		$(".fsReponse").last().find("span#idReponse").text(index+1);
+		$(".fsReponse").last().find("input").first().val("")
+		$(".fsReponse").last().find("input[type='checkbox']").val(index+1);
 	});
 });

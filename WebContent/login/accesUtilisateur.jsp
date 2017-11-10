@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/theme/css/style.css">
   <script src="<%=request.getContextPath() %>/theme/bootstrap/js/bootstrap.min.js"></script>
-
+  <script src="<%=request.getContextPath() %>/theme/js/style.js"></script>
+  <script src="<%=request.getContextPath()%>/theme/js/jquery-3.2.1.min.js"></script>
 <title>ENI Ecole - Acces Utilisateur</title>
 </head>
 <body>
